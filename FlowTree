@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manufactured Home Issue Navigator</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for Inter font and general body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff; /* White background for the card */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            border-radius: 20px; /* More rounded corners */
+            padding: 30px;
+            max-width: 700px; /* Wider container */
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 25px; /* Increased spacing between elements */
+        }
+        .question-text {
+            font-size: 1.6rem; /* Larger font for questions */
+            color: #2c3e50; /* Darker text color */
+            font-weight: 600; /* Semi-bold */
+        }
+        .decision-text {
+            font-size: 1.3rem; /* Slightly smaller for decisions */
+            color: #34495e; /* Medium dark text */
+            line-height: 1.6;
+        }
+        .button-grid {
+            display: grid;
+            gap: 15px; /* Spacing between buttons */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+        }
+        .flow-button {
+            background-color: #3b82f6; /* Blue 500 */
+            color: white;
+            padding: 15px 25px; /* More padding */
+            border-radius: 12px; /* Nicely rounded buttons */
+            font-size: 1.1rem; /* Larger font for buttons */
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Button shadow */
+        }
+        .flow-button:hover {
+            background-color: #2563eb; /* Blue 600 on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+        .flow-button:active {
+            background-color: #1d4ed8; /* Blue 700 on active */
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .reset-button {
+            background-color: #6b7280; /* Gray 500 */
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin-top: 20px;
+        }
+        .reset-button:hover {
+            background-color: #4b5563; /* Gray 600 on hover */
+            transform: translateY(-1px);
+        }
+        .reset-button:active {
+            background-color: #374151; /* Gray 700 on active */
+            transform: translateY(0);
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            .question-text {
+                font-size: 1.4rem;
+            }
+            .decision-text {
+                font-size: 1.1rem;
+            }
+            .flow-button {
+                padding: 12px 20px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Manufactured Home Issue Navigator</h1>
+
+        <div id="flowContent">
+            <!-- Content will be dynamically loaded here -->
+        </div>
+
+        <button id="resetButton" class="reset-button hidden">Start Over</button>
+    </div>
+
+    <script>
+        // Define the flow tree structure
+        const flowTree = {
+            "start": {
+                "question": "I have an issue with my home. What kind of issue is it?",
+                "options": [
+                    { "text": "Electrical", "next": "electrical_start" },
+                    { "text": "Structural", "next": "structural_start" },
+                    { "text": "Water Related", "next": "water_start" },
+                    { "text": "Yard Related", "next": "yard_start" },
+                    { "text": "Community Related", "next": "community_start" }
+                ]
+            },
+            // Electrical Path
+            "electrical_start": {
+                "question": "What specifically is the electrical issue?",
+                "options": [
+                    { "text": "An outlet doesn't work", "next": "electrical_outlet" },
+                    { "text": "A light won't come on", "next": "electrical_light" },
+                    { "text": "An appliance doesn't work", "next": "electrical_appliance" }
+                ]
+            },
+            "electrical_outlet": {
+                "question": "Is the circuit breaker tripped or GFCI reset button popped?",
+                "options": [
+                    { "text": "Yes, I reset it but it tripped again", "next": "electrical_outlet_tripped" },
+                    { "text": "No, it's not tripped/popped", "next": "electrical_outlet_not_tripped" }
+                ]
+            },
+            "electrical_outlet_tripped": {
+                "decision": {
+                    "text": "If the breaker or GFCI trips immediately after resetting, there might be a short circuit or overload. This requires professional attention. You should contact a **qualified electrician** or your **warranty department** if the home is still under warranty.",
+                    "action": "Contact a **qualified electrician** or your **warranty department**."
+                }
+            },
+            "electrical_outlet_not_tripped": {
+                "decision": {
+                    "text": "If the outlet is completely dead and the breaker is not tripped, it could be a loose wire or a faulty outlet. You should contact a **qualified electrician**.",
+                    "action": "Contact a **qualified electrician**."
+                }
+            },
+            "electrical_light": {
+                "question": "Have you tried replacing the light bulb?",
+                "options": [
+                    { "text": "Yes, and it still doesn't work", "next": "electrical_light_bulb_replaced" },
+                    { "text": "No, I haven't tried that yet", "next": "electrical_light_try_bulb" }
+                ]
+            },
+            "electrical_light_try_bulb": {
+                "decision": {
+                    "text": "Start by replacing the light bulb. Ensure it's the correct type and wattage. If it still doesn't work, proceed to troubleshoot further.",
+                    "action": "Try replacing the light bulb first."
+                }
+            },
+            "electrical_light_bulb_replaced": {
+                "question": "Is it a fixture with multiple bulbs, and some work while others don't?",
+                "options": [
+                    { "text": "Yes, some work, some don't", "next": "electrical_light_partial_failure" },
+                    { "text": "No, no lights work in the fixture at all", "next": "electrical_light_full_failure" }
+                ]
+            },
+            "electrical_light_partial_failure": {
+                "decision": {
+                    "text": "This suggests an issue with specific sockets or wiring within the fixture. You might need to contact a **qualified electrician**.",
+                    "action": "Contact a **qualified electrician**."
+                }
+            },
+            "electrical_light_full_failure": {
+                "decision": {
+                    "text": "Check the circuit breaker for that area. If the breaker isn't tripped, it could be a wiring issue in the fixture or switch. You should contact a **qualified electrician** or your **warranty department**.",
+                    "action": "Contact a **qualified electrician** or your **warranty department**."
+                }
+            },
+            "electrical_appliance": {
+                "question": "Is the appliance plugged in and receiving power (e.g., screen lights up, hums)?",
+                "options": [
+                    { "text": "Yes, it has power but doesn't work", "next": "electrical_appliance_power_but_no_work" },
+                    { "text": "No, it has no power at all", "next": "electrical_appliance_no_power" }
+                ]
+            },
+            "electrical_appliance_power_but_no_work": {
+                "decision": {
+                    "text": "The issue is likely with the appliance itself. You should contact an **appliance repair technician** or the **appliance's warranty department**.",
+                    "action": "Contact an **appliance repair technician** or the **appliance's warranty department**."
+                }
+            },
+            "electrical_appliance_no_power": {
+                "question": "Have you checked the outlet it's plugged into with another device?",
+                "options": [
+                    { "text": "Yes, the outlet works with other devices", "next": "electrical_appliance_outlet_works" },
+                    { "text": "No, the outlet doesn't work with other devices either", "next": "electrical_appliance_outlet_no_work" }
+                ]
+            },
+            "electrical_appliance_outlet_works": {
+                "decision": {
+                    "text": "If the outlet works with other devices, the issue is with the appliance itself. You should contact an **appliance repair technician** or the **appliance's warranty department**.",
+                    "action": "Contact an **appliance repair technician** or the **appliance's warranty department**."
+                }
+            },
+            "electrical_appliance_outlet_no_work": {
+                "decision": {
+                    "text": "If the outlet doesn't work, refer to the 'Outlet doesn't work' flow. It might be a tripped breaker or GFCI. If the outlet still doesn't work after checking, you should contact a **qualified electrician** or your **warranty department**.",
+                    "action": "Refer to 'Outlet doesn't work' flow or contact a **qualified electrician** / **warranty department**."
+                }
+            },
+            // Structural Path
+            "structural_start": {
+                "question": "What is the structural issue?",
+                "options": [
+                    { "text": "Cracks in walls/ceiling", "next": "structural_cracks" },
+                    { "text": "Sagging floors/roof", "next": "structural_sagging" },
+                    { "text": "Door/window not closing properly", "next": "structural_door_window" }
+                ]
+            },
+            "structural_cracks": {
+                "decision": {
+                    "text": "Small hairline cracks are often cosmetic. Larger, widening cracks, or cracks with uneven displacement, suggest a more serious structural issue. You should contact a **structural engineer** or your **warranty department** if the home is new.",
+                    "action": "Contact a **structural engineer** or your **warranty department**."
+                }
+            },
+            "structural_sagging": {
+                "decision": {
+                    "text": "Sagging indicates a serious structural problem that could compromise the home's integrity. This requires immediate professional assessment. You should contact a **structural engineer** or your **warranty department** urgently.",
+                    "action": "Contact a **structural engineer** or your **warranty department** urgently."
+                }
+            },
+            "structural_door_window": {
+                "decision": {
+                    "text": "Doors or windows that don't close properly can indicate foundation shifting or framing issues. If this is a new development, contact your **warranty department**. For older homes, consider a **general contractor** or **foundation specialist**.",
+                    "action": "Contact your **warranty department**, a **general contractor**, or a **foundation specialist**."
+                }
+            },
+            // Water Related Path
+            "water_start": {
+                "question": "What is the water-related issue?",
+                "options": [
+                    { "text": "Visible Leak (drip, puddle)", "next": "water_leak_visible" },
+                    { "text": "No hot water", "next": "water_no_hot" },
+                    { "text": "Low water pressure", "next": "water_low_pressure" },
+                    { "text": "Drainage Issues (slow, clogged)", "next": "water_drainage_issues" }
+                ]
+            },
+            "water_leak_visible": {
+                "question": "Where is the leak located?",
+                "options": [
+                    { "text": "Under sink/toilet/appliance", "next": "water_leak_plumbing" },
+                    { "text": "From ceiling/roof/wall", "next": "water_leak_structure" },
+                    { "text": "Pipe burst/major flood", "next": "water_leak_major" }
+                ]
+            },
+            "water_leak_plumbing": {
+                "decision": {
+                    "text": "If it's a minor drip, you might be able to tighten connections or replace a washer. For persistent leaks or if unsure, contact a **licensed plumber** or your **warranty department**.",
+                    "action": "Contact a **licensed plumber** or your **warranty department**."
+                }
+            },
+            "water_leak_structure": {
+                "decision": {
+                    "text": "Leaks from ceilings, roofs, or walls can indicate issues with roofing, flashing, or internal plumbing. Identify the source if possible. Contact a **roofing contractor**, **general contractor**, or your **warranty department**.",
+                    "action": "Contact a **roofing contractor**, **general contractor**, or your **warranty department**."
+                }
+            },
+            "water_leak_major": {
+                "decision": {
+                    "text": "Immediately shut off your main water supply to prevent further damage. Then contact an **emergency plumber** or your **warranty department** immediately. Document the damage for insurance.",
+                    "action": "Immediately shut off water and contact an **emergency plumber** or your **warranty department**."
+                }
+            },
+            "water_no_hot": {
+                "question": "Is your water heater electric or gas?",
+                "options": [
+                    { "text": "Electric", "next": "water_no_hot_electric" },
+                    { "text": "Gas", "next": "water_no_hot_gas" }
+                ]
+            },
+            "water_no_hot_electric": {
+                "decision": {
+                    "text": "Check the breaker for the water heater. If tripped, reset it. If it keeps tripping, or if there's no power/hot water, contact a **qualified electrician** or your **warranty department**.",
+                    "action": "Check breaker; contact an **electrician** or **warranty department**."
+                }
+            },
+            "water_no_hot_gas": {
+                "decision": {
+                    "text": "Check if the pilot light is out (for older models) or if the gas supply valve is open. If unsure or if the issue persists, contact a **licensed plumber** or your **warranty department**.",
+                    "action": "Check pilot/gas; contact a **licensed plumber** or **warranty department**."
+                }
+            },
+            "water_low_pressure": {
+                "question": "Is the low pressure affecting all faucets/showers, or just one?",
+                "options": [
+                    { "text": "All of them", "next": "water_low_pressure_all" },
+                    { "text": "Just one/some", "next": "water_low_pressure_some" }
+                ]
+            },
+            "water_low_pressure_all": {
+                "decision": {
+                    "text": "Low pressure throughout the home could indicate an issue with the main water shut-off valve (partially closed), a pressure regulator problem, or a main line leak. Contact a **licensed plumber** or your **warranty department**.",
+                    "action": "Contact a **licensed plumber** or your **warranty department**."
+                }
+            },
+            "water_low_pressure_some": {
+                "decision": {
+                    "text": "If it's isolated to one fixture, the aerator might be clogged. Clean or replace it. If the problem persists, it could be a faulty fixture or localized pipe issue. Contact a **licensed plumber**.",
+                    "action": "Clean aerator; if persists, contact a **licensed plumber**."
+                }
+            },
+            "water_drainage_issues": {
+                "question": "Is the drainage issue affecting a single drain, or multiple drains?",
+                "options": [
+                    { "text": "Single drain (sink, shower)", "next": "water_drain_single" },
+                    { "text": "Multiple drains/main line", "next": "water_drain_multiple" }
+                ]
+            },
+            "water_drain_single": {
+                "decision": {
+                    "text": "A single slow or clogged drain can often be resolved with a plunger or a drain snake. Avoid harsh chemical drain cleaners if possible. If the clog persists, contact a **licensed plumber**.",
+                    "action": "Try plunger/snake; if persists, contact a **licensed plumber**."
+                }
+            },
+            "water_drain_multiple": {
+                "decision": {
+                    "text": "If multiple drains are slow or clogged, especially those on different levels, it indicates a main line blockage. This requires immediate attention. Contact an **emergency licensed plumber**.",
+                    "action": "Contact an **emergency licensed plumber**."
+                }
+            },
+            // Yard Related Path
+            "yard_start": {
+                "question": "What is the yard-related issue?",
+                "options": [
+                    { "text": "Drainage problems/standing water", "next": "yard_drainage" },
+                    { "text": "Pest or insect control", "next": "yard_pest" },
+                    { "text": "Landscaping/tree concerns", "next": "yard_landscape" }
+                ]
+            },
+            "yard_drainage": {
+                "decision": {
+                    "text": "Poor yard drainage can lead to foundation issues or standing water. Consider adding French drains, re-grading the yard, or consulting a **landscape professional** specializing in drainage. If impacting the home's foundation, contact your **warranty department**.",
+                    "action": "Contact a **landscape professional** or your **warranty department**."
+                }
+            },
+            "yard_pest": {
+                "decision": {
+                    "text": "Identify the type of pest if possible. For common pests, DIY solutions may work. For infestations, destructive pests (termites, carpenter ants), or wildlife, contact a **professional pest control service**.",
+                    "action": "Contact a **professional pest control service**."
+                }
+            },
+            "yard_landscape": {
+                "decision": {
+                    "text": "For general landscaping, a **local landscaper** can assist. For large trees close to the home or power lines, contact a **certified arborist** to assess risk and provide trimming/removal. If trees were part of the initial property and are causing new home damage, contact your **warranty department**.",
+                    "action": "Contact a **local landscaper**, **certified arborist**, or your **warranty department**."
+                }
+            },
+            // Community Related Path
+            "community_start": {
+                "question": "What is the community-related issue?",
+                "options": [
+                    { "text": "Neighbor/Noise complaint", "next": "community_noise" },
+                    { "text": "Amenity access/maintenance (pool, roads)", "next": "community_amenity" },
+                    { "text": "Rules/bylaws dispute or question", "next": "community_rules" }
+                ]
+            },
+            "community_noise": {
+                "decision": {
+                    "text": "For recurring noise issues, first try to resolve it amicably with the neighbor if safe and appropriate. If unsuccessful or uncomfortable, report the issue to the **Community Office/Management**.",
+                    "action": "Talk to neighbor or report to **Community Office/Management**."
+                }
+            },
+            "community_amenity": {
+                "decision": {
+                    "text": "For issues with community amenities (e.g., pool, clubhouse, common area maintenance, roads, utilities), report it directly to the **Community Office/Management** for resolution.",
+                    "action": "Report to **Community Office/Management**."
+                }
+            },
+            "community_rules": {
+                "decision": {
+                    "text": "If you have a dispute or question regarding community rules and bylaws, consult your community's official documents and contact the **Community Office/Management** for clarification or mediation.",
+                    "action": "Consult documents and contact **Community Office/Management**."
+                }
+            }
+        };
+
+        const flowContent = document.getElementById('flowContent');
+        const resetButton = document.getElementById('resetButton');
+
+        /**
+         * Renders the current step of the flow tree.
+         * @param {string} stepId The ID of the step to render.
+         */
+        function renderStep(stepId) {
+            flowContent.innerHTML = ''; // Clear previous content
+            const currentStep = flowTree[stepId];
+
+            if (!currentStep) {
+                // Handle invalid step gracefully
+                flowContent.innerHTML = `<p class="decision-text text-red-600">An error occurred: Invalid step encountered. Please start over.</p>`;
+                resetButton.classList.remove('hidden');
+                return;
+            }
+
+            if (currentStep.question) {
+                // Display question
+                const questionElement = document.createElement('p');
+                questionElement.className = 'question-text mb-6';
+                questionElement.textContent = currentStep.question;
+                flowContent.appendChild(questionElement);
+
+                // Display options as buttons
+                const buttonGrid = document.createElement('div');
+                buttonGrid.className = 'button-grid';
+                currentStep.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'flow-button';
+                    button.textContent = option.text;
+                    button.dataset.nextStep = option.next; // Store next step ID in data attribute
+                    button.addEventListener('click', handleButtonClick);
+                    buttonGrid.appendChild(button);
+                });
+                flowContent.appendChild(buttonGrid);
+                resetButton.classList.add('hidden'); // Hide reset button during flow
+            } else if (currentStep.decision) {
+                // Display decision
+                const decisionElement = document.createElement('p');
+                decisionElement.className = 'decision-text mb-6';
+                decisionElement.innerHTML = currentStep.decision.text; // Use innerHTML for bold formatting
+                flowContent.appendChild(decisionElement);
+
+                // Show reset button
+                resetButton.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Handles button clicks to navigate the flow tree.
+         * @param {Event} event The click event.
+         */
+        function handleButtonClick(event) {
+            const nextStep = event.target.dataset.nextStep;
+            if (nextStep) {
+                renderStep(nextStep);
+            }
+        }
+
+        /**
+         * Resets the flow back to the starting point.
+         */
+        function resetFlow() {
+            renderStep("start");
+        }
+
+        // Event listener for the "Start Over" button
+        resetButton.addEventListener('click', resetFlow);
+
+        // Initial render when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            renderStep("start");
+        });
+    </script>
+</body>
+</html>
