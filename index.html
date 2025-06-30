@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manufactured Home Issue Navigator</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom styles for Inter font and general body */
@@ -110,13 +109,32 @@
         <h1 class="text-3xl font-bold text-gray-800 mb-6">Manufactured Home Issue Navigator</h1>
 
         <div id="flowContent">
-            <!-- Content will be dynamically loaded here -->
-        </div>
+            </div>
 
         <button id="resetButton" class="reset-button hidden">Start Over</button>
     </div>
 
     <script>
+        // Helper function for the warranty email decision
+        function getWarrantyEmailDecision() {
+            return {
+                "decision": {
+                    "text": "Send an email to <a href='mailto:warranty@peakmhc.com' class='text-blue-600 underline'>warranty@peakmhc.com</a> explaining the issue, the location in the home, your lot number, your name, and contact number. This is not a guarantee it is a warranty claim; however, we will help investigate the root cause to determine responsibility.",
+                    "action": "Email warranty department."
+                }
+            };
+        }
+
+        // Helper function for general contact technician decision
+        function getCertifiedTechDecision() {
+            return {
+                "decision": {
+                    "text": "You will need to contact a **certified technician** for further investigation as this would fall under regular maintenance of your home.",
+                    "action": "Contact a certified technician."
+                }
+            };
+        }
+
         // Define the flow tree structure
         const flowTree = {
             "start": {
@@ -126,102 +144,183 @@
                     { "text": "Structural", "next": "structural_start" },
                     { "text": "Water Related", "next": "water_start" },
                     { "text": "Yard Related", "next": "yard_start" },
-                    { "text": "Community Related", "next": "community_start" }
+                    { "text": "Community Related", "next": "community_start" },
+                    { "text": "Appliance/HVAC", "next": "appliance_hvac_start" } // Added new category
                 ]
             },
             // Electrical Path
             "electrical_start": {
                 "question": "What specifically is the electrical issue?",
                 "options": [
-                    { "text": "An outlet doesn't work", "next": "electrical_outlet" },
-                    { "text": "A light won't come on", "next": "electrical_light" },
-                    { "text": "An appliance doesn't work", "next": "electrical_appliance" }
+                    { "text": "An outlet doesn't work", "next": "electrical_outlet_location" }, // Changed next step
+                    { "text": "A light won't come on", "next": "electrical_light_start" }, // Changed next step
+                    { "text": "A fan doesn't work", "next": "electrical_fan_start" } // Added fan option
                 ]
             },
-            "electrical_outlet": {
-                "question": "Is the circuit breaker tripped or GFCI reset button popped?",
+            // --- Electrical Outlet Path ---
+            "electrical_outlet_location": {
+                "question": "Where is the outlet located?",
                 "options": [
-                    { "text": "Yes, I reset it but it tripped again", "next": "electrical_outlet_tripped" },
-                    { "text": "No, it's not tripped/popped", "next": "electrical_outlet_not_tripped" }
+                    { "text": "Bedroom, Living Room, Dining Room, Hall", "next": "electrical_outlet_standard_breaker_check" },
+                    { "text": "Kitchen, Bathroom, Laundry Room, Outside (GFCI outlets)", "next": "electrical_outlet_gfci_check" }
                 ]
             },
-            "electrical_outlet_tripped": {
-                "decision": {
-                    "text": "If the breaker or GFCI trips immediately after resetting, there might be a short circuit or overload. This requires professional attention. You should contact a **qualified electrician** or your **warranty department** if the home is still under warranty.",
-                    "action": "Contact a **qualified electrician** or your **warranty department**."
-                }
-            },
-            "electrical_outlet_not_tripped": {
-                "decision": {
-                    "text": "If the outlet is completely dead and the breaker is not tripped, it could be a loose wire or a faulty outlet. You should contact a **qualified electrician**.",
-                    "action": "Contact a **qualified electrician**."
-                }
-            },
-            "electrical_light": {
-                "question": "Have you tried replacing the light bulb?",
+            "electrical_outlet_standard_breaker_check": {
+                "question": "Have you checked the breaker in the main breaker panel to ensure it is still in the on position?",
                 "options": [
-                    { "text": "Yes, and it still doesn't work", "next": "electrical_light_bulb_replaced" },
-                    { "text": "No, I haven't tried that yet", "next": "electrical_light_try_bulb" }
+                    { "text": "Yes, the breaker is still in the on position", "next": "electrical_outlet_standard_no_flip" },
+                    { "text": "No, the breaker has flipped", "next": "electrical_outlet_standard_flipped" }
                 ]
             },
-            "electrical_light_try_bulb": {
+            "electrical_outlet_standard_no_flip": getWarrantyEmailDecision(), // Uses helper function
+            "electrical_outlet_standard_flipped": {
                 "decision": {
-                    "text": "Start by replacing the light bulb. Ensure it's the correct type and wattage. If it still doesn't work, proceed to troubleshoot further.",
-                    "action": "Try replacing the light bulb first."
+                    "text": "Flip the breaker. If the problem happens again, " + getWarrantyEmailDecision().decision.text,
+                    "action": "Flip breaker; if re-occurs, email warranty."
                 }
             },
-            "electrical_light_bulb_replaced": {
-                "question": "Is it a fixture with multiple bulbs, and some work while others don't?",
+            "electrical_outlet_gfci_check": {
+                "question": "Have you checked the GFCI button on the outlet or another GFCI outlet in the area?",
                 "options": [
-                    { "text": "Yes, some work, some don't", "next": "electrical_light_partial_failure" },
-                    { "text": "No, no lights work in the fixture at all", "next": "electrical_light_full_failure" }
+                    { "text": "The GFCI button is not flipped but the plug still does not work.", "next": "electrical_outlet_gfci_no_flip_breaker_check" },
+                    { "text": "Yes, I reset the GFCI and it works now.", "next": "electrical_outlet_gfci_fixed" },
+                    { "text": "The GFCI button was flipped, I reset it, but it tripped again.", "next": "electrical_outlet_gfci_tripped_again" }
                 ]
             },
-            "electrical_light_partial_failure": {
+            "electrical_outlet_gfci_fixed": {
                 "decision": {
-                    "text": "This suggests an issue with specific sockets or wiring within the fixture. You might need to contact a **qualified electrician**.",
-                    "action": "Contact a **qualified electrician**."
+                    "text": "Great! The GFCI successfully reset, indicating it was a temporary overload or fault. Keep an eye on it, but the issue should be resolved for now.",
+                    "action": "GFCI reset, issue resolved."
                 }
             },
-            "electrical_light_full_failure": {
-                "decision": {
-                    "text": "Check the circuit breaker for that area. If the breaker isn't tripped, it could be a wiring issue in the fixture or switch. You should contact a **qualified electrician** or your **warranty department**.",
-                    "action": "Contact a **qualified electrician** or your **warranty department**."
-                }
-            },
-            "electrical_appliance": {
-                "question": "Is the appliance plugged in and receiving power (e.g., screen lights up, hums)?",
+            "electrical_outlet_gfci_tripped_again": getWarrantyEmailDecision(),
+            "electrical_outlet_gfci_no_flip_breaker_check": {
+                "question": "Have you checked the breaker in the main breaker panel to ensure the breaker has not flipped?",
                 "options": [
-                    { "text": "Yes, it has power but doesn't work", "next": "electrical_appliance_power_but_no_work" },
-                    { "text": "No, it has no power at all", "next": "electrical_appliance_no_power" }
+                    { "text": "Yes, the breaker is still in the on position.", "next": "electrical_outlet_gfci_breaker_on" },
+                    { "text": "Yes, the breaker is in the off position.", "next": "electrical_outlet_gfci_breaker_off" }
                 ]
             },
-            "electrical_appliance_power_but_no_work": {
-                "decision": {
-                    "text": "The issue is likely with the appliance itself. You should contact an **appliance repair technician** or the **appliance's warranty department**.",
-                    "action": "Contact an **appliance repair technician** or the **appliance's warranty department**."
-                }
-            },
-            "electrical_appliance_no_power": {
-                "question": "Have you checked the outlet it's plugged into with another device?",
+            "electrical_outlet_gfci_breaker_on": getWarrantyEmailDecision(),
+            "electrical_outlet_gfci_breaker_off": getWarrantyEmailDecision(), // Even if breaker is off, you want them to contact warranty
+            // --- End Electrical Outlet Path ---
+
+            // --- Electrical Light Path ---
+            "electrical_light_start": {
+                "question": "My light will not work properly. What is the issue?",
                 "options": [
-                    { "text": "Yes, the outlet works with other devices", "next": "electrical_appliance_outlet_works" },
-                    { "text": "No, the outlet doesn't work with other devices either", "next": "electrical_appliance_outlet_no_work" }
+                    { "text": "The light will not come on", "next": "electrical_light_no_come_on" },
+                    { "text": "The light will not go off", "next": "electrical_light_no_go_off" }
                 ]
             },
-            "electrical_appliance_outlet_works": {
+            "electrical_light_no_come_on": {
+                "question": "You should first try changing the bulb. Are you able to do this, or have you already?",
+                "options": [
+                    { "text": "I am not able to change the bulb", "next": "electrical_light_cannot_change_bulb" },
+                    { "text": "I have, but the light still does not come on", "next": "electrical_light_bulb_changed" }
+                ]
+            },
+            "electrical_light_cannot_change_bulb": getCertifiedTechDecision(),
+            "electrical_light_bulb_changed": {
+                "question": "Have you checked the breaker in the main breaker panel?",
+                "options": [
+                    { "text": "The breaker has flipped", "next": "electrical_light_breaker_flipped" },
+                    { "text": "The breaker has not flipped", "next": "electrical_light_breaker_not_flipped" }
+                ]
+            },
+            "electrical_light_breaker_flipped": {
                 "decision": {
-                    "text": "If the outlet works with other devices, the issue is with the appliance itself. You should contact an **appliance repair technician** or the **appliance's warranty department**.",
-                    "action": "Contact an **appliance repair technician** or the **appliance's warranty department**."
+                    "text": "Flip the breaker back to the on position. If it flips again, " + getWarrantyEmailDecision().decision.text,
+                    "action": "Flip breaker; if re-occurs, email warranty."
                 }
             },
-            "electrical_appliance_outlet_no_work": {
+            "electrical_light_breaker_not_flipped": getWarrantyEmailDecision(),
+            "electrical_light_no_go_off": getWarrantyEmailDecision(),
+            // --- End Electrical Light Path ---
+
+            // --- Electrical Fan Path ---
+            "electrical_fan_start": {
+                "question": "My fan will not work properly. Does the fan have a remote or a pull string?",
+                "options": [
+                    { "text": "The fan has a remote", "next": "electrical_fan_remote_start" },
+                    { "text": "The fan has a pull string", "next": "electrical_fan_pull_string_start" }
+                ]
+            },
+            "electrical_fan_remote_start": {
+                "question": "What is the issue with your remote-controlled fan?",
+                "options": [
+                    { "text": "The light comes on but the fan will not", "next": "electrical_fan_remote_fan_only_issue" },
+                    { "text": "Neither the fan nor the light will come on", "next": "electrical_fan_remote_no_power" },
+                    { "text": "I cannot control the speed of the fan", "next": "electrical_fan_remote_speed_issue" }
+                ]
+            },
+            "electrical_fan_remote_fan_only_issue": {
+                "question": "Have you tried changing the batteries in the remote and resyncing the remote to the fan?",
+                "options": [
+                    { "text": "Yes, the fan still will not work properly", "next": "electrical_fan_remote_fan_still_no_work" },
+                    { "text": "Yes, and it works now", "next": "electrical_fan_remote_fixed" }
+                ]
+            },
+            "electrical_fan_remote_fixed": {
                 "decision": {
-                    "text": "If the outlet doesn't work, refer to the 'Outlet doesn't work' flow. It might be a tripped breaker or GFCI. If the outlet still doesn't work after checking, you should contact a **qualified electrician** or your **warranty department**.",
-                    "action": "Refer to 'Outlet doesn't work' flow or contact a **qualified electrician** / **warranty department**."
+                    "text": "Great! The issue was resolved by replacing batteries and resyncing the remote. Keep an eye on it.",
+                    "action": "Fan remote fixed."
                 }
             },
-            // Structural Path
+            "electrical_fan_remote_fan_still_no_work": getWarrantyEmailDecision(),
+            "electrical_fan_remote_no_power": {
+                "question": "Have you tried changing the batteries in the remote and resyncing the remote to the fan?",
+                "options": [
+                    { "text": "Yes, the fan and the light still will not work properly.", "next": "electrical_fan_remote_no_power_check_breaker" },
+                    { "text": "Yes, and it works now", "next": "electrical_fan_remote_fixed" }
+                ]
+            },
+            "electrical_fan_remote_no_power_check_breaker": {
+                "question": "Have you checked the breaker in the main breaker panel?",
+                "options": [
+                    { "text": "The breaker has flipped", "next": "electrical_fan_breaker_flipped" },
+                    { "text": "The breaker has not flipped", "next": "electrical_fan_breaker_not_flipped" }
+                ]
+            },
+            "electrical_fan_remote_speed_issue": {
+                "question": "Have you tried changing the batteries in the remote and resyncing the remote to the fan?",
+                "options": [
+                    { "text": "Yes, the fan speed still cannot be controlled", "next": "electrical_fan_remote_speed_issue_check_breaker" },
+                    { "text": "Yes, and it works now", "next": "electrical_fan_remote_fixed" }
+                ]
+            },
+            "electrical_fan_remote_speed_issue_check_breaker": {
+                "question": "Have you checked the breaker in the main breaker panel?",
+                "options": [
+                    { "text": "The breaker has flipped", "next": "electrical_fan_breaker_flipped" },
+                    { "text": "The breaker has not flipped", "next": "electrical_fan_breaker_not_flipped" }
+                ]
+            },
+            "electrical_fan_breaker_flipped": {
+                "decision": {
+                    "text": "Flip the breaker back to the on position. If it flips again, " + getWarrantyEmailDecision().decision.text,
+                    "action": "Flip breaker; if re-occurs, email warranty."
+                }
+            },
+            "electrical_fan_breaker_not_flipped": getWarrantyEmailDecision(),
+            "electrical_fan_pull_string_start": {
+                "question": "What is the issue with your pull-string fan?",
+                "options": [
+                    { "text": "The pull string has broken off inside the fan motor.", "next": "electrical_fan_pull_string_broken" },
+                    { "text": "The fan doesn't respond to the pull string (string is intact).", "next": "electrical_fan_pull_string_no_response" }
+                ]
+            },
+            "electrical_fan_pull_string_broken": getWarrantyEmailDecision(),
+            "electrical_fan_pull_string_no_response": {
+                "question": "Have you checked the breaker in the main breaker panel?",
+                "options": [
+                    { "text": "The breaker has flipped", "next": "electrical_fan_breaker_flipped" },
+                    { "text": "The breaker has not flipped", "next": "electrical_fan_breaker_not_flipped" }
+                ]
+            },
+            // --- End Electrical Fan Path ---
+
+            // Structural Path (remains largely the same as before)
             "structural_start": {
                 "question": "What is the structural issue?",
                 "options": [
@@ -248,7 +347,7 @@
                     "action": "Contact your **warranty department**, a **general contractor**, or a **foundation specialist**."
                 }
             },
-            // Water Related Path
+            // Water Related Path (remains largely the same as before)
             "water_start": {
                 "question": "What is the water-related issue?",
                 "options": [
@@ -341,34 +440,43 @@
                     "action": "Contact an **emergency licensed plumber**."
                 }
             },
-            // Yard Related Path
+            // Yard Related Path (renamed to Property)
             "yard_start": {
-                "question": "What is the yard-related issue?",
+                 "question": "What is the yard-related issue?", // Renamed to "property_start" below
+                 "options": [
+                     { "text": "Drainage problems/standing water", "next": "yard_drainage" },
+                     { "text": "Pest or insect control", "next": "yard_pest" },
+                     { "text": "Landscaping/tree concerns", "next": "yard_landscape" }
+                 ]
+            },
+            "property_start": { // This is the new start node if you want to rename "Yard Related" to "Property"
+                "question": "What is the property-related issue?",
                 "options": [
-                    { "text": "Drainage problems/standing water", "next": "yard_drainage" },
-                    { "text": "Pest or insect control", "next": "yard_pest" },
-                    { "text": "Landscaping/tree concerns", "next": "yard_landscape" }
+                    { "text": "Yard Drainage problems/standing water", "next": "property_yard_drainage" },
+                    { "text": "Pest or insect control", "next": "property_pest" },
+                    { "text": "Landscaping/tree concerns", "next": "property_landscape" }
+                    // Add other property-related options here, e.g., "Siding/Skirting Damage", "Roof Damage"
                 ]
             },
-            "yard_drainage": {
+            "property_yard_drainage": { // Renamed from yard_drainage
                 "decision": {
                     "text": "Poor yard drainage can lead to foundation issues or standing water. Consider adding French drains, re-grading the yard, or consulting a **landscape professional** specializing in drainage. If impacting the home's foundation, contact your **warranty department**.",
                     "action": "Contact a **landscape professional** or your **warranty department**."
                 }
             },
-            "yard_pest": {
+            "property_pest": { // Renamed from yard_pest
                 "decision": {
                     "text": "Identify the type of pest if possible. For common pests, DIY solutions may work. For infestations, destructive pests (termites, carpenter ants), or wildlife, contact a **professional pest control service**.",
                     "action": "Contact a **professional pest control service**."
                 }
             },
-            "yard_landscape": {
+            "property_landscape": { // Renamed from yard_landscape
                 "decision": {
                     "text": "For general landscaping, a **local landscaper** can assist. For large trees close to the home or power lines, contact a **certified arborist** to assess risk and provide trimming/removal. If trees were part of the initial property and are causing new home damage, contact your **warranty department**.",
                     "action": "Contact a **local landscaper**, **certified arborist**, or your **warranty department**."
                 }
             },
-            // Community Related Path
+            // Community Related Path (remains the same)
             "community_start": {
                 "question": "What is the community-related issue?",
                 "options": [
@@ -394,6 +502,163 @@
                     "text": "If you have a dispute or question regarding community rules and bylaws, consult your community's official documents and contact the **Community Office/Management** for clarification or mediation.",
                     "action": "Consult documents and contact **Community Office/Management**."
                 }
+            },
+
+            // --- New Appliance/HVAC Path ---
+            "appliance_hvac_start": {
+                "question": "What appliance or HVAC system is having an issue?",
+                "options": [
+                    { "text": "HVAC System", "next": "hvac_system_start" },
+                    { "text": "Refrigerator", "next": "refrigerator_start" },
+                    { "text": "Stove/Cook Top/Hood Vent", "next": "stove_start" },
+                    { "text": "Microwave", "next": "microwave_start" },
+                    { "text": "Dishwasher", "next": "dishwasher_start" },
+                    { "text": "Water Heater", "next": "water_heater_appliance_start" } // Separate from general water issues
+                ]
+            },
+            // HVAC System sub-path
+            "hvac_system_start": {
+                "question": "What is the issue with your HVAC system?",
+                "options": [
+                    { "text": "The system does not come on at all", "next": "hvac_no_power" },
+                    { "text": "No heating/cooling", "next": "hvac_no_heat_cool" },
+                    { "text": "Poor airflow", "next": "hvac_poor_airflow" },
+                    { "text": "Strange noises or smells", "next": "hvac_noise_smell" }
+                ]
+            },
+            "hvac_no_power": {
+                "question": "Have you checked the breaker for the HVAC unit in the main breaker panel?",
+                "options": [
+                    { "text": "Yes, the breaker has flipped", "next": "hvac_breaker_flipped" },
+                    { "text": "No, the breaker has not flipped", "next": "hvac_breaker_not_flipped" }
+                ]
+            },
+            "hvac_breaker_flipped": {
+                "decision": {
+                    "text": "Flip the breaker back to the on position. If it flips again, or if the unit still doesn't power on, you should contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Flip breaker; if re-occurs, contact warranty/HVAC tech."
+                }
+            },
+            "hvac_breaker_not_flipped": {
+                "decision": {
+                    "text": "If the breaker is on and the unit still has no power, there may be an internal electrical issue or a problem with the thermostat. You should contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Contact warranty/HVAC technician."
+                }
+            },
+            "hvac_no_heat_cool": {
+                "question": "Is the thermostat set correctly (e.g., to 'Cool' and a lower temperature for AC, or 'Heat' and a higher temperature for heat)?",
+                "options": [
+                    { "text": "Yes, thermostat is set correctly but still no heat/cool.", "next": "hvac_no_heat_cool_thermostat_ok" },
+                    { "text": "No, I just adjusted the thermostat.", "next": "hvac_no_heat_cool_thermostat_adjusted" }
+                ]
+            },
+            "hvac_no_heat_cool_thermostat_adjusted": {
+                "decision": {
+                    "text": "Wait a few minutes to see if the system kicks on after adjusting the thermostat. If not, proceed to check other issues.",
+                    "action": "Wait and re-check thermostat."
+                }
+            },
+            "hvac_no_heat_cool_thermostat_ok": {
+                "question": "Have you checked the air filter? A clogged filter can severely restrict airflow.",
+                "options": [
+                    { "text": "Yes, I've checked/changed the filter, still no heat/cool.", "next": "hvac_no_heat_cool_filter_ok" },
+                    { "text": "No, I need to check/change the filter.", "next": "hvac_no_heat_cool_check_filter" }
+                ]
+            },
+            "hvac_no_heat_cool_check_filter": {
+                "decision": {
+                    "text": "Replace or clean your air filter. This is a common cause of HVAC inefficiency. If the problem persists, proceed to contact a professional.",
+                    "action": "Check/change air filter."
+                }
+            },
+            "hvac_no_heat_cool_filter_ok": {
+                "decision": {
+                    "text": "If the thermostat is correct and the filter is clean, the issue could be with the refrigerant levels, compressor, or heating elements. You should contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Contact warranty/HVAC technician."
+                }
+            },
+            "hvac_poor_airflow": {
+                "question": "Is the airflow poor from all vents or just some?",
+                "options": [
+                    { "text": "All vents", "next": "hvac_poor_airflow_all" },
+                    { "text": "Just some vents", "next": "hvac_poor_airflow_some" }
+                ]
+            },
+            "hvac_poor_airflow_all": {
+                "decision": {
+                    "text": "Poor airflow from all vents often indicates a clogged air filter, blocked return air vent, or issues with the blower motor. Check your filter first. If problem persists, contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Check filter; contact warranty/HVAC tech."
+                }
+            },
+            "hvac_poor_airflow_some": {
+                "decision": {
+                    "text": "If airflow is poor from only some vents, check if those specific vents are blocked or closed. It could also indicate a ductwork issue. You should contact a **qualified HVAC technician**.",
+                    "action": "Check vents; contact HVAC technician."
+                }
+            },
+            "hvac_noise_smell": {
+                "question": "What kind of noise or smell are you experiencing?",
+                "options": [
+                    { "text": "Loud banging/clanking", "next": "hvac_noise_banging" },
+                    { "text": "Burning smell", "next": "hvac_smell_burning" },
+                    { "text": "Musty/moldy smell", "next": "hvac_smell_musty" },
+                    { "text": "Hissing/squealing", "next": "hvac_noise_hissing" }
+                ]
+            },
+            "hvac_noise_banging": {
+                "decision": {
+                    "text": "Loud banging or clanking can indicate a serious issue with the blower motor, fan blades, or other internal components. Shut off the unit immediately and contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Shut off unit; contact warranty/HVAC tech."
+                }
+            },
+            "hvac_smell_burning": {
+                "decision": {
+                    "text": "A burning smell can indicate electrical issues, burnt wiring, or a failing motor. Shut off the unit immediately and contact your **warranty department** or an **emergency qualified HVAC technician**.",
+                    "action": "Shut off unit; contact warranty/emergency HVAC tech."
+                }
+            },
+            "hvac_smell_musty": {
+                "decision": {
+                    "text": "A musty or moldy smell often indicates moisture or mold buildup in the ductwork or within the unit, possibly due to a clogged condensate drain. You should contact a **qualified HVAC technician** to inspect for mold and address the moisture issue.",
+                    "action": "Contact HVAC technician for mold/moisture."
+                }
+            },
+            "hvac_noise_hissing": {
+                "decision": {
+                    "text": "Hissing or squealing noises can indicate a refrigerant leak (hissing) or a failing belt/motor bearing (squealing). This requires professional diagnosis. Contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Contact warranty/HVAC technician."
+                }
+            },
+            // Appliance Placeholders
+            "refrigerator_start": {
+                "decision": {
+                    "text": "For refrigerator issues, check the power supply (if none), ensure doors are sealed, and refer to your appliance manual. For specific malfunctions, contact an **appliance repair technician** or the **appliance's warranty department**.",
+                    "action": "Contact appliance repair or warranty."
+                }
+            },
+            "stove_start": {
+                "decision": {
+                    "text": "For stove/cook top/hood vent issues, check gas supply (if applicable), power supply, and refer to your appliance manual. For specific malfunctions, contact an **appliance repair technician** or the **appliance's warranty department**.",
+                    "action": "Contact appliance repair or warranty."
+                }
+            },
+            "microwave_start": {
+                "decision": {
+                    "text": "For microwave issues, ensure the door is properly latched, check for power, and refer to your appliance manual. For malfunctions, contact an **appliance repair technician** or the **appliance's warranty department**.",
+                    "action": "Contact appliance repair or warranty."
+                }
+            },
+            "dishwasher_start": {
+                "decision": {
+                    "text": "For dishwasher issues, check for clogged filters, proper loading, and water supply. Refer to your appliance manual. For malfunctions, contact an **appliance repair technician** or the **appliance's warranty department**.",
+                    "action": "Contact appliance repair or warranty."
+                }
+            },
+            "water_heater_appliance_start": { // This is a separate path for the appliance itself, not general water issues
+                 "decision": {
+                     "text": "If your water heater (as an appliance) is malfunctioning (e.g., unusual noises, error codes, visible leaks from the unit itself), and it's not a general hot water supply issue, you should contact an **appliance repair technician** specializing in water heaters or the **appliance's warranty department**.",
+                     "action": "Contact water heater appliance repair or warranty."
+                 }
             }
         };
 
@@ -439,7 +704,7 @@
                 // Display decision
                 const decisionElement = document.createElement('p');
                 decisionElement.className = 'decision-text mb-6';
-                decisionElement.innerHTML = currentStep.decision.text; // Use innerHTML for bold formatting
+                decisionElement.innerHTML = currentStep.decision.text; // Use innerHTML for bold and link formatting
                 flowContent.appendChild(decisionElement);
 
                 // Show reset button
