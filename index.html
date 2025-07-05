@@ -3,138 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manufactured Home Issue Navigator</title>
+    <title>Home Issue Troubleshooting</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom styles for Inter font and general body */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+        /* Basic styling to make it look decent and functional */
         .container {
-            background-color: #ffffff; /* White background for the card */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); /* Soft shadow */
-            border-radius: 20px; /* More rounded corners */
-            padding: 30px;
-            max-width: 700px; /* Wider container */
-            width: 100%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 25px; /* Increased spacing between elements */
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-family: sans-serif;
+        }
+        .flow-button {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%; /* Make buttons take full width of grid column */
+        }
+        .flow-button:hover {
+            background-color: #45a049;
         }
         .question-text {
-            font-size: 1.6rem; /* Larger font for questions */
-            color: #2c3e50; /* Darker text color */
-            font-weight: 600; /* Semi-bold */
+            font-size: 1.25rem; /* Equivalent to text-xl in Tailwind */
+            font-weight: 600; /* Equivalent to font-semibold in Tailwind */
+            color: #333;
+            margin-bottom: 1.5rem; /* Equivalent to mb-6 in Tailwind */
         }
         .decision-text {
-            font-size: 1.3rem; /* Slightly smaller for decisions */
-            color: #34495e; /* Medium dark text */
+            font-size: 1.1rem;
+            color: #555;
             line-height: 1.6;
+        }
+        .decision-text strong {
+            color: #000; /* Make bold text stand out more */
         }
         .button-grid {
             display: grid;
-            gap: 15px; /* Spacing between buttons */
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
+            gap: 10px;
         }
-        .flow-button {
-            background-color: #3b82f6; /* Blue 500 */
-            color: white;
-            padding: 15px 25px; /* More padding */
-            border-radius: 12px; /* Nicely rounded buttons */
-            font-size: 1.1rem; /* Larger font for buttons */
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Button shadow */
-        }
-        .flow-button:hover {
-            background-color: #2563eb; /* Blue 600 on hover */
-            transform: translateY(-2px); /* Slight lift effect */
-        }
-        .flow-button:active {
-            background-color: #1d4ed8; /* Blue 700 on active */
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .reset-button {
-            background-color: #6b7280; /* Gray 500 */
-            color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin-top: 20px;
-        }
-        .reset-button:hover {
-            background-color: #4b5563; /* Gray 600 on hover */
-            transform: translateY(-1px);
-        }
-        .reset-button:active {
-            background-color: #374151; /* Gray 700 on active */
-            transform: translateY(0);
-        }
-        
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-                margin: 10px;
-            }
-            .question-text {
-                font-size: 1.4rem;
-            }
-            .decision-text {
-                font-size: 1.1rem;
-            }
-            .flow-button {
-                padding: 12px 20px;
-                font-size: 1rem;
-            }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
-<body>
+<body class="bg-gray-100 p-4">
     <div class="container">
-        <h1 class="text-3xl font-bold text-gray-800 mb-6">Manufactured Home Issue Navigator</h1>
-
-        <div id="flowContent">
-        </div>
-
-        <button id="resetButton" class="reset-button hidden">Start Over</button>
+        <h1 class="text-2xl font-bold text-center mb-6">Home Issue Troubleshooting Assistant</h1>
+        <div id="flowContent" class="mb-6">
+            </div>
+        <button id="resetButton" class="flow-button w-full bg-blue-500 hover:bg-blue-600 hidden">Start Over</button>
     </div>
 
     <script>
-        // Helper function for the warranty email decision
-        function getWarrantyEmailDecision() {
-            return {
-                "decision": {
-                    "text": "Send an email to <a href='mailto:warranty@peakmhc.com' class='text-blue-600 underline'>warranty@peakmhc.com</a> explaining the issue, the location in the home, your lot number, your name, and contact number. This is not a guarantee it is a warranty claim; however, we will help investigate the root cause to determine responsibility.",
-                    "action": "Email warranty department."
-                }
-            };
-        }
-
-        // Helper function for general contact technician decision
-        function getCertifiedTechDecision() {
-            return {
-                "decision": {
-                    "text": "You will need to contact a **certified technician** for further investigation as this would fall under regular maintenance of your home.",
-                    "action": "Contact a certified technician."
-                }
-            };
-        }
-
         // Define the flow tree structure
         const flowTree = {
             "start": {
@@ -142,175 +71,114 @@
                 "options": [
                     { "text": "Electrical", "next": "electrical_start" },
                     { "text": "Structural", "next": "structural_start" },
-                    { "text": "Water Related", "next": "water_start" },
+                    { "text": "Water", "next": "water_start_new" },
                     { "text": "Yard Related", "next": "yard_start" },
                     { "text": "Community Related", "next": "community_start" },
-                    { "text": "Appliance/HVAC", "next": "appliance_hvac_start" } // Added new category
+                    { "text": "Appliance/HVAC", "next": "appliance_hvac_start" }
                 ]
             },
             // Electrical Path
             "electrical_start": {
-                "question": "What specifically is the electrical issue?",
+                "question": "What is the electrical issue?",
                 "options": [
-                    { "text": "An outlet doesn't work", "next": "electrical_outlet_location" }, // Changed next step
-                    { "text": "A light won't come on", "next": "electrical_light_start" }, // Changed next step
-                    { "text": "A fan doesn't work", "next": "electrical_fan_start" } // Added fan option
+                    { "text": "Outlet not working", "next": "electrical_outlet_issue" },
+                    { "text": "Light fixture not working", "next": "electrical_light_fixture_issue" },
+                    { "text": "Ceiling fan not working", "next": "electrical_ceiling_fan_issue" },
+                    { "text": "Breaker keeps tripping", "next": "electrical_breaker_tripping" }
                 ]
             },
-            // --- Electrical Outlet Path ---
-            "electrical_outlet_location": {
-                "question": "Where is the outlet located?",
+            "electrical_outlet_issue": {
+                "question": "Have you checked the breaker in the main breaker panel for the tripped breaker? Have you tried to reset the GFCI outlet?",
                 "options": [
-                    { "text": "Bedroom, Living Room, Dining Room, Hall", "next": "electrical_outlet_standard_breaker_check" },
-                    { "text": "Kitchen, Bathroom, Laundry Room, Outside (GFCI outlets)", "next": "electrical_outlet_gfci_check" }
+                    { "text": "Yes, the breaker has flipped or the GFCI tripped.", "next": "electrical_outlet_breaker_tripped" },
+                    { "text": "No, the breaker is on and the GFCI is not tripped.", "next": "electrical_outlet_no_breaker_issue" }
                 ]
             },
-            "electrical_outlet_standard_breaker_check": {
-                "question": "Have you checked the breaker in the main breaker panel to ensure it is still in the on position?",
-                "options": [
-                    { "text": "Yes, the breaker is still in the on position", "next": "electrical_outlet_standard_no_flip" },
-                    { "text": "No, the breaker has flipped", "next": "electrical_outlet_standard_flipped" }
-                ]
-            },
-            "electrical_outlet_standard_no_flip": getWarrantyEmailDecision(), // Uses helper function
-            "electrical_outlet_standard_flipped": {
+            "electrical_outlet_breaker_tripped": {
                 "decision": {
-                    "text": "Flip the breaker. If the problem happens again, " + getWarrantyEmailDecision().decision.text,
-                    "action": "Flip breaker; if re-occurs, email warranty."
+                    "text": "Reset the breaker or GFCI. If it immediately trips again, there's likely an electrical short or overload. Contact your **warranty department** or a **licensed electrician** immediately. If it stays on but the outlet still doesn't work, proceed to contact for repair.",
+                    "action": "Reset breaker/GFCI; if trips/fails, contact warranty/electrician."
                 }
             },
-            "electrical_outlet_gfci_check": {
-                "question": "Have you checked the GFCI button on the outlet or another GFCI outlet in the area?",
-                "options": [
-                    { "text": "The GFCI button is not flipped but the plug still does not work.", "next": "electrical_outlet_gfci_no_flip_breaker_check" },
-                    { "text": "Yes, I reset the GFCI and it works now.", "next": "electrical_outlet_gfci_fixed" },
-                    { "text": "The GFCI button was flipped, I reset it, but it tripped again.", "next": "electrical_outlet_gfci_tripped_again" }
-                ]
-            },
-            "electrical_outlet_gfci_fixed": {
+            "electrical_outlet_no_breaker_issue": {
                 "decision": {
-                    "text": "Great! The GFCI successfully reset, indicating it was a temporary overload or fault. Keep an eye on it, but the issue should be resolved for now.",
-                    "action": "GFCI reset, issue resolved."
+                    "text": "If the breaker is on and the GFCI is not tripped, the outlet itself may be faulty or improperly wired. Contact your **warranty department** or a **licensed electrician** for diagnosis and repair.",
+                    "action": "Contact warranty/electrician."
                 }
             },
-            "electrical_outlet_gfci_tripped_again": getWarrantyEmailDecision(),
-            "electrical_outlet_gfci_no_flip_breaker_check": {
-                "question": "Have you checked the breaker in the main breaker panel to ensure the breaker has not flipped?",
+            "electrical_light_fixture_issue": {
+                "question": "Have you replaced the light bulb?",
                 "options": [
-                    { "text": "Yes, the breaker is still in the on position.", "next": "electrical_outlet_gfci_breaker_on" },
-                    { "text": "Yes, the breaker is in the off position.", "next": "electrical_outlet_gfci_breaker_off" }
+                    { "text": "Yes, I replaced the bulb and it still doesn't work.", "next": "electrical_light_fixture_bulb_replaced" },
+                    { "text": "No, I haven't replaced the bulb yet.", "next": "electrical_light_fixture_replace_bulb" }
                 ]
             },
-            "electrical_outlet_gfci_breaker_on": getWarrantyEmailDecision(),
-            "electrical_outlet_gfci_breaker_off": getWarrantyEmailDecision(), // Even if breaker is off, you want them to contact warranty
-            // --- End Electrical Outlet Path ---
-
-            // --- Electrical Light Path ---
-            "electrical_light_start": {
-                "question": "My light will not work properly. What is the issue?",
-                "options": [
-                    { "text": "The light will not come on", "next": "electrical_light_no_come_on" },
-                    { "text": "The light will not go off", "next": "electrical_light_no_go_off" }
-                ]
+            "electrical_light_fixture_replace_bulb": {
+                "decision": {
+                    "text": "Replace the light bulb. If the issue persists, proceed to contact for repair.",
+                    "action": "Replace light bulb."
+                }
             },
-            "electrical_light_no_come_on": {
-                "question": "You should first try changing the bulb. Are you able to do this, or have you already?",
-                "options": [
-                    { "text": "I am not able to change the bulb", "next": "electrical_light_cannot_change_bulb" },
-                    { "text": "I have, but the light still does not come on", "next": "electrical_light_bulb_changed" }
-                ]
-            },
-            "electrical_light_cannot_change_bulb": getCertifiedTechDecision(),
-            "electrical_light_bulb_changed": {
+            "electrical_light_fixture_bulb_replaced": {
                 "question": "Have you checked the breaker in the main breaker panel?",
                 "options": [
-                    { "text": "The breaker has flipped", "next": "electrical_light_breaker_flipped" },
-                    { "text": "The breaker has not flipped", "next": "electrical_light_breaker_not_flipped" }
+                    { "text": "The breaker has flipped", "next": "electrical_light_fixture_breaker_tripped" },
+                    { "text": "The breaker has not flipped", "next": "electrical_light_fixture_breaker_not_flipped" }
                 ]
             },
-            "electrical_light_breaker_flipped": {
+            "electrical_light_fixture_breaker_tripped": {
                 "decision": {
-                    "text": "Flip the breaker back to the on position. If it flips again, " + getWarrantyEmailDecision().decision.text,
-                    "action": "Flip breaker; if re-occurs, email warranty."
+                    "text": "Reset the breaker. If it immediately trips again, there's likely an electrical short. Contact your **warranty department** or a **licensed electrician** immediately. If it stays on but the fixture still doesn't work, proceed to contact for repair.",
+                    "action": "Reset breaker; if trips/fails, contact warranty/electrician."
                 }
             },
-            "electrical_light_breaker_not_flipped": getWarrantyEmailDecision(),
-            "electrical_light_no_go_off": getWarrantyEmailDecision(),
-            // --- End Electrical Light Path ---
-
-            // --- Electrical Fan Path ---
-            "electrical_fan_start": {
-                "question": "My fan will not work properly. Does the fan have a remote or a pull string?",
-                "options": [
-                    { "text": "The fan has a remote", "next": "electrical_fan_remote_start" },
-                    { "text": "The fan has a pull string", "next": "electrical_fan_pull_string_start" }
-                ]
-            },
-            "electrical_fan_remote_start": {
-                "question": "What is the issue with your remote-controlled fan?",
-                "options": [
-                    { "text": "The light comes on but the fan will not", "next": "electrical_fan_remote_fan_only_issue" },
-                    { "text": "Neither the fan nor the light will come on", "next": "electrical_fan_remote_no_power" },
-                    { "text": "I cannot control the speed of the fan", "next": "electrical_fan_remote_speed_issue" }
-                ]
-            },
-            "electrical_fan_remote_fan_only_issue": {
-                "question": "Have you tried changing the batteries in the remote and resyncing the remote to the fan?",
-                "options": [
-                    { "text": "Yes, the fan still will not work properly", "next": "electrical_fan_remote_fan_still_no_work" },
-                    { "text": "Yes, and it works now", "next": "electrical_fan_remote_fixed" }
-                ]
-            },
-            "electrical_fan_remote_fixed": {
+            "electrical_light_fixture_breaker_not_flipped": {
                 "decision": {
-                    "text": "Great! The issue was resolved by replacing batteries and resyncing the remote. Keep an eye on it.",
-                    "action": "Fan remote fixed."
+                    "text": "If the breaker is on, the issue is likely within the light fixture itself, such as a faulty socket or wiring. Contact your **warranty department** or a **licensed electrician** for diagnosis and repair.",
+                    "action": "Contact warranty/electrician."
                 }
             },
-            "electrical_fan_remote_fan_still_no_work": getWarrantyEmailDecision(),
-            "electrical_fan_remote_no_power": {
-                "question": "Have you tried changing the batteries in the remote and resyncing the remote to the fan?",
+            "electrical_breaker_tripping": {
+                "question": "Is it a specific appliance or device that causes the breaker to trip, or does it seem random?",
                 "options": [
-                    { "text": "Yes, the fan and the light still will not work properly.", "next": "electrical_fan_remote_no_power_check_breaker" },
-                    { "text": "Yes, and it works now", "next": "electrical_fan_remote_fixed" }
+                    { "text": "A specific appliance/device causes it to trip.", "next": "electrical_breaker_appliance_cause" },
+                    { "text": "It seems to trip randomly or without a clear cause.", "next": "electrical_breaker_random_trip" }
                 ]
             },
-            "electrical_fan_remote_no_power_check_breaker": {
+            "electrical_breaker_appliance_cause": {
+                "decision": {
+                    "text": "Unplug the appliance that causes the trip. If the breaker holds, the appliance is likely faulty. If multiple appliances on the same circuit cause it, you may be overloading the circuit. If the breaker still trips without the appliance, or if it's a new issue, contact your **warranty department** or a **licensed electrician**.",
+                    "action": "Unplug faulty appliance/reduce load; contact warranty/electrician if issue persists."
+                }
+            },
+            "electrical_breaker_random_trip": {
+                "decision": {
+                    "text": "Random breaker trips can indicate a serious underlying electrical issue, such as a short in the wiring or a faulty breaker. This requires immediate attention. Contact your **warranty department** or a **licensed electrician** urgently.",
+                    "action": "Contact warranty/electrician urgently."
+                }
+            },
+            "electrical_ceiling_fan_issue": {
+                "question": "What is the issue with your ceiling fan?",
+                "options": [
+                    { "text": "Fan hums but doesn't spin or spins slowly.", "next": "electrical_fan_hums" },
+                    { "text": "Fan doesn't turn on at all (no light, no fan movement).", "next": "electrical_fan_no_power" },
+                    { "text": "Pull chain/string doesn't do anything.", "next": "electrical_fan_pull_string_no_response" },
+                    { "text": "Fan wobbles excessively or makes grinding/clicking noises.", "next": "electrical_fan_wobble_noise" }
+                ]
+            },
+            "electrical_fan_hums": {
+                "decision": {
+                    "text": "This could indicate a faulty capacitor or a motor issue. Ensure the fan blades are unobstructed and balanced. If the issue persists, contact your **warranty department** or a **licensed electrician**.",
+                    "action": "Check for obstructions/balance; contact warranty/electrician."
+                }
+            },
+            "electrical_fan_no_power": {
                 "question": "Have you checked the breaker in the main breaker panel?",
                 "options": [
                     { "text": "The breaker has flipped", "next": "electrical_fan_breaker_flipped" },
                     { "text": "The breaker has not flipped", "next": "electrical_fan_breaker_not_flipped" }
                 ]
             },
-            "electrical_fan_remote_speed_issue": {
-                "question": "Have you tried changing the batteries in the remote and resyncing the remote to the fan?",
-                "options": [
-                    { "text": "Yes, the fan speed still cannot be controlled", "next": "electrical_fan_remote_speed_issue_check_breaker" },
-                    { "text": "Yes, and it works now", "next": "electrical_fan_remote_fixed" }
-                ]
-            },
-            "electrical_fan_remote_speed_issue_check_breaker": {
-                "question": "Have you checked the breaker in the main breaker panel?",
-                "options": [
-                    { "text": "The breaker has flipped", "next": "electrical_fan_breaker_flipped" },
-                    { "text": "The breaker has not flipped", "next": "electrical_fan_breaker_not_flipped" }
-                ]
-            },
-            "electrical_fan_breaker_flipped": {
-                "decision": {
-                    "text": "Flip the breaker back to the on position. If it flips again, " + getWarrantyEmailDecision().decision.text,
-                    "action": "Flip breaker; if re-occurs, email warranty."
-                }
-            },
-            "electrical_fan_breaker_not_flipped": getWarrantyEmailDecision(),
-            "electrical_fan_pull_string_start": {
-                "question": "What is the issue with your pull-string fan?",
-                "options": [
-                    { "text": "The pull string has broken off inside the fan motor.", "next": "electrical_fan_pull_string_broken" },
-                    { "text": "The fan doesn't respond to the pull string (string is intact).", "next": "electrical_fan_pull_string_no_response" }
-                ]
-            },
-            "electrical_fan_pull_string_broken": getWarrantyEmailDecision(),
             "electrical_fan_pull_string_no_response": {
                 "question": "Have you checked the breaker in the main breaker panel?",
                 "options": [
@@ -318,412 +186,751 @@
                     { "text": "The breaker has not flipped", "next": "electrical_fan_breaker_not_flipped" }
                 ]
             },
-            // --- End Electrical Fan Path ---
+            "electrical_fan_wobble_noise": {
+                "decision": {
+                    "text": "Excessive wobble usually means loose mounting or unbalanced blades. Ensure all screws are tight and use a balancing kit. Grinding/clicking suggests motor or bearing issues. If balancing doesn't help or noises persist, contact your **warranty department** or a **licensed electrician**.",
+                    "action": "Check mounting/balance blades; contact warranty/electrician if persistent."
+                }
+            },
+            "electrical_fan_breaker_flipped": {
+                "decision": {
+                    "text": "Reset the breaker. If it immediately trips again, there's likely an electrical short. Contact your **warranty department** or a **licensed electrician** immediately. If it stays on but the fan still doesn't work, proceed to contact for repair.",
+                    "action": "Reset breaker; if trips/fails, contact warranty/electrician."
+                }
+            },
+            "electrical_fan_breaker_not_flipped": {
+                "decision": {
+                    "text": "If the breaker is on, the issue is likely within the fan unit itself, such as a faulty motor, switch, or wiring. Contact your **warranty department** or a **licensed electrician** for diagnosis and repair.",
+                    "action": "Contact warranty/electrician."
+                }
+            },
 
-            // Structural Path (remains largely the same as before)
+            // Water Section
+            "water_start_new": {
+                "question": "Is the water issue inside or outside the home?",
+                "options": [
+                    { "text": "The issue is inside", "next": "water_issue_inside" },
+                    { "text": "The issue is outside", "next": "water_issue_outside" }
+                ]
+            },
+            "water_issue_inside": {
+                "question": "What is the issue inside the home?",
+                "options": [
+                    { "text": "The issue is with a toilet", "next": "water_toilet_start_new" },
+                    { "text": "The issue is with a tub/shower", "next": "water_tub_shower_start" },
+                    { "text": "The issue is with a sink", "next": "water_sink_start" },
+                    { "text": "The issue is in the laundry area", "next": "water_laundry_start" },
+                    { "text": "There is water coming from the AC/water heater closet", "next": "water_ac_heater_closet_start" },
+                    { "text": "The dishwasher is leaking", "next": "water_dishwasher_leaking" },
+                    { "text": "There is a leak in my ceiling after it rains", "next": "water_ceiling_leak_after_rain" }
+                ]
+            },
+            // Toilet Sub-path
+            "water_toilet_start_new": {
+                "question": "What is the issue with your toilet?",
+                "options": [
+                    { "text": "The water in my toilet continues to run.", "next": "water_toilet_running_new" },
+                    { "text": "The toilet will not flush, or it is overflowing", "next": "water_toilet_clog_overflow" }
+                ]
+            },
+            "water_toilet_running_new": {
+                "decision": {
+                    "text": "This is a **homeowner’s responsibility**. You may need to adjust the fill level, repair the flush mechanism, or replace a seal. You can perform this yourself or contact a service technician. This repair and the expense of it, is the responsibility of the homeowner. Not repairing this will cause an increase to your water bill.",
+                    "action": "Homeowner responsibility; adjust/repair/replace components or contact technician."
+                }
+            },
+            "water_toilet_clog_overflow": {
+                "question": "Did you flush something by accident?",
+                "options": [
+                    { "text": "Yes", "next": "water_toilet_clog_flushed_item" },
+                    { "text": "No", "next": "water_toilet_clog_no_item" }
+                ]
+            },
+            "water_toilet_clog_flushed_item": {
+                "decision": {
+                    "text": "You will need to plunge the toilet with a plunger to clear the clog. If this does not work you will need to contact a **certified technician**. This is a homeowner's responsibility and the homeowner will be responsible for any expenses incurred.",
+                    "action": "Plunge toilet; if persistent, contact technician (homeowner expense)."
+                }
+            },
+            "water_toilet_clog_no_item": {
+                "decision": {
+                    "text": "If you have tried plunging the toilet and the toilet still does not flush contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice. It will be reviewed to determine responsibility.",
+                    "action": "Plunge toilet; if persistent, contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            // Tub/Shower Sub-path
+            "water_tub_shower_start": {
+                "question": "What is the issue with your tub/shower?",
+                "options": [
+                    { "text": "The tub/shower will not drain", "next": "water_tub_shower_not_drain" },
+                    { "text": "There is water leaking from behind the fixture in the tub/shower", "next": "water_tub_shower_fixture_leak" },
+                    { "text": "There is water leaking into the floor when the tub/shower is in use or is draining", "next": "water_tub_shower_floor_leak" }
+                ]
+            },
+            "water_tub_shower_not_drain": {
+                "question": "Is there something in the drain?",
+                "options": [
+                    { "text": "Yes", "next": "water_tub_shower_drain_debris" },
+                    { "text": "No", "next": "water_tub_shower_drain_no_debris" }
+                ]
+            },
+            "water_tub_shower_drain_debris": {
+                "decision": {
+                    "text": "Clear the debris from the drain and see if this helps.",
+                    "action": "Clear debris from drain."
+                }
+            },
+            "water_tub_shower_drain_no_debris": {
+                "decision": {
+                    "text": "If you have tried plunging the tub/shower and the tub/shower still does not drain, contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice. It will be reviewed to determine responsibility.",
+                    "action": "Plunge tub/shower; if persistent, contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_tub_shower_fixture_leak": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_tub_shower_fixture_leak_after_hours" },
+                    { "text": "No", "next": "water_tub_shower_fixture_leak_during_hours" }
+                ]
+            },
+            "water_tub_shower_fixture_leak_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_tub_shower_fixture_leak_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_tub_shower_floor_leak": {
+                "question": "Where is the water coming from?",
+                "options": [
+                    { "text": "The water is coming from under the tub/shower", "next": "water_tub_shower_under_leak" },
+                    { "text": "There is water leaking from the wall in the room behind the tub/shower", "next": "water_tub_shower_wall_leak_behind" }
+                ]
+            },
+            "water_tub_shower_under_leak": {
+                "decision": {
+                    "text": "Discontinue use of the tub/shower and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Discontinue use; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_tub_shower_wall_leak_behind": {
+                "decision": {
+                    "text": "Discontinue use of the tub/shower and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Discontinue use; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            // Sink Sub-path
+            "water_sink_start": {
+                "question": "What is the issue with your sink?",
+                "options": [
+                    { "text": "When I turn the water on it leaks from the fixture", "next": "water_sink_fixture_leak" },
+                    { "text": "There is a water leak under the sink", "next": "water_sink_under_leak_start" }
+                ]
+            },
+            "water_sink_fixture_leak": {
+                "decision": {
+                    "text": "Discontinue use of the sink and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Discontinue use; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_sink_under_leak_start": {
+                "question": "Where is the water leaking from under the sink?",
+                "options": [
+                    { "text": "The water coming from the P-Trap. The P-Trap is a white pipe that loops down and back up. Sometimes this becomes loose and can leak.", "next": "water_sink_leak_ptrap" },
+                    { "text": "The water is leaking from one of the water lines.", "next": "water_sink_leak_water_line_start" },
+                    { "text": "The valve is leaking", "next": "water_sink_leak_valve_start" }
+                ]
+            },
+            "water_sink_leak_ptrap": {
+                "decision": {
+                    "text": "Check the P-Trap and ensure the fitting is tight. The P-Trap is a white pipe that loops down and back up. Sometimes this becomes loose and can leak. This is something that as a homeowner should be checked regularly. Any damage caused by this leak will not be considered warranty and the homeowner is responsible for any repairs caused by neglecting to check this regularly.",
+                    "action": "Check/tighten P-Trap; homeowner responsibility for associated damage."
+                }
+            },
+            "water_sink_leak_water_line_start": {
+                "question": "Is the leak after or before the valve?",
+                "options": [
+                    { "text": "After", "next": "water_sink_water_line_leak_after_valve" },
+                    { "text": "Before", "next": "water_sink_water_line_leak_before_valve_time_check" }
+                ]
+            },
+            "water_sink_water_line_leak_after_valve": {
+                "decision": {
+                    "text": "Turn the water off at the valve. Discontinue use of the sink and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off valve; discontinue use; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_sink_water_line_leak_before_valve_time_check": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_sink_water_line_leak_before_valve_after_hours" },
+                    { "text": "No", "next": "water_sink_water_line_leak_before_valve_during_hours" }
+                ]
+            },
+            "water_sink_water_line_leak_before_valve_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_sink_water_line_leak_before_valve_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_sink_leak_valve_start": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_sink_leak_valve_after_hours" },
+                    { "text": "No", "next": "water_sink_leak_valve_during_hours" }
+                ]
+            },
+            "water_sink_leak_valve_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_sink_leak_valve_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            // Laundry Area Sub-path
+            "water_laundry_start": {
+                "question": "What is the issue in the laundry area?",
+                "options": [
+                    { "text": "There is water leaking from my washing machine", "next": "water_laundry_washing_machine_leak" },
+                    { "text": "There is water leaking from where the water hose of the washing machine hooks up", "next": "water_laundry_hose_hookup_leak" },
+                    { "text": "There is water leaking from under the wall", "next": "water_laundry_under_wall_leak" }
+                ]
+            },
+            "water_laundry_washing_machine_leak": {
+                "decision": {
+                    "text": "This is a **homeowner’s responsibility** and not a warranty issue. You will need to contact a service technician at your own expense to repair the issue.",
+                    "action": "Homeowner responsibility; contact service technician at own expense."
+                }
+            },
+            "water_laundry_hose_hookup_leak": {
+                "question": "Is it on the washing machine side of the valve?",
+                "options": [
+                    { "text": "Yes", "next": "water_laundry_hose_leak_machine_side" },
+                    { "text": "It is leaking at the valve", "next": "water_laundry_hose_leak_valve_time_check" }
+                ]
+            },
+            "water_laundry_hose_leak_machine_side": {
+                "decision": {
+                    "text": "This is a **homeowner’s responsibility** and not a warranty issue. You will need to contact a service technician at your own expense to repair the issue.",
+                    "action": "Homeowner responsibility; contact service technician at own expense."
+                }
+            },
+            "water_laundry_hose_leak_valve_time_check": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_laundry_hose_leak_valve_after_hours" },
+                    { "text": "No", "next": "water_laundry_hose_leak_valve_during_hours" }
+                ]
+            },
+            "water_laundry_hose_leak_valve_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_laundry_hose_leak_valve_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_laundry_under_wall_leak": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_laundry_under_wall_leak_after_hours" },
+                    { "text": "No", "next": "water_laundry_under_wall_leak_during_hours" }
+                ]
+            },
+            "water_laundry_under_wall_leak_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_laundry_under_wall_leak_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            // AC/Water Heater Closet Sub-path
+            "water_ac_heater_closet_start": {
+                "question": "What is the issue in the AC/water heater closet?",
+                "options": [
+                    { "text": "There is water spraying from the water heater", "next": "water_ac_heater_closet_heater_spray" },
+                    { "text": "There is water coming from the air handler in the closet", "next": "water_ac_heater_closet_air_handler_start" }
+                ]
+            },
+            "water_ac_heater_closet_heater_spray": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_ac_heater_closet_heater_spray_after_hours" },
+                    { "text": "No", "next": "water_ac_heater_closet_heater_spray_during_hours" }
+                ]
+            },
+            "water_ac_heater_closet_heater_spray_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_ac_heater_closet_heater_spray_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_ac_heater_closet_air_handler_start": {
+                "question": "Remove the front of the air handler to expose the coils. If coils are covered with ice, turn off the system and contact your HVAC warranty company. What park do you live in?",
+                "options": [
+                    { "text": "Rancho Serenidad MHC", "next": "water_ac_heater_closet_air_handler_rancho" },
+                    { "text": "Villas De Mariposa MHC", "next": "water_ac_heater_closet_air_handler_villas" },
+                    { "text": "Solena MHC", "next": "water_ac_heater_closet_air_handler_solena" },
+                    { "text": "Brazos Point MHC", "next": "water_ac_heater_closet_air_handler_brazos" }
+                ]
+            },
+            "water_ac_heater_closet_air_handler_rancho": {
+                "decision": {
+                    "text": "Contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
+                    "action": "Contact Champion Heating and Air with unit serial number."
+                }
+            },
+            "water_ac_heater_closet_air_handler_villas": {
+                "decision": {
+                    "text": "Contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
+                    "action": "Contact Champion Heating and Air with unit serial number."
+                }
+            },
+            "water_ac_heater_closet_air_handler_solena": {
+                "decision": {
+                    "text": "Contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
+                    "action": "Contact Champion Heating and Air with unit serial number."
+                }
+            },
+            "water_ac_heater_closet_air_handler_brazos": {
+                "decision": {
+                    "text": "Contact Mr. Chill at **936-236-9241**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
+                    "action": "Contact Mr. Chill with unit serial number."
+                }
+            },
+            // Dishwasher Sub-path (Internal Leak)
+            "water_dishwasher_leaking": {
+                "question": "How is the dishwasher leaking?",
+                "options": [
+                    { "text": "It leaks when it is draining after running a cycle", "next": "water_dishwasher_drain_leak" },
+                    { "text": "It leaks constantly even when it is not in use", "next": "water_dishwasher_constant_leak_time_check" }
+                ]
+            },
+            "water_dishwasher_drain_leak": {
+                "question": "Have you checked the hose on the dishwasher and where it connects to the drain line under the kitchen sink to ensure it is tight and connected well?",
+                "options": [
+                    { "text": "This fixed the issue", "next": "water_dishwasher_drain_leak_fixed" },
+                    { "text": "These connections are tight, but it still leaks", "next": "water_dishwasher_drain_leak_persistent" }
+                ]
+            },
+            "water_dishwasher_drain_leak_fixed": {
+                "decision": {
+                    "text": "Great! Ensuring drain connections are tight often resolves this issue. Monitor to ensure the leak does not reoccur.",
+                    "action": "Issue resolved; monitor."
+                }
+            },
+            "water_dishwasher_drain_leak_persistent": {
+                "decision": {
+                    "text": "Discontinue use of the dishwasher and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Discontinue use; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_dishwasher_constant_leak_time_check": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_dishwasher_constant_leak_after_hours" },
+                    { "text": "No", "next": "water_dishwasher_constant_leak_during_hours" }
+                ]
+            },
+            "water_dishwasher_constant_leak_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_dishwasher_constant_leak_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            // Ceiling Leak After Rain
+            "water_ceiling_leak_after_rain": {
+                "question": "Have you inspected your roof?",
+                "options": [
+                    { "text": "There is no noticeable damage", "next": "water_ceiling_leak_no_roof_damage" },
+                    { "text": "There is damage to the roof in the area of concern", "next": "water_ceiling_leak_roof_damage" }
+                ]
+            },
+            "water_ceiling_leak_no_roof_damage": {
+                "decision": {
+                    "text": "Contact a **certified roofer** and have them inspect your roof. Your roof warranty covers material failure and workmanship of the installation of it. It will not cover weather-related issues, and you will be responsible for any expenses incurred. Depending on the amount of the repair you may choose to involve your homeowner’s insurance policy. If the roofing company determines it is a warranty issue they will need to document the issue well with before, during, and after photos of the repair. Submit the invoice and their report, with the photos, to **warranty@peakmhc.com** for review to determine responsibility.",
+                    "action": "Contact certified roofer; if warranty issue, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_ceiling_leak_roof_damage": {
+                "decision": {
+                    "text": "Contact a **certified roofer** and have them inspect your roof. Your roof warranty covers material failure and workmanship of the installation of it. It will not cover weather-related issues, and you will be responsible for any expenses incurred. Depending on the amount of the repair you may choose to involve your homeowner’s insurance policy. If the roofing company determines it is a warranty issue they will need to document the issue well with before, during, and after photos of the repair. Submit the invoice and their report, with the photos, to **warranty@peakmhc.com** for review to determine responsibility.",
+                    "action": "Contact certified roofer; if warranty issue, document and submit to warranty@peakmhc.com."
+                }
+            },
+            // Outside Issues
+            "water_issue_outside": {
+                "question": "What is the issue outside the home?",
+                "options": [
+                    { "text": "There is water coming from under my home", "next": "water_outside_leak_under_home_temp_check" },
+                    { "text": "I smell sewer", "next": "water_outside_sewer_smell_start" }
+                ]
+            },
+            "water_outside_leak_under_home_temp_check": {
+                "question": "Is the temperature below freezing or has it been below freezing in the last 72 hours?",
+                "options": [
+                    { "text": "Yes", "next": "water_outside_leak_under_home_frozen_time_check" },
+                    { "text": "No", "next": "water_outside_leak_under_home_not_frozen_time_check" }
+                ]
+            },
+            "water_outside_leak_under_home_frozen_time_check": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_outside_leak_under_home_frozen_after_hours" },
+                    { "text": "No", "next": "water_outside_leak_under_home_frozen_during_hours" }
+                ]
+            },
+            "water_outside_leak_under_home_frozen_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_outside_leak_under_home_frozen_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_outside_leak_under_home_not_frozen_time_check": {
+                "question": "Is it after 4PM or is it a weekend?",
+                "options": [
+                    { "text": "Yes", "next": "water_outside_leak_under_home_not_frozen_after_hours" },
+                    { "text": "No", "next": "water_outside_leak_under_home_not_frozen_during_hours" }
+                ]
+            },
+            "water_outside_leak_under_home_not_frozen_after_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_outside_leak_under_home_not_frozen_during_hours": {
+                "decision": {
+                    "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.",
+                    "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
+                }
+            },
+            "water_outside_sewer_smell_start": {
+                "question": "What type of sewer smell are you experiencing?",
+                "options": [
+                    { "text": "There is sewer water coming from the underbelly of the home", "next": "water_outside_sewer_underbelly" },
+                    { "text": "There is sewer water coming from the ground under or near my home", "next": "water_outside_sewer_ground" }
+                ]
+            },
+            "water_outside_sewer_underbelly": {
+                "decision": {
+                    "text": "Contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.",
+                    "action": "Contact certified technician. If warranty, document and submit to warranty@peakmhc.com."
+                }
+            },
+            "water_outside_sewer_ground": {
+                "decision": {
+                    "text": "Send an email to **warranty@peakmhc.com** with as many details about the issue as possible, please include photos. Please include your lot number and contact information in the email.",
+                    "action": "Email warranty@peakmhc.com with details, photos, lot number, and contact info."
+                }
+            },
+
+            // Structural Path
             "structural_start": {
-                "question": "What is the structural issue?",
+                "question": "What kind of structural issue are you experiencing?",
                 "options": [
-                    { "text": "Cracks in walls/ceiling", "next": "structural_cracks" },
-                    { "text": "Sagging floors/roof", "next": "structural_sagging" },
-                    { "text": "Door/window not closing properly", "next": "structural_door_window" }
+                    { "text": "Cracks in walls or ceiling", "next": "structural_wall_ceiling_crack_type" },
+                    { "text": "Squeaky floors or subfloor issues", "next": "structural_floor_squeaks" },
+                    { "text": "Doors or windows sticking/not closing properly", "next": "structural_door_window_sticking" },
+                    { "text": "Foundation concerns (e.g., visible cracks, shifting)", "next": "structural_foundation_concerns" }
                 ]
             },
-            "structural_cracks": {
-                "decision": {
-                    "text": "Small hairline cracks are often cosmetic. Larger, widening cracks, or cracks with uneven displacement, suggest a more serious structural issue. You should contact a **structural engineer** or your **warranty department** if the home is new.",
-                    "action": "Contact a **structural engineer** or your **warranty department**."
-                }
-            },
-            "structural_sagging": {
-                "decision": {
-                    "text": "Sagging indicates a serious structural problem that could compromise the home's integrity. This requires immediate professional assessment. You should contact a **structural engineer** or your **warranty department** urgently.",
-                    "action": "Contact a **structural engineer** or your **warranty department** urgently."
-                }
-            },
-            "structural_door_window": {
-                "decision": {
-                    "text": "Doors or windows that don't close properly can indicate foundation shifting or framing issues. If this is a new development, contact your **warranty department**. For older homes, consider a **general contractor** or **foundation specialist**.",
-                    "action": "Contact your **warranty department**, a **general contractor**, or a **foundation specialist**."
-                }
-            },
-            
-            // --- START UPDATED WATER RELATED PATH ---
-            "water_start": {
-                "question": "What is the water-related issue?",
+            "structural_wall_ceiling_crack_type": {
+                "question": "What does the crack look like?",
                 "options": [
-                    { "text": "No Water at all", "next": "water_no_water_at_all" },
-                    { "text": "No hot water", "next": "water_no_hot" },
-                    { "text": "Low water pressure", "next": "water_low_pressure" },
-                    { "text": "Drainage Issues (slow, clogged)", "next": "water_drainage_issues" },
-                    { "text": "Visible Leak (drip, puddle)", "next": "water_leak_visible" },
-                    { "text": "Frozen Pipes", "next": "water_frozen_pipes" },
-                    { "text": "Water Heater is Leaking", "next": "water_heater_leaking" },
-                    { "text": "Toilet Problems", "next": "water_toilet_problems" }
+                    { "text": "Hairline cracks, small, not expanding", "next": "structural_wall_ceiling_crack_minor" },
+                    { "text": "Large, jagged, or expanding cracks; cracks near doors/windows; cracks in brick/foundation", "next": "structural_wall_ceiling_crack_major" }
                 ]
             },
-            "water_no_water_at_all": {
-                "question": "Is there no water coming from ANY faucet in the home?",
-                "options": [
-                    { "text": "Yes, no water from any faucet.", "next": "water_no_water_all_faucets" },
-                    { "text": "No, water is coming from some faucets.", "next": "water_no_water_some_faucets" }
-                ]
-            },
-            "water_no_water_all_faucets": {
-                "question": "Have you checked the main water shut-off valve for your home to ensure it's fully open?",
-                "options": [
-                    { "text": "Yes, the valve is open, or I opened it, but still no water.", "next": "water_no_water_valve_open_no_change" },
-                    { "text": "No, the valve was closed or partially closed, and now water is flowing.", "next": "water_no_water_valve_opened_fixed" }
-                ]
-            },
-            "water_no_water_valve_opened_fixed": {
+            "structural_wall_ceiling_crack_minor": {
                 "decision": {
-                    "text": "Great! The issue was a partially or fully closed main water shut-off valve. Ensure it's fully open for proper flow.",
-                    "action": "Main water valve was adjusted; issue resolved."
+                    "text": "Minor hairline cracks are common in new homes due to settling and humidity changes and are considered cosmetic. Monitor for expansion. If they expand significantly, or appear with other signs of structural movement, contact your **warranty department**.",
+                    "action": "Monitor minor cracks; if expand, contact warranty."
                 }
             },
-            "water_no_water_valve_open_no_change": {
-                "question": "Are your neighbors experiencing a similar issue, or is there a known community water outage?",
-                "options": [
-                    { "text": "Yes, my neighbors also have no water or there's a community outage.", "next": "water_no_water_community_issue" },
-                    { "text": "No, it seems to be only my home.", "next": "water_no_water_only_my_home" }
-                ]
-            },
-            "water_no_water_community_issue": {
+            "structural_wall_ceiling_crack_major": {
                 "decision": {
-                    "text": "If it's a community-wide issue, contact your **Community Office/Management** for updates and resolution. This is likely not a home-specific problem.",
-                    "action": "Contact Community Office/Management for water outage."
+                    "text": "Large, expanding, or jagged cracks, especially near openings or in the foundation/brick, can indicate structural issues. Take photos and contact your **warranty department** immediately for assessment.",
+                    "action": "Take photos; contact warranty department immediately."
                 }
             },
-            "water_no_water_only_my_home": getCertifiedTechDecision(), // Use existing helper for certified tech
-            "water_no_water_some_faucets": {
-                "question": "Are the affected faucets exhibiting low pressure, or no water at all?",
-                "options": [
-                    { "text": "No water at all from specific faucets.", "next": "water_no_water_specific_faucets" },
-                    { "text": "Low water pressure from specific faucets.", "next": "water_low_pressure_some" } // Re-use existing node
-                ]
-            },
-            "water_no_water_specific_faucets": getCertifiedTechDecision(), // Use existing helper for certified tech
-            "water_leak_visible": {
-                "question": "Where is the leak located?",
-                "options": [
-                    { "text": "Under sink/toilet/appliance", "next": "water_leak_plumbing" },
-                    { "text": "From ceiling/roof/wall", "next": "water_leak_structure" },
-                    { "text": "Pipe burst/major flood", "next": "water_leak_major" }
-                ]
-            },
-            "water_leak_plumbing": {
+            "structural_floor_squeaks": {
                 "decision": {
-                    "text": "If it's a minor drip, you might be able to tighten connections or replace a washer. For persistent leaks or if unsure, contact a **licensed plumber** or your **warranty department**.",
-                    "action": "Contact a **licensed plumber** or your **warranty department**."
+                    "text": "Squeaky floors can be caused by subfloor movement, loose nails, or changes in humidity. Minor squeaks are often considered normal settling. If the squeaks are excessive, new, or indicate significant floor movement, contact your **warranty department** for assessment.",
+                    "action": "Assess severity; contact warranty if significant."
                 }
             },
-            "water_leak_structure": {
+            "structural_door_window_sticking": {
                 "decision": {
-                    "text": "Leaks from ceilings, roofs, or walls can indicate issues with roofing, flashing, or internal plumbing. Identify the source if possible. Contact a **roofing contractor**, **general contractor**, or your **warranty department**.",
-                    "action": "Contact a **roofing contractor**, **general contractor**, or your **warranty department**."
+                    "text": "Doors or windows sticking can be due to humidity changes causing expansion, or minor settling of the home. Adjustments to hinges or frames may be needed. If the sticking is severe, sudden, or accompanied by other signs of structural movement (e.g., large cracks), contact your **warranty department** for assessment.",
+                    "action": "Check for environmental factors/adjust; if severe/structural signs, contact warranty."
                 }
             },
-            "water_leak_major": {
+            "structural_foundation_concerns": {
                 "decision": {
-                    "text": "Immediately shut off your main water supply to prevent further damage. Then contact an **emergency plumber** or your **warranty department** immediately. Document the damage for insurance.",
-                    "action": "Immediately shut off water and contact an **emergency plumber** or your **warranty department**."
+                    "text": "Visible cracks in the foundation, significant shifting, or unlevel floors are serious concerns. Document with photos and contact your **warranty department** immediately for a professional foundation inspection. Do not delay.",
+                    "action": "Document with photos; contact warranty department immediately for foundation inspection."
                 }
             },
-            "water_no_hot": {
-                "question": "Is your water heater electric or gas?",
-                "options": [
-                    { "text": "Electric", "next": "water_no_hot_electric" },
-                    { "text": "Gas", "next": "water_no_hot_gas" }
-                ]
-            },
-            "water_no_hot_electric": {
-                "decision": {
-                    "text": "Check the breaker for the water heater. If tripped, reset it. If it keeps tripping, or if there's no power/hot water, contact a **qualified electrician** or your **warranty department**.",
-                    "action": "Check breaker; contact an **electrician** or **warranty department**."
-                }
-            },
-            "water_no_hot_gas": {
-                "decision": {
-                    "text": "Check if the pilot light is out (for older models) or if the gas supply valve is open. If unsure or if the issue persists, contact a **licensed plumber** or your **warranty department**.",
-                    "action": "Check pilot/gas; contact a **licensed plumber** or **warranty department**."
-                }
-            },
-            "water_low_pressure": {
-                "question": "Is the low pressure affecting all faucets/showers, or just one?",
-                "options": [
-                    { "text": "All of them", "next": "water_low_pressure_all" },
-                    { "text": "Just one/some", "next": "water_low_pressure_some" }
-                ]
-            },
-            "water_low_pressure_all": {
-                "decision": {
-                    "text": "Low pressure throughout the home could indicate an issue with the main water shut-off valve (partially closed), a pressure regulator problem, or a main line leak. Contact a **licensed plumber** or your **warranty department**.",
-                    "action": "Contact a **licensed plumber** or your **warranty department**."
-                }
-            },
-            "water_low_pressure_some": {
-                "decision": {
-                    "text": "If it's isolated to one fixture, the aerator might be clogged. Clean or replace it. If the problem persists, it could be a faulty fixture or localized pipe issue. Contact a **licensed plumber**.",
-                    "action": "Clean aerator; if persists, contact a **licensed plumber**."
-                }
-            },
-            "water_drainage_issues": {
-                "question": "Is the drainage issue affecting a single drain, or multiple drains?",
-                "options": [
-                    { "text": "Single drain (sink, shower)", "next": "water_drain_single" },
-                    { "text": "Multiple drains/main line", "next": "water_drain_multiple" }
-                ]
-            },
-            "water_drain_single": {
-                "decision": {
-                    "text": "A single slow or clogged drain can often be resolved with a plunger or a drain snake. Avoid harsh chemical drain cleaners if possible. If the clog persists, contact a **licensed plumber**.",
-                    "action": "Try plunger/snake; if persists, contact a **licensed plumber**."
-                }
-            },
-            "water_drain_multiple": {
-                "decision": {
-                    "text": "If multiple drains are slow or clogged, especially those on different levels, it indicates a main line blockage. This requires immediate attention. Contact an **emergency licensed plumber**.",
-                    "action": "Contact an **emergency licensed plumber**."
-                }
-            },
-            "water_frozen_pipes": {
-                "question": "Are temperatures below freezing, and is the home skirted properly?",
-                "options": [
-                    { "text": "Yes, it's freezing and/or the home is not skirted.", "next": "water_frozen_pipes_risk" },
-                    { "text": "No, temperatures are above freezing.", "next": "water_frozen_pipes_not_freezing" }
-                ]
-            },
-            "water_frozen_pipes_risk": {
-                "decision": {
-                    "text": "If pipes are frozen, locate the affected area, open faucets slightly, and apply gentle heat (e.g., hairdryer, heat lamp). If you suspect a burst pipe or cannot thaw it, immediately shut off your main water supply and contact an **emergency licensed plumber**.",
-                    "action": "Thaw pipes carefully; if burst or cannot thaw, emergency plumber."
-                }
-            },
-            "water_frozen_pipes_not_freezing": {
-                "decision": {
-                    "text": "If temperatures are not below freezing, the issue is likely not frozen pipes. It may be a lack of water supply or a severe clog. Follow the 'No Water at all' path or 'Drainage Issues' path, or contact a **licensed plumber**.",
-                    "action": "Not frozen pipes; investigate other water issues or contact plumber."
-                }
-            },
-            "water_heater_leaking": getWarrantyEmailDecision(), // Use existing helper for warranty email
-            "water_toilet_problems": {
-                "question": "What is the specific toilet problem?",
-                "options": [
-                    { "text": "Toilet runs continuously", "next": "water_toilet_runs" },
-                    { "text": "Toilet won't flush properly", "next": "water_toilet_wont_flush" },
-                    { "text": "Toilet is leaking", "next": "water_toilet_leaking" }
-                ]
-            },
-            "water_toilet_runs": {
-                "decision": {
-                    "text": "A continuously running toilet often indicates a faulty flapper or fill valve. These are common wear-and-tear items and can usually be replaced DIY. If uncomfortable, contact a **licensed plumber**.",
-                    "action": "Replace flapper/fill valve or contact plumber."
-                }
-            },
-            "water_toilet_wont_flush": {
-                "question": "Is the toilet completely clogged, or does it flush weakly?",
-                "options": [
-                    { "text": "Completely clogged (overflow risk)", "next": "water_toilet_clogged" },
-                    { "text": "Flushes weakly/needs multiple flushes", "next": "water_toilet_weak_flush" }
-                ]
-            },
-            "water_toilet_clogged": {
-                "decision": {
-                    "text": "Use a plunger to attempt to clear the clog. If it persists, avoid further flushing to prevent overflow and contact a **licensed plumber** or a **drain cleaning service**.",
-                    "action": "Plunge; if persistent, contact plumber/drain service."
-                }
-            },
-            "water_toilet_weak_flush": {
-                "decision": {
-                    "text": "Weak flushing can be due to mineral buildup in the rim jets, a low water level in the tank, or a partially closed flapper. Clean the rim jets and check tank water level. If it persists, contact a **licensed plumber**.",
-                    "action": "Clean rim jets, check tank, or contact plumber."
-                }
-            },
-            "water_toilet_leaking": {
-                "question": "Where is the toilet leaking from?",
-                "options": [
-                    { "text": "Base of the toilet (on the floor)", "next": "water_toilet_leak_base" },
-                    { "text": "Back of the toilet (tank to bowl connection, supply line)", "next": "water_toilet_leak_back" },
-                    { "text": "Inside the tank (but not overflowing)", "next": "water_toilet_leak_tank_internal" }
-                ]
-            },
-            "water_toilet_leak_base": {
-                "decision": {
-                    "text": "A leak from the base usually means a failed wax ring seal. This requires removing the toilet to replace the wax ring. This is considered maintenance. If you cannot do this, contact a **licensed plumber**.",
-                    "action": "Replace wax ring or contact plumber."
-                }
-            },
-            "water_toilet_leak_back": {
-                "decision": {
-                    "text": "Leaks from the back are often due to loose tank bolts, a faulty fill valve gasket, or a loose supply line connection. Tighten connections. If parts are cracked or tightening doesn't work, contact a **licensed plumber**.",
-                    "action": "Tighten connections; if cracked/persists, contact plumber."
-                }
-            },
-            "water_toilet_leak_tank_internal": {
-                "decision": {
-                    "text": "If water is leaking inside the tank, but not flowing into the bowl or outside the toilet, it might be a silent leak from the fill valve or flapper. Check for constant running. This typically falls under regular maintenance. If you cannot identify the source or fix it, contact a **licensed plumber**.",
-                    "action": "Diagnose internal tank leak; contact plumber if needed."
-                }
-            },
-            // --- END UPDATED WATER RELATED PATH ---
 
-            // Yard Related Path (renamed to Property)
+            // Yard Related Path
             "yard_start": {
-                "question": "What is the yard-related issue?", // Renamed to "property_start" below
+                "question": "What kind of yard-related issue is it?",
                 "options": [
-                    { "text": "Drainage problems/standing water", "next": "yard_drainage" },
-                    { "text": "Pest or insect control", "next": "yard_pest" },
-                    { "text": "Landscaping/tree concerns", "next": "yard_landscape" }
+                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue" },
+                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern" },
+                    { "text": "Fence damage/issues", "next": "yard_fence_issue" },
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type" }
                 ]
             },
-            "property_start": { // This is the new start node if you want to rename "Yard Related" to "Property"
-                "question": "What is the property-related issue?",
+            "yard_drainage_issue": {
+                "decision": {
+                    "text": "Ensure downspouts are properly directed away from the foundation and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the foundation or causes significant erosion, contact your **warranty department** for a drainage assessment.",
+                    "action": "Check downspouts/gutters; observe; if significant issue, contact warranty."
+                }
+            },
+            "yard_landscaping_concern": {
+                "decision": {
+                    "text": "Newly installed sod/plants require consistent watering. Refer to your homeowner's manual for watering guidelines. Issues like dead patches after initial establishment may be homeowner responsibility due to care. If the issue is widespread or appears to be due to poor installation, contact your **warranty department**.",
+                    "action": "Review watering guidelines; contact warranty if installation issue."
+                }
+            },
+            "yard_fence_issue": {
+                "decision": {
+                    "text": "Minor fence damage (e.g., loose picket) is often a homeowner repair. If the damage is significant, affects structural integrity (e.g., leaning posts), or was present at move-in, document with photos and contact your **warranty department**. Damage caused by weather (e.g., strong winds) or external factors (e.g., vehicle impact) is typically not covered by warranty.",
+                    "action": "Assess damage; if structural/move-in/significant, contact warranty."
+                }
+            },
+            "yard_sprinkler_issue_type": {
+                "question": "What is the specific issue with your sprinkler system?",
                 "options": [
-                    { "text": "Yard Drainage problems/standing water", "next": "property_yard_drainage" },
-                    { "text": "Pest or insect control", "next": "property_pest" },
-                    { "text": "Landscaping/tree concerns", "next": "property_landscape" }
-                    // Add other property-related options here, e.g., "Siding/Skirting Damage", "Roof Damage"
+                    { "text": "Sprinkler head broken/leaking", "next": "yard_sprinkler_head_issue" },
+                    { "text": "Zones not turning on/off", "next": "yard_sprinkler_zone_issue" },
+                    { "text": "Low pressure across a zone", "next": "yard_sprinkler_low_pressure" },
+                    { "text": "System not running at all", "next": "yard_sprinkler_system_off" }
                 ]
             },
-            "property_yard_drainage": { // Renamed from yard_drainage
+            "yard_sprinkler_head_issue": {
                 "decision": {
-                    "text": "Poor yard drainage can lead to foundation issues or standing water. Consider adding French drains, re-grading the yard, or consulting a **landscape professional** specializing in drainage. If impacting the home's foundation, contact your **warranty department**.",
-                    "action": "Contact a **landscape professional** or your **warranty department**."
+                    "text": "Broken or leaking sprinkler heads can often be replaced by the homeowner. Ensure the replacement head matches the existing one for proper coverage. If you are uncomfortable doing this or if the issue persists after replacement, contact a **landscape/irrigation specialist**.",
+                    "action": "Replace sprinkler head or contact irrigation specialist."
                 }
             },
-            "property_pest": { // Renamed from yard_pest
+            "yard_sprinkler_zone_issue": {
                 "decision": {
-                    "text": "Identify the type of pest if possible. For common pests, DIY solutions may work. For infestations, destructive pests (termites, carpenter ants), or wildlife, contact a **professional pest control service**.",
-                    "action": "Contact a **professional pest control service**."
+                    "text": "If zones aren't turning on/off, check the controller programming, rain sensor (if present), and wiring connections at the controller and valves. If all seems correct, the issue could be a faulty solenoid or valve. Contact a **landscape/irrigation specialist** or your **warranty department**.",
+                    "action": "Check controller/wiring/sensors; contact irrigation specialist/warranty."
                 }
             },
-            "property_landscape": { // Renamed from yard_landscape
+            "yard_sprinkler_low_pressure": {
                 "decision": {
-                    "text": "For general landscaping, a **local landscaper** can assist. For large trees close to the home or power lines, contact a **certified arborist** to assess risk and provide trimming/removal. If trees were part of the initial property and are causing new home damage, contact your **warranty department**.",
-                    "action": "Contact a **local landscaper**, **certified arborist**, or your **warranty department**."
+                    "text": "Low pressure across a zone might indicate a main line leak for that zone, a stuck valve, or an issue with the backflow preventer. Inspect the area for visible leaks when the zone is active. Contact a **landscape/irrigation specialist** or your **warranty department**.",
+                    "action": "Inspect for leaks; contact irrigation specialist/warranty."
                 }
             },
-            // Community Related Path (remains the same)
-            "community_start": {
-                "question": "What is the community-related issue?",
-                "options": [
-                    { "text": "Neighbor/Noise complaint", "next": "community_noise" },
-                    { "text": "Amenity access/maintenance (pool, roads)", "next": "community_amenity" },
-                    { "text": "Rules/bylaws dispute or question", "next": "community_rules" }
-                ]
-            },
-            "community_noise": {
+            "yard_sprinkler_system_off": {
                 "decision": {
-                    "text": "For recurring noise issues, first try to resolve it amicably with the neighbor if safe and appropriate. If unsuccessful or uncomfortable, report the issue to the **Community Office/Management**.",
-                    "action": "Talk to neighbor or report to **Community Office/Management**."
-                }
-            },
-            "community_amenity": {
-                "decision": {
-                    "text": "For issues with community amenities (e.g., pool, clubhouse, common area maintenance, roads, utilities), report it directly to the **Community Office/Management** for resolution.",
-                    "action": "Report to **Community Office/Management**."
-                }
-            },
-            "community_rules": {
-                "decision": {
-                    "text": "If you have a dispute or question regarding community rules and bylaws, consult your community's official documents and contact the **Community Office/Management** for clarification or mediation.",
-                    "action": "Consult documents and contact **Community Office/Management**."
+                    "text": "If the entire system isn't running, check the power to the controller and the circuit breaker. Ensure the master valve (if present) is open. If still unresponsive, the controller itself may be faulty. Contact a **landscape/irrigation specialist** or your **warranty department**.",
+                    "action": "Check power/breaker/master valve; contact irrigation specialist/warranty."
                 }
             },
 
-            // --- New Appliance/HVAC Path ---
-            "appliance_hvac_start": {
-                "question": "What appliance or HVAC system is having an issue?",
+            // Community Related Path
+            "community_start": {
+                "question": "What kind of community-related issue is it?",
                 "options": [
-                    { "text": "HVAC System", "next": "hvac_system_start" },
+                    { "text": "Street light out/damaged", "next": "community_street_light_issue" },
+                    { "text": "Amenity damage/issue (e.g., pool, clubhouse)", "next": "community_amenity_damage" },
+                    { "text": "HOA violation/concern", "next": "community_hoa_violation" },
+                    { "text": "Common area maintenance (e.g., park, green space)", "next": "community_common_area_maintenance" }
+                ]
+            },
+            "community_street_light_issue": {
+                "decision": {
+                    "text": "Report street light outages or damage directly to the Homeowners Association (HOA) or your local utility company. Look for a pole number to provide accurate location information.",
+                    "action": "Report to HOA/utility company."
+                }
+            },
+            "community_amenity_damage": {
+                "question": "Which amenity is damaged?",
+                "options": [
+                    { "text": "Pool/Splash Pad", "next": "community_amenity_pool" },
+                    { "text": "Playground", "next": "community_amenity_playground" },
+                    { "text": "Common Area Landscaping/Fencing", "next": "community_amenity_landscaping" },
+                    { "text": "Clubhouse/Fitness Center", "next": "community_amenity_clubhouse" },
+                    { "text": "Walking Trails/Sidewalks", "next": "community_amenity_trails" }
+                ]
+            },
+            "community_amenity_pool": {
+                "decision": {
+                    "text": "Report issues with community pools or splash pads directly to the Homeowners Association (HOA) or property management company. Look for contact information on community signage or your HOA documents.",
+                    "action": "Report to HOA/property management."
+                }
+            },
+            "community_amenity_playground": {
+                "decision": {
+                    "text": "Report any damage or safety concerns at community playgrounds to the Homeowners Association (HOA) or property management company immediately. Provide photos if possible.",
+                    "action": "Report to HOA/property management."
+                }
+            },
+            "community_amenity_landscaping": {
+                "decision": {
+                    "text": "For issues with common area landscaping, such as dead plants, irrigation leaks, or damaged fencing, report them to the Homeowners Association (HOA) or property management company.",
+                    "action": "Report to HOA/property management."
+                }
+            },
+            "community_amenity_clubhouse": {
+                "decision": {
+                    "text": "Report maintenance issues, damage, or concerns about the clubhouse or fitness center facilities to the Homeowners Association (HOA) or property management company.",
+                    "action": "Report to HOA/property management."
+                }
+            },
+            "community_amenity_trails": {
+                "decision": {
+                    "text": "Report damage, blockages, or safety concerns regarding community walking trails or sidewalks to the Homeowners Association (HOA) or property management company.",
+                    "action": "Report to HOA/property management."
+                }
+            },
+            "community_hoa_violation": {
+                "decision": {
+                    "text": "For HOA violations or concerns, refer to your HOA Covenants, Conditions, and Restrictions (CC&Rs) and contact the Homeowners Association (HOA) or property management company directly to discuss the issue.",
+                    "action": "Refer to CC&Rs; contact HOA/property management."
+                }
+            },
+            "community_common_area_maintenance": {
+                "decision": {
+                    "text": "Report general maintenance needs or concerns in common areas (parks, green spaces, entryways) to the Homeowners Association (HOA) or property management company.",
+                    "action": "Report to HOA/property management."
+                }
+            },
+
+            // Appliance/HVAC Path
+            "appliance_hvac_start": {
+                "question": "What kind of appliance or HVAC issue is it?",
+                "options": [
+                    { "text": "HVAC (Heating, Ventilation, Air Conditioning)", "next": "hvac_start" },
                     { "text": "Refrigerator", "next": "refrigerator_start" },
                     { "text": "Stove/Cook Top/Hood Vent", "next": "stove_start" },
                     { "text": "Microwave", "next": "microwave_start" },
                     { "text": "Dishwasher", "next": "dishwasher_start" },
-                    { "text": "Water Heater", "next": "water_heater_appliance_start" } // Separate from general water issues
+                    { "text": "Water Heater (appliance related)", "next": "water_heater_appliance_start" }
                 ]
             },
-            // HVAC System sub-path
-            "hvac_system_start": {
-                "question": "What is the issue with your HVAC system?",
+            "hvac_start": {
+                "question": "What is the HVAC issue?",
                 "options": [
-                    { "text": "The system does not come on at all", "next": "hvac_no_power" },
-                    { "text": "No heating/cooling", "next": "hvac_no_heat_cool" },
-                    { "text": "Poor airflow", "next": "hvac_poor_airflow" },
-                    { "text": "Strange noises or smells", "next": "hvac_noise_smell" }
+                    { "text": "Not cooling/heating effectively", "next": "hvac_not_cooling_heating" },
+                    { "text": "No power/Not turning on", "next": "hvac_no_power" },
+                    { "text": "Poor airflow from vents", "next": "hvac_poor_airflow" },
+                    { "text": "Unusual noises or smells", "next": "hvac_noise_smell" }
                 ]
+            },
+            "hvac_not_cooling_heating": {
+                "question": "Have you checked the thermostat settings and replaced/cleaned your air filter recently?",
+                "options": [
+                    { "text": "Yes, thermostat is correct and filter is clean/new.", "next": "hvac_cooling_heating_filter_thermostat_ok" },
+                    { "text": "No, I haven't, or they are incorrect/dirty.", "next": "hvac_thermostat_filter_action" }
+                ]
+            },
+            "hvac_thermostat_filter_action": {
+                "decision": {
+                    "text": "Adjust thermostat settings (ensure it's on 'Cool' or 'Heat' and 'Auto' for fan). Clean or replace your air filter. A dirty filter severely restricts performance. If the issue persists after these steps, contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Adjust thermostat/clean filter; if persists, contact warranty/HVAC tech."
+                }
+            },
+            "hvac_cooling_heating_filter_thermostat_ok": {
+                "question": "Is the outdoor unit (condenser) running, and is it free of debris?",
+                "options": [
+                    { "text": "Yes, unit is running and clear.", "next": "hvac_outdoor_unit_ok" },
+                    { "text": "No, unit is not running or is obstructed.", "next": "hvac_outdoor_unit_issue" }
+                ]
+            },
+            "hvac_outdoor_unit_ok": {
+                "decision": {
+                    "text": "If the outdoor unit is running and clear, but there's no effective cooling/heating, it could indicate a refrigerant issue, a faulty compressor, or an indoor coil problem. Contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Contact warranty/HVAC technician."
+                }
+            },
+            "hvac_outdoor_unit_issue": {
+                "decision": {
+                    "text": "Ensure the outdoor unit is free of leaves, dirt, or other obstructions. If it's not running, check the circuit breaker. If clearing debris or resetting the breaker doesn't help, or if the unit is frozen, contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Clear debris/check breaker; if issues persist or frozen, contact warranty/HVAC tech."
+                }
             },
             "hvac_no_power": {
-                "question": "Have you checked the breaker for the HVAC unit in the main breaker panel?",
+                "question": "Have you checked the circuit breaker for your HVAC system in the main electrical panel?",
                 "options": [
-                    { "text": "Yes, the breaker has flipped", "next": "hvac_breaker_flipped" },
-                    { "text": "No, the breaker has not flipped", "next": "hvac_breaker_not_flipped" }
+                    { "text": "Yes, the breaker is tripped or off.", "next": "hvac_breaker_tripped" },
+                    { "text": "No, the breaker is on.", "next": "hvac_no_breaker_issue" }
                 ]
             },
-            "hvac_breaker_flipped": {
+            "hvac_breaker_tripped": {
                 "decision": {
-                    "text": "Flip the breaker back to the on position. If it flips again, or if the unit still doesn't power on, you should contact your **warranty department** or a **qualified HVAC technician**.",
-                    "action": "Flip breaker; if re-occurs, contact warranty/HVAC tech."
+                    "text": "Reset the breaker. If it immediately trips again, there's a serious electrical issue. Contact your **warranty department** or a **qualified HVAC technician** immediately. If it stays on but the unit still doesn't power up, proceed to contact for repair.",
+                    "action": "Reset breaker; if trips/fails, contact warranty/HVAC tech urgently."
                 }
             },
-            "hvac_breaker_not_flipped": {
+            "hvac_no_breaker_issue": {
                 "decision": {
-                    "text": "If the breaker is on and the unit still has no power, there may be an internal electrical issue or a problem with the thermostat. You should contact your **warranty department** or a **qualified HVAC technician**.",
+                    "text": "If the breaker is on, but the HVAC system has no power, the issue could be with the thermostat, control board, or other electrical components within the unit. Contact your **warranty department** or a **qualified HVAC technician**.",
                     "action": "Contact warranty/HVAC technician."
-                }
-            },
-            "hvac_no_heat_cool": {
-                "question": "Is the thermostat set correctly (e.g., to 'Cool' and a lower temperature for AC, or 'Heat' and a higher temperature for heat)?",
-                "options": [
-                    { "text": "Yes, thermostat is set correctly but still no heat/cool.", "next": "hvac_no_heat_cool_thermostat_ok" },
-                    { "text": "No, I just adjusted the thermostat.", "next": "hvac_no_heat_cool_thermostat_adjusted" }
-                ]
-            },
-            "hvac_no_heat_cool_thermostat_adjusted": {
-                "decision": {
-                    "text": "Wait a few minutes to see if the system kicks on after adjusting the thermostat. If not, proceed to check other issues.",
-                    "action": "Wait and re-check thermostat."
-                }
-            },
-            "hvac_no_heat_cool_thermostat_ok": {
-                "question": "Have you checked the air filter? A clogged filter can severely restrict airflow and cause heating/cooling issues.",
-                "options": [
-                    { "text": "Yes, the filter is clean or has been replaced, but still no heat/cool.", "next": "hvac_filter_ok_no_heat_cool" },
-                    { "text": "No, the filter is dirty and I will clean/replace it.", "next": "hvac_filter_dirty_action" }
-                ]
-            },
-            "hvac_filter_dirty_action": {
-                "decision": {
-                    "text": "Clean or replace your air filter. This is a common cause of HVAC problems. If the issue persists after changing the filter, contact your **warranty department** or a **qualified HVAC technician**.",
-                    "action": "Clean/replace filter; if persists, contact warranty/HVAC tech."
-                }
-            },
-            "hvac_filter_ok_no_heat_cool": {
-                "question": "Is the outdoor unit (condenser for AC, heat pump) running or making any unusual noises?",
-                "options": [
-                    { "text": "No, the outdoor unit is not running at all.", "next": "hvac_outdoor_unit_off" },
-                    { "text": "Yes, it's running but not heating/cooling, or making strange noises.", "next": "hvac_outdoor_unit_trouble" }
-                ]
-            },
-            "hvac_outdoor_unit_off": {
-                "decision": {
-                    "text": "If the outdoor unit is not running, and your thermostat/filter checks are okay, there might be a wiring issue, capacitor problem, or other electrical fault. Contact your **warranty department** or a **qualified HVAC technician**.",
-                    "action": "Contact warranty/HVAC technician."
-                }
-            },
-            "hvac_outdoor_unit_trouble": {
-                "decision": {
-                    "text": "Unusual noises (grinding, banging, squealing) or running without heating/cooling often indicate mechanical failure (e.g., compressor, fan motor) or a refrigerant leak. Immediately contact your **warranty department** or a **qualified HVAC technician**.",
-                    "action": "Contact warranty/HVAC technician immediately."
                 }
             },
             "hvac_poor_airflow": {
                 "question": "Have you checked and replaced/cleaned your air filter recently?",
                 "options": [
                     { "text": "Yes, the filter is clean/new.", "next": "hvac_airflow_filter_ok" },
-                    { "text": "No, I haven't, or it's dirty.", "next": "hvac_filter_dirty_action" } // Re-use decision
+                    { "text": "No, I haven't, or it's dirty.", "next": "hvac_filter_dirty_action" }
                 ]
+            },
+            "hvac_filter_dirty_action": {
+                "decision": {
+                    "text": "Clean or replace your air filter immediately. A dirty filter severely restricts airflow and can damage your HVAC system. If the issue persists after replacing the filter, contact your **warranty department** or a **qualified HVAC technician**.",
+                    "action": "Clean/replace filter; if persists, contact warranty/HVAC tech."
+                }
             },
             "hvac_airflow_filter_ok": {
                 "question": "Are all vents open and unobstructed by furniture or curtains?",
@@ -837,12 +1044,6 @@
                     { "text": "Yes, water supply is on.", "next": "refrigerator_ice_maker_water_on" },
                     { "text": "No, I just turned on the water supply.", "next": "refrigerator_ice_maker_water_on_fixed" }
                 ]
-            },
-            "refrigerator_ice_maker_water_on_fixed": {
-                "decision": {
-                    "text": "Allow time for the ice maker to fill and produce ice. If it still doesn't work after several hours, there might be another issue.",
-                    "action": "Wait for ice production."
-                }
             },
             "refrigerator_ice_maker_water_on_fixed": {
                 "decision": {
@@ -965,13 +1166,13 @@
                 }
             },
 
-            // Dishwasher sub-path
+            // Dishwasher sub-path (This is different from water_dishwasher_leaking, but points to it if leak is the issue)
             "dishwasher_start": {
                 "question": "What is the issue with your dishwasher?",
                 "options": [
                     { "text": "Not turning on/No power", "next": "dishwasher_no_power" },
                     { "text": "Not cleaning dishes properly", "next": "dishwasher_not_cleaning" },
-                    { "text": "Leaking water", "next": "dishwasher_leaking" },
+                    { "text": "Leaking water", "next": "water_dishwasher_leaking" }, // Re-use the water section's dishwasher leak path
                     { "text": "Not draining water", "next": "dishwasher_not_draining" }
                 ]
             },
@@ -987,12 +1188,6 @@
                     "action": "Check spray arms/filters/detergent; contact appliance tech."
                 }
             },
-            "dishwasher_leaking": {
-                "decision": {
-                    "text": "Leaks can be from a cracked tub, faulty door gasket, loose hose connections, or a malfunctioning pump. Inspect visible areas. If the source isn't obvious or easily fixed, contact a **certified appliance technician**.",
-                    "action": "Inspect for leaks; contact appliance tech if needed."
-                }
-            },
             "dishwasher_not_draining": {
                 "decision": {
                     "text": "Check for food debris in the drain filter at the bottom of the tub. Ensure the air gap (if present) is not clogged. If connected to a garbage disposal, ensure the knock-out plug was removed upon installation. If the issue persists, the drain pump or hose may be clogged/faulty. Contact a **certified appliance technician**.",
@@ -1004,19 +1199,24 @@
             "water_heater_appliance_start": {
                 "question": "What is the issue with your water heater?",
                 "options": [
-                    { "text": "No hot water", "next": "water_no_hot" }, // Re-use existing water_no_hot path
-                    { "text": "Leaking water", "next": "water_heater_leaking" }, // Re-use existing water_heater_leaking
-                    { "text": "Strange noises (popping, rumbling)", "next": "water_heater_noise" },
-                    { "text": "Smelly/discolored water", "next": "water_heater_smelly_water" }
+                    { "text": "No hot water", "next": "water_heater_appliance_no_hot" },
+                    { "text": "Strange noises (popping, rumbling)", "next": "water_heater_appliance_noise" },
+                    { "text": "Smelly/discolored water", "next": "water_heater_appliance_smelly_water" }
                 ]
             },
-            "water_heater_noise": {
+            "water_heater_appliance_no_hot": {
+                "decision": {
+                    "text": "Check the breaker for the water heater. If it's a gas heater, check the pilot light and gas supply. If these basic checks don't resolve the issue, contact a **licensed plumber** or your **warranty department**.",
+                    "action": "Check breaker/pilot/gas; if persistent, contact plumber/warranty."
+                }
+            },
+            "water_heater_appliance_noise": {
                 "decision": {
                     "text": "Noises like popping or rumbling usually indicate sediment buildup at the bottom of the tank, reducing efficiency and potentially damaging the unit. Draining and flushing the tank (annual maintenance) can help. If severe or persistent, contact a **licensed plumber**.",
                     "action": "Flush water heater; if persistent, contact plumber."
                 }
             },
-            "water_heater_smelly_water": {
+            "water_heater_appliance_smelly_water": {
                 "decision": {
                     "text": "Smelly (sulfur/rotten egg) water often means bacterial growth in the tank, especially in homes with well water or after long periods of inactivity. Discolored water could be rust from the tank or pipes. Flushing the tank and potentially replacing the anode rod can help. Contact a **licensed plumber**.",
                     "action": "Flush tank/check anode rod; contact plumber."
