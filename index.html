@@ -740,65 +740,20 @@
                     "action": "Check downspouts/gutters; observe; if significant issue, contact warranty."
                 }
             },
-            "yard_landscaping_concern": {
-                "decision": {
-                    "text": "Newly installed sod/plants require consistent watering. Refer to your homeowner's manual for watering guidelines. Issues like dead patches after initial establishment may be homeowner responsibility due to care. If the issue is widespread or appears to be due to poor installation, contact your **warranty department**.",
-                    "action": "Review watering guidelines; contact warranty if installation issue."
-                }
-            },
-            "yard_fence_issue": {
-                "decision": {
-                    "text": "Minor fence damage (e.g., loose picket) is often a homeowner repair. If the damage is significant, affects structural integrity (e.g., leaning posts), or was present at move-in, document with photos and contact your **warranty department**. Damage caused by weather (e.g., strong winds) or external factors (e.g., vehicle impact) is typically not covered by warranty.",
-                    "action": "Assess damage; if structural/move-in/significant, contact warranty."
-                }
-            },
-            "yard_sprinkler_issue_type": {
-                "question": "What is the specific issue with your sprinkler system?",
-                "options": [
-                    { "text": "Sprinkler head broken/leaking", "next": "yard_sprinkler_head_issue" },
-                    { "text": "Zones not turning on/off", "next": "yard_sprinkler_zone_issue" },
-                    { "text": "Low pressure across a zone", "next": "yard_sprinkler_low_pressure" },
-                    { "text": "System not running at all", "next": "yard_sprinkler_system_off" }
-                ]
-            },
-            "yard_sprinkler_head_issue": {
-                "decision": {
-                    "text": "Broken or leaking sprinkler heads can often be replaced by the homeowner. Ensure the replacement head matches the existing one for proper coverage. If you are uncomfortable doing this or if the issue persists after replacement, contact a **landscape/irrigation specialist**.",
-                    "action": "Replace sprinkler head or contact irrigation specialist."
-                }
-            },
-            "yard_sprinkler_zone_issue": {
-                "decision": {
-                    "text": "If zones aren't turning on/off, check the controller programming, rain sensor (if present), and wiring connections at the controller and valves. If all seems correct, the issue could be a faulty solenoid or valve. Contact a **landscape/irrigation specialist** or your **warranty department**.",
-                    "action": "Check controller/wiring/sensors; contact irrigation specialist/warranty."
-                }
-            },
-            "yard_sprinkler_low_pressure": {
-                "decision": {
-                    "text": "Low pressure across a zone might indicate a main line leak for that zone, a stuck valve, or an issue with the backflow preventer. Inspect the area for visible leaks when the zone is active. Contact a **landscape/irrigation specialist** or your **warranty department**.",
-                    "action": "Inspect for leaks; contact irrigation specialist/warranty."
-                }
-            },
-            "yard_sprinkler_system_off": {
-                "decision": {
-                    "text": "If the entire system isn't running, check the power to the controller and the circuit breaker. Ensure the master valve (if present) is open. If still unresponsive, the controller itself may be faulty. Contact a **landscape/irrigation specialist** or your **warranty department**.",
-                    "action": "Check power/breaker/master valve; contact irrigation specialist/warranty."
-                }
-            },
-            // Community Related Path
+           // Community Related Path
             "community_start": {
                 "question": "What kind of community-related issue is it?",
                 "options": [
                     { "text": "Street light out/damaged", "next": "community_street_light_issue" },
                     { "text": "Amenity damage/issue (e.g., pool, clubhouse)", "next": "community_amenity_damage" },
-                    { "text": "HOA violation/concern", "next": "community_hoa_violation" },
+                    { "text": "Community violation/concern", "next": "community_hoa_violation" },
                     { "text": "Common area maintenance (e.g., park, green space)", "next": "community_common_area_maintenance" }
                 ]
             },
             "community_street_light_issue": {
                 "decision": {
-                    "text": "Report street light outages or damage directly to the Homeowners Association (HOA) or your local utility company. Look for a pole number to provide accurate location information.",
-                    "action": "Report to HOA/utility company."
+                    "text": "Report street light outages or damage directly to the Park office and please provide accurate location information.",
+                    "action": "Contact property management."
                 }
             },
             "community_amenity_damage": {
@@ -813,44 +768,44 @@
             },
             "community_amenity_pool": {
                 "decision": {
-                    "text": "Report issues with community pools or splash pads directly to the Homeowners Association (HOA) or property management company. Look for contact information on community signage or your HOA documents.",
-                    "action": "Report to HOA/property management."
+                    "text": "Report issues with community pools or splash pads directly to the property management.",
+                    "action": "Report property management."
                 }
             },
             "community_amenity_playground": {
                 "decision": {
-                    "text": "Report any damage or safety concerns at community playgrounds to the Homeowners Association (HOA) or property management company immediately. Provide photos if possible.",
-                    "action": "Report to HOA/property management."
+                    "text": "Report any damage or safety concerns at community playgrounds to the property management company immediately. Provide photos if possible.",
+                    "action": "Report to property management."
                 }
             },
             "community_amenity_landscaping": {
                 "decision": {
-                    "text": "For issues with common area landscaping, such as dead plants, irrigation leaks, or damaged fencing, report them to the Homeowners Association (HOA) or property management company.",
-                    "action": "Report to HOA/property management."
+                    "text": "For issues with common area landscaping, such as dead plants, irrigation leaks, or damaged fencing, report them to property management.",
+                    "action": "Report to property management."
                 }
             },
             "community_amenity_clubhouse": {
                 "decision": {
-                    "text": "Report maintenance issues, damage, or concerns about the clubhouse or fitness center facilities to the Homeowners Association (HOA) or property management company.",
-                    "action": "Report to HOA/property management."
+                    "text": "Report maintenance issues, damage, or concerns about the clubhouse or fitness center facilities to property management.",
+                    "action": "Report to property management."
                 }
             },
             "community_amenity_trails": {
                 "decision": {
-                    "text": "Report damage, blockages, or safety concerns regarding community walking trails or sidewalks to the Homeowners Association (HOA) or property management company.",
-                    "action": "Report to HOA/property management."
+                    "text": "Report damage, blockages, or safety concerns regarding community walking trails or sidewalks to the property management.",
+                    "action": "Report to property management."
                 }
             },
-            "community_hoa_violation": {
+            "community_violation": {
                 "decision": {
-                    "text": "For HOA violations or concerns, refer to your HOA Covenants, Conditions, and Restrictions (CC&Rs) and contact the Homeowners Association (HOA) or property management company directly to discuss the issue.",
-                    "action": "Refer to CC&Rs; contact HOA/property management."
+                    "text": "For HOA violations or concerns, refer to your HOA Covenants, Conditions, and Restrictions (CC&Rs) and contact property management company directly to discuss the issue.",
+                    "action": "Report to property management."
                 }
             },
             "community_common_area_maintenance": {
                 "decision": {
-                    "text": "Report general maintenance needs or concerns in common areas (parks, green spaces, entryways) to the Homeowners Association (HOA) or property management company.",
-                    "action": "Report to HOA/property management."
+                    "text": "Report general maintenance needs or concerns in common areas (parks, green spaces, entryways) to property management.",
+                    "action": "Report to property management."
                 }
             },
             "appliance_hvac_start": {
@@ -947,13 +902,13 @@
             "hvac_airflow_vents_adjusted": {
                 "decision": {
                     "text": "Ensure all supply and return vents are open and unobstructed. This can significantly impact airflow. If the issue persists, contact your **warranty department** or a **qualified HVAC technician**.",
-                    "action": "Adjust vents; if persists, contact warranty/HVAC tech."
+                    "action": "Adjust vents; if persists, contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
                 }
             },
             "hvac_airflow_vents_clear": {
                 "decision": {
                     "text": "If filters are clean and vents are clear, poor airflow could be due to duct leaks, a failing blower motor, or an issue with the evaporator coil. Contact your **warranty department** or a **qualified HVAC technician**.",
-                    "action": "Contact warranty/HVAC technician."
+                    "action": "Contact contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
                 }
             },
             "hvac_noise_smell": {
@@ -965,13 +920,13 @@
             },
             "hvac_noise_mechanical": {
                 "decision": {
-                    "text": "These noises typically indicate a serious mechanical problem (e.g., motor bearing failure, loose fan blade, compressor issue). Shut off the unit immediately to prevent further damage and contact your **warranty department** or a **qualified HVAC technician**.",
-                    "action": "Shut off unit; contact warranty/HVAC tech immediately."
+                    "text": "These noises typically indicate a serious mechanical problem (e.g., motor bearing failure, loose fan blade, compressor issue). Shut off the unit immediately to prevent further damage and contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
+                    "action": "Shut off unit; contact contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
                 }
             },
             "hvac_smell_odor": {
                 "decision": {
-                    "text": "Musty/moldy smells suggest moisture issues or mold in the ductwork/unit. Burnt smells could indicate electrical problems. For any persistent unusual smell, especially burning, shut off the unit and contact your **warranty department** or a **qualified HVAC technician**.",
+                    "text": "Musty/moldy smells suggest moisture issues or mold in the ductwork/unit. Burnt smells could indicate electrical problems. For any persistent unusual smell, especially burning, shut off the unit and contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.",
                     "action": "Investigate smell; contact warranty/HVAC tech."
                 }
             },
