@@ -403,7 +403,6 @@
                     "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
                 }
             },
-            // Laundry Area Sub-path
             "water_laundry_start": {
                 "question": "What is the issue in the laundry area?",
                 "options": [
@@ -847,18 +846,23 @@
                 }
             },
 
-            // Appliance/HVAC Path
+            // ================================================================= //
+            // == START OF UPDATED APPLIANCE/HVAC SECTION == //
+            // ================================================================= //
+
             "appliance_hvac_start": {
                 "question": "What kind of appliance or HVAC issue is it?",
                 "options": [
                     { "text": "HVAC (Heating, Ventilation, Air Conditioning)", "next": "hvac_start" },
-                    { "text": "Refrigerator", "next": "refrigerator_start" },
-                    { "text": "Stove/Cook Top/Hood Vent", "next": "stove_start" },
-                    { "text": "Microwave", "next": "microwave_start" },
-                    { "text": "Dishwasher", "next": "dishwasher_start" },
-                    { "text": "Water Heater (appliance related)", "next": "water_heater_appliance_start" }
+                    { "text": "Refrigerator", "next": "refrigerator_start_new" },
+                    { "text": "Stove/Cook Top/Hood Vent", "next": "stove_start_new" },
+                    { "text": "Microwave", "next": "microwave_start_new" },
+                    { "text": "Dishwasher", "next": "dishwasher_start_new" },
+                    { "text": "Water Heater (appliance related)", "next": "water_heater_start_new" }
                 ]
             },
+            
+            // --- HVAC Section (Original, Retained) ---
             "hvac_start": {
                 "question": "What is the HVAC issue?",
                 "options": [
@@ -971,257 +975,237 @@
                 }
             },
 
-            // Refrigerator sub-path
-            "refrigerator_start": {
+            // --- Refrigerator Section (New) ---
+            "refrigerator_start_new": {
                 "question": "What is the issue with your refrigerator?",
                 "options": [
-                    { "text": "Not cooling at all", "next": "refrigerator_no_cooling" },
-                    { "text": "Leaking water", "next": "refrigerator_leaking" },
-                    { "text": "Making unusual noises", "next": "refrigerator_noise" },
-                    { "text": "Ice maker not working", "next": "refrigerator_ice_maker" }
+                    { "text": "It is not running", "next": "appliance_manufacturer_question" },
+                    { "text": "The fridge is cool, but the freezer does not work", "next": "appliance_manufacturer_question" },
+                    { "text": "There is an alarm indicating the filter needs to be changed", "next": "refrigerator_filter_alarm" },
+                    { "text": "There is an alarm indicating it is not cooling properly", "next": "appliance_manufacturer_question" }
                 ]
             },
-            "refrigerator_no_cooling": {
-                "question": "Have you checked if the refrigerator is plugged in and if the circuit breaker for the kitchen has tripped?",
-                "options": [
-                    { "text": "Yes, it's plugged in and the breaker is fine.", "next": "refrigerator_no_cooling_breaker_ok" },
-                    { "text": "No, it was unplugged or the breaker was tripped.", "next": "refrigerator_no_cooling_fixed" }
-                ]
-            },
-            "refrigerator_no_cooling_fixed": {
+            "refrigerator_filter_alarm": {
                 "decision": {
-                    "text": "Ensure the refrigerator is securely plugged in and the breaker is reset. Monitor if cooling resumes. If the breaker trips again, or if it doesn't cool, proceed with further troubleshooting or contact for repair.",
-                    "action": "Check plug/breaker; monitor."
-                }
-            },
-            "refrigerator_no_cooling_breaker_ok": {
-                "question": "Are the condenser coils on the back or bottom of the refrigerator clean and free of dust/debris?",
-                "options": [
-                    { "text": "Yes, coils are clean.", "next": "refrigerator_coils_clean" },
-                    { "text": "No, coils are dirty and I will clean them.", "next": "refrigerator_coils_dirty_action" }
-                ]
-            },
-            "refrigerator_coils_dirty_action": {
-                "decision": {
-                    "text": "Clean the condenser coils using a vacuum or brush. Dirty coils reduce efficiency. If cooling does not improve, or if the issue reoccurs, contact a **certified appliance technician**.",
-                    "action": "Clean coils; if persists, contact appliance tech."
-                }
-            },
-            "refrigerator_coils_clean": {
-                "decision": {
-                    "text": "If the coils are clean and the refrigerator still isn't cooling, it could be a faulty compressor, fan motor, or thermostat. Contact your **warranty department** or a **certified appliance technician**.",
-                    "action": "Contact warranty/appliance technician."
-                }
-            },
-            "refrigerator_leaking": {
-                "question": "Where is the water leaking from?",
-                "options": [
-                    { "text": "From under the refrigerator (front or back)", "next": "refrigerator_leak_under" },
-                    { "text": "Inside the refrigerator/freezer (e.g., ice maker area)", "next": "refrigerator_leak_inside" }
-                ]
-            },
-            "refrigerator_leak_under": {
-                "decision": {
-                    "text": "Leaks from under the fridge can be due to a clogged defrost drain, a cracked water line (for ice maker/dispenser), or a faulty water inlet valve. Check the defrost drain first. If it's a water line issue, shut off water to the fridge and contact a **certified appliance technician**.",
-                    "action": "Check defrost drain; if water line, shut off water & contact appliance tech."
-                }
-            },
-            "refrigerator_leak_inside": {
-                "decision": {
-                    "text": "Internal leaks often point to a clogged defrost drain line or a malfunctioning ice maker. Clear any visible blockages in the drain. If the problem persists, contact a **certified appliance technician**.",
-                    "action": "Clear internal drain; if persists, contact appliance tech."
-                }
-            },
-            "refrigerator_noise": {
-                "decision": {
-                    "text": "Minor hums are normal. Louder, persistent noises like rattling, buzzing, or grinding often indicate a problem with the condenser fan, evaporator fan, or compressor. Contact a **certified appliance technician** for diagnosis and repair.",
-                    "action": "Contact a **certified appliance technician**."
-                }
-            },
-            "refrigerator_ice_maker": {
-                "question": "Is the water supply line to the refrigerator connected and turned on?",
-                "options": [
-                    { "text": "Yes, water supply is on.", "next": "refrigerator_ice_maker_water_on" },
-                    { "text": "No, I just turned on the water supply.", "next": "refrigerator_ice_maker_water_on_fixed" }
-                ]
-            },
-            "refrigerator_ice_maker_water_on_fixed": {
-                "decision": {
-                    "text": "Allow time for the ice maker to fill and produce ice. If it still doesn't work after several hours, there might be another issue. If still not working, contact a **certified appliance technician**.",
-                    "action": "Wait for ice production; if no ice, contact tech."
-                }
-            },
-            "refrigerator_ice_maker_water_on": {
-                "question": "Is the ice dispenser chute clear of ice jams, and is the freezer temperature set correctly (typically 0°F / -18°C or lower)?",
-                "options": [
-                    { "text": "Yes, chute is clear and temp is correct.", "next": "refrigerator_ice_maker_chute_temp_ok" },
-                    { "text": "No, I will clear the chute or adjust temperature.", "next": "refrigerator_ice_maker_chute_temp_adjusted" }
-                ]
-            },
-            "refrigerator_ice_maker_chute_temp_adjusted": {
-                "decision": {
-                    "text": "Clear any ice jams from the chute and ensure the freezer temperature is set appropriately. If the ice maker still doesn't produce ice, contact a **certified appliance technician**.",
-                    "action": "Clear chute/adjust temp; if no ice, contact tech."
-                }
-            },
-            "refrigerator_ice_maker_chute_temp_ok": {
-                "decision": {
-                    "text": "If the water supply, chute, and temperature are all correct, the issue could be a faulty ice maker assembly or water inlet valve. Contact your **warranty department** or a **certified appliance technician**.",
-                    "action": "Contact warranty/appliance technician."
+                    "text": "Remove the filter and locate the serial number on the filter. Purchase a new filter and replace it. This is a **homeowner responsibility**, and the homeowner will be responsible for changing the filter and any charges associated with changing the filter.",
+                    "action": "Homeowner responsibility: Purchase and replace filter."
                 }
             },
 
-            // Stove/Cook Top/Hood Vent sub-path
-            "stove_start": {
+            // --- Stove/Cook Top/Hood Vent Section (New) ---
+            "stove_start_new": {
                 "question": "What is the issue with your stove, cooktop, or hood vent?",
                 "options": [
-                    { "text": "Gas burner not lighting/Electric burner not heating", "next": "stove_burner_issue" },
-                    { "text": "Oven not heating/uneven heating", "next": "stove_oven_issue" },
-                    { "text": "Hood vent not working", "next": "hood_vent_issue" }
+                    { "text": "A burner is not heating properly", "next": "appliance_manufacturer_question" },
+                    { "text": "The oven does not work", "next": "appliance_manufacturer_question" },
+                    { "text": "A piece of the stove has broken off", "next": "appliance_manufacturer_question" },
+                    { "text": "The door will not close properly", "next": "appliance_manufacturer_question" },
+                    { "text": "The surface is broken or cracked", "next": "appliance_manufacturer_question" },
+                    { "text": "There is no power", "next": "decision_email_warranty_stove_power" }
                 ]
             },
-            "stove_burner_issue": {
-                "question": "Is it a gas or electric burner?",
-                "options": [
-                    { "text": "Gas burner", "next": "stove_gas_burner" },
-                    { "text": "Electric burner", "next": "stove_electric_burner" }
-                ]
-            },
-            "stove_gas_burner": {
-                "decision": {
-                    "text": "Ensure the burner cap is correctly seated and the gas supply valve to the stove is open. If still not lighting, there might be a clogged pilot hole (for older models), faulty igniter, or gas supply issue. Contact a **qualified gas appliance technician** or your **warranty department**.",
-                    "action": "Check cap/gas supply; contact gas tech/warranty."
-                }
-            },
-            "stove_electric_burner": {
-                "decision": {
-                    "text": "Check if the burner is properly seated and clean. If it's a coil burner, ensure it's fully plugged in. If still not heating, it could be a faulty burner element or control switch. Contact a **certified appliance technician**.",
-                    "action": "Check burner seating/clean; contact appliance tech."
-                }
-            },
-            "stove_oven_issue": {
-                "question": "Is it a gas or electric oven?",
-                "options": [
-                    { "text": "Gas oven", "next": "oven_gas" },
-                    { "text": "Electric oven", "next": "oven_electric" }
-                ]
-            },
-            "oven_gas": {
-                "decision": {
-                    "text": "Ensure the gas supply is on. If the oven isn't heating, it could be a faulty igniter or thermostat. For safety, contact a **qualified gas appliance technician** or your **warranty department**.",
-                    "action": "Check gas supply; contact gas tech/warranty."
-                }
-            },
-            "oven_electric": {
-                "decision": {
-                    "text": "Check the circuit breaker for the oven. If it's tripped, reset it. If the oven still isn't heating or is heating unevenly, it could be a faulty heating element or thermostat. Contact a **certified appliance technician** or your **warranty department**.",
-                    "action": "Check breaker; contact appliance tech/warranty."
-                }
-            },
-            "hood_vent_issue": {
-                "question": "Is the hood vent completely unresponsive (no light, no fan), or is the fan/light just weak?",
-                "options": [
-                    { "text": "Completely unresponsive", "next": "hood_vent_no_power" },
-                    { "text": "Weak fan/light", "next": "hood_vent_weak" }
-                ]
-            },
-            "hood_vent_no_power": {
-                "decision": {
-                    "text": "Check the circuit breaker for the kitchen or the dedicated vent hood circuit. If it's tripped, reset it. If still no power, contact a **certified appliance technician** or your **warranty department**.",
-                    "action": "Check breaker; contact appliance tech/warranty."
-                }
-            },
-            "hood_vent_weak": {
-                "decision": {
-                    "text": "Ensure the fan filters are clean and unclogged. Blocked filters severely restrict airflow. If cleaning doesn't help, or the lights are dim, it could be a failing motor or bulb. Contact a **certified appliance technician**.",
-                    "action": "Clean filters; if persists, contact appliance tech."
+            "decision_email_warranty_stove_power": {
+                 "decision": {
+                    "text": "Send an email to **warranty@peakmhc.com**. Provide your contact information, the park you live in, and your lot number.",
+                    "action": "Email warranty with contact info, park, and lot number."
                 }
             },
 
-            // Microwave sub-path
-            "microwave_start": {
+            // --- Microwave Section (New) ---
+            "microwave_start_new": {
                 "question": "What is the issue with your microwave?",
                 "options": [
-                    { "text": "No power/Not turning on", "next": "microwave_no_power" },
-                    { "text": "Not heating food", "next": "microwave_not_heating" },
-                    { "text": "Making unusual noises/smells", "next": "microwave_noise_smell" }
+                    { "text": "The microwave is not heating", "next": "microwave_manufacturer_question" },
+                    { "text": "The turn table does not turn", "next": "microwave_manufacturer_question" },
+                    { "text": "The light does not come on", "next": "microwave_manufacturer_question" },
+                    { "text": "There is no power", "next": "decision_email_warranty_microwave_power" },
+                    { "text": "The door will not stay closed", "next": "microwave_manufacturer_question" }
                 ]
             },
-            "microwave_no_power": {
-                "decision": {
-                    "text": "Check if the microwave is plugged in securely and if the dedicated circuit breaker for the kitchen or microwave has tripped. If resetting the breaker doesn't work, contact a **certified appliance technician** or your **warranty department**.",
-                    "action": "Check plug/breaker; contact appliance tech/warranty."
-                }
+            "microwave_manufacturer_question": {
+                "question": "Who is the manufacturer of your microwave?",
+                "options": [
+                    { "text": "Samsung", "next": "decision_discontinue_contact_samsung" },
+                    { "text": "General Electric (GE)", "next": "decision_discontinue_contact_ge" },
+                    { "text": "Whirlpool", "next": "decision_discontinue_contact_whirlpool" },
+                    { "text": "Frigidaire", "next": "decision_discontinue_contact_frigidaire" },
+                    { "text": "Electrolux", "next": "decision_discontinue_contact_electrolux" }
+                ]
             },
-            "microwave_not_heating": {
+            "decision_email_warranty_microwave_power": {
                 "decision": {
-                    "text": "Ensure the door is fully latched. If the microwave lights up and runs but doesn't heat, it likely has an internal component failure (e.g., magnetron). This requires professional repair. Contact a **certified appliance technician** or your **warranty department**.",
-                    "action": "Check door latch; contact appliance tech/warranty."
-                }
-            },
-            "microwave_noise_smell": {
-                "decision": {
-                    "text": "Arcing, buzzing, grinding noises, or burning smells indicate serious internal issues and potential fire hazards. Stop using the microwave immediately and unplug it. Contact a **certified appliance technician** or your **warranty department**.",
-                    "action": "Unplug immediately; contact appliance tech/warranty."
+                    "text": "Send an email to **warranty@peakmhc.com**.",
+                    "action": "Email warranty."
                 }
             },
 
-            // Dishwasher sub-path (This is different from water_dishwasher_leaking, but points to it if leak is the issue)
-            "dishwasher_start": {
+            // --- Dishwasher Section (New) ---
+            "dishwasher_start_new": {
                 "question": "What is the issue with your dishwasher?",
                 "options": [
-                    { "text": "Not turning on/No power", "next": "dishwasher_no_power" },
-                    { "text": "Not cleaning dishes properly", "next": "dishwasher_not_cleaning" },
-                    { "text": "Leaking water", "next": "water_dishwasher_leaking" }, // Re-use the water section's dishwasher leak path
-                    { "text": "Not draining water", "next": "dishwasher_not_draining" }
+                    { "text": "There is no power", "next": "decision_email_warranty_dishwasher" },
+                    { "text": "It will not dry the dishes", "next": "dishwasher_manufacturer_question" },
+                    { "text": "It will not complete a cycle", "next": "dishwasher_manufacturer_question" },
+                    { "text": "It is loose from the cabinet", "next": "decision_email_warranty_dishwasher" },
+                    { "text": "The door will not close", "next": "dishwasher_door_wont_close" },
+                    { "text": "There is a leak", "next": "dishwasher_leak_question" }
                 ]
             },
-            "dishwasher_no_power": {
+            "dishwasher_manufacturer_question": {
+                "question": "Who is the manufacturer of your dishwasher?",
+                "options": [
+                    { "text": "Samsung", "next": "decision_discontinue_contact_samsung" },
+                    { "text": "General Electric (GE)", "next": "decision_discontinue_contact_ge" },
+                    { "text": "Whirlpool", "next": "decision_discontinue_contact_whirlpool" },
+                    { "text": "Frigidaire", "next": "decision_discontinue_contact_frigidaire" },
+                    { "text": "Electrolux", "next": "decision_discontinue_contact_electrolux" }
+                ]
+            },
+            "decision_email_warranty_dishwasher": {
                 "decision": {
-                    "text": "Check if the dishwasher is plugged in (if applicable) and if the dedicated circuit breaker has tripped. Also, check if the door latch is fully engaged. If resetting the breaker or latching the door doesn't work, contact a **certified appliance technician** or your **warranty department**.",
-                    "action": "Check plug/breaker/latch; contact appliance tech/warranty."
+                    "text": "Discontinue use of the dishwasher and send an email to **warranty@peakmhc.com**. Include your contact information, lot number, and a brief description of the issue.",
+                    "action": "Email warranty with contact info, lot number, and description."
                 }
             },
-            "dishwasher_not_cleaning": {
+            "dishwasher_door_wont_close": {
+                "question": "Why will the door not close?",
+                 "options": [
+                    { "text": "The cabinet is in the way", "next": "decision_email_warranty_dishwasher" },
+                    { "text": "It will not latch when closed all the way", "next": "dishwasher_manufacturer_question" }
+                ]
+            },
+            "dishwasher_leak_question": {
+                "question": "Where is the leak coming from?",
+                "options": [
+                    { "text": "It comes from under the dishwasher", "next": "dishwasher_manufacturer_question" },
+                    { "text": "It comes from under the sink where the drain line connects", "next": "decision_email_warranty_dishwasher" }
+                ]
+            },
+
+            // --- Water Heater Section (New) ---
+            "water_heater_start_new": {
+                "question": "What is the issue with your water heater?",
+                "options": [
+                    { "text": "There is no hot water", "next": "water_heater_no_hot_water_q" },
+                    { "text": "The water is too hot", "next": "water_heater_too_hot" },
+                    { "text": "There is a leak", "next": "water_heater_leak_q" },
+                    { "text": "The water heater is making a weird noise", "next": "decision_contact_rheem" }
+                ]
+            },
+            "water_heater_no_hot_water_q": {
+                "question": "Does the water heater have power?",
+                "options": [
+                    { "text": "Yes", "next": "decision_contact_rheem" },
+                    { "text": "No", "next": "decision_email_warranty_water_heater" }
+                ]
+            },
+            "water_heater_too_hot": {
                 "decision": {
-                    "text": "Ensure spray arms are not blocked, filters are clean, and you are using appropriate detergent and rinse aid. Overloading can also affect cleaning. If issues persist, it could be a faulty pump or spray arm. Contact a **certified appliance technician**.",
-                    "action": "Check spray arms/filters/detergent; contact appliance tech."
+                    "text": "A safe temperature to operate the water heater at is 131 degrees. If you are not able to set the temperature at this temperature you will need to contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Check temp; if unable to set, contact Rheem with serial number."
                 }
             },
-            "dishwasher_not_draining": {
+            "water_heater_leak_q": {
+                "question": "Where is the leak coming from?",
+                "options": [
+                    { "text": "It is coming from one of the water lines", "next": "decision_email_warranty_water_heater" },
+                    { "text": "It is coming from the water heater itself", "next": "water_heater_leak_from_unit" }
+                ]
+            },
+            "water_heater_leak_from_unit": {
                 "decision": {
-                    "text": "Check for food debris in the drain filter at the bottom of the tub. Ensure the air gap (if present) is not clogged. If connected to a garbage disposal, ensure the knock-out plug was removed upon installation. If the issue persists, the drain pump or hose may be clogged/faulty. Contact a **certified appliance technician**.",
-                    "action": "Check drain filter/air gap/disposal plug; contact appliance tech."
+                    "text": "Turn the water off to the water heater and contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Turn off water to heater; contact Rheem with serial number."
+                }
+            },
+            "decision_email_warranty_water_heater": {
+                 "decision": {
+                    "text": "Send an email to **warranty@peakmhc.com**. Include your contact information, lot number, and a brief description of the issue.",
+                    "action": "Email warranty with contact info, lot number, and description."
                 }
             },
 
-            // Water Heater (Appliance category) sub-path
-            "water_heater_appliance_start": {
-                "question": "What is the issue with your water heater?",
+            // --- Reusable Manufacturer Contact Nodes ---
+            "appliance_manufacturer_question": {
+                "question": "Who is the manufacturer of your appliance?",
                 "options": [
-                    { "text": "No hot water", "next": "water_heater_appliance_no_hot" },
-                    { "text": "Strange noises (popping, rumbling)", "next": "water_heater_appliance_noise" },
-                    { "text": "Smelly/discolored water", "next": "water_heater_appliance_smelly_water" }
+                    { "text": "Samsung", "next": "decision_contact_samsung" },
+                    { "text": "General Electric (GE)", "next": "decision_contact_ge" },
+                    { "text": "Whirlpool", "next": "decision_contact_whirlpool" },
+                    { "text": "Frigidaire", "next": "decision_contact_frigidaire" },
+                    { "text": "Electrolux", "next": "decision_contact_electrolux" }
                 ]
             },
-            "water_heater_appliance_no_hot": {
+            "decision_contact_samsung": {
                 "decision": {
-                    "text": "Check the breaker for the water heater. If it's a gas heater, check the pilot light and gas supply. If these basic checks don't resolve the issue, contact a **licensed plumber** or your **warranty department**.",
-                    "action": "Check breaker/pilot/gas; if persistent, contact plumber/warranty."
+                    "text": "Contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Contact Samsung with serial number."
                 }
             },
-            "water_heater_appliance_noise": {
+            "decision_contact_ge": {
                 "decision": {
-                    "text": "Noises like popping or rumbling usually indicate sediment buildup at the bottom of the tank, reducing efficiency and potentially damaging the unit. Draining and flushing the tank (annual maintenance) can help. If severe or persistent, contact a **licensed plumber**.",
-                    "action": "Flush water heater; if persistent, contact plumber."
+                    "text": "Contact GE at **800-432-2737**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Contact GE with serial number."
                 }
             },
-            "water_heater_appliance_smelly_water": {
+            "decision_contact_whirlpool": {
                 "decision": {
-                    "text": "Smelly (sulfur/rotten egg) water often means bacterial growth in the tank, especially in homes with well water or after long periods of inactivity. Discolored water could be rust from the tank or pipes. Flushing the tank and potentially replacing the anode rod can help. Contact a **licensed plumber**.",
-                    "action": "Flush tank/check anode rod; contact plumber."
+                    "text": "Contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Contact Whirlpool with serial number."
+                }
+            },
+            "decision_contact_frigidaire": {
+                "decision": {
+                    "text": "Contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Contact Frigidaire with serial number."
+                }
+            },
+            "decision_contact_electrolux": {
+                "decision": {
+                    "text": "Contact Electrolux at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Contact Electrolux with serial number."
+                }
+            },
+             "decision_contact_rheem": {
+                "decision": {
+                    "text": "Contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Contact Rheem with serial number."
+                }
+            },
+            // --- Reusable "Discontinue Use and Contact" Nodes ---
+            "decision_discontinue_contact_samsung": {
+                "decision": {
+                    "text": "Discontinue use of the appliance and contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Discontinue use; contact Samsung with serial number."
+                }
+            },
+            "decision_discontinue_contact_ge": {
+                "decision": {
+                    "text": "Discontinue use of the appliance and contact GE at **800-432-2737**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Discontinue use; contact GE with serial number."
+                }
+            },
+            "decision_discontinue_contact_whirlpool": {
+                "decision": {
+                    "text": "Discontinue use of the appliance and contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Discontinue use; contact Whirlpool with serial number."
+                }
+            },
+            "decision_discontinue_contact_frigidaire": {
+                "decision": {
+                    "text": "Discontinue use of the appliance and contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Discontinue use; contact Frigidaire with serial number."
+                }
+            },
+            "decision_discontinue_contact_electrolux": {
+                "decision": {
+                    "text": "Discontinue use of the appliance and contact Electrolux at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "action": "Discontinue use; contact Electrolux with serial number."
                 }
             }
+            // ================================================================= //
+            // == END OF UPDATED APPLIANCE/HVAC SECTION == //
+            // ================================================================= //
         };
 
         let currentPath = []; // To keep track of the path taken
