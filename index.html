@@ -66,6 +66,25 @@
     <script>
         // Define the flow tree structure
         const flowTree = {
+            // ================================================================= //
+            // == START OF FILE - NEW WARRANTY CHECK QUESTION == //
+            // ================================================================= //
+            "warranty_check": {
+                "question": "Have you lived in your home for less than a year?",
+                "options": [
+                    { "text": "Yes", "next": "start" },
+                    { "text": "No", "next": "warranty_expired_warning" }
+                ]
+            },
+            "warranty_expired_warning": {
+                "question": "Your warranty has expired and you as the homeowner are responsible for the maintenance to your home and any cost associated with it.",
+                "options": [
+                    { "text": "I Understand, Continue to Troubleshooter", "next": "start" }
+                ]
+            },
+            // ================================================================= //
+            // == END OF NEW CODE - The original "start" node follows this == //
+            // ================================================================= //
             "start": {
                 "question": "I have an issue with my home. What kind of issue is it?",
                 "options": [
@@ -204,7 +223,6 @@
                     "action": "Contact warranty/electrician."
                 }
             },
-
             // Water Section
             "water_start_new": {
                 "question": "Is the water issue inside or outside the home?",
@@ -225,7 +243,6 @@
                     { "text": "There is a leak in my ceiling after it rains", "next": "water_ceiling_leak_after_rain" }
                 ]
             },
-            // Toilet Sub-path
             "water_toilet_start_new": {
                 "question": "What is the issue with your toilet?",
                 "options": [
@@ -258,7 +275,6 @@
                     "action": "Plunge toilet; if persistent, contact technician. If warranty, document and submit to warranty@peakmhc.com."
                 }
             },
-            // Tub/Shower Sub-path
             "water_tub_shower_start": {
                 "question": "What is the issue with your tub/shower?",
                 "options": [
@@ -324,7 +340,6 @@
                     "action": "Discontinue use; email warranty@peakmhc.com with details and photos."
                 }
             },
-            // Sink Sub-path
             "water_sink_start": {
                 "question": "What is the issue with your sink?",
                 "options": [
@@ -468,7 +483,6 @@
                     "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
                 }
             },
-            // AC/Water Heater Closet Sub-path
             "water_ac_heater_closet_start": {
                 "question": "What is the issue in the AC/water heater closet?",
                 "options": [
@@ -528,7 +542,6 @@
                     "action": "Contact Mr. Chill with unit serial number."
                 }
             },
-            // Dishwasher Sub-path (Internal Leak)
             "water_dishwasher_leaking": {
                 "question": "How is the dishwasher leaking?",
                 "options": [
@@ -574,7 +587,6 @@
                     "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos."
                 }
             },
-            // Ceiling Leak After Rain
             "water_ceiling_leak_after_rain": {
                 "question": "Have you inspected your roof?",
                 "options": [
@@ -594,7 +606,6 @@
                     "action": "Contact certified roofer; if warranty issue, document and submit to warranty@peakmhc.com."
                 }
             },
-            // Outside Issues
             "water_issue_outside": {
                 "question": "What is the issue outside the home?",
                 "options": [
@@ -666,7 +677,6 @@
                     "action": "Email warranty@peakmhc.com with details, photos, lot number, and contact info."
                 }
             },
-
             // Structural Path
             "structural_start": {
                 "question": "What kind of structural issue are you experiencing?",
@@ -714,7 +724,6 @@
                     "action": "Document with photos; contact warranty department immediately for foundation inspection."
                 }
             },
-
             // Yard Related Path
             "yard_start": {
                 "question": "What kind of yard-related issue is it?",
@@ -776,7 +785,6 @@
                     "action": "Check power/breaker/master valve; contact irrigation specialist/warranty."
                 }
             },
-
             // Community Related Path
             "community_start": {
                 "question": "What kind of community-related issue is it?",
@@ -845,11 +853,6 @@
                     "action": "Report to HOA/property management."
                 }
             },
-
-            // ================================================================= //
-            // == START OF UPDATED APPLIANCE/HVAC SECTION == //
-            // ================================================================= //
-
             "appliance_hvac_start": {
                 "question": "What kind of appliance or HVAC issue is it?",
                 "options": [
@@ -861,8 +864,6 @@
                     { "text": "Water Heater (appliance related)", "next": "water_heater_start_new" }
                 ]
             },
-            
-            // --- HVAC Section (Original, Retained) ---
             "hvac_start": {
                 "question": "What is the HVAC issue?",
                 "options": [
@@ -974,8 +975,6 @@
                     "action": "Investigate smell; contact warranty/HVAC tech."
                 }
             },
-
-            // --- Refrigerator Section (New) ---
             "refrigerator_start_new": {
                 "question": "What is the issue with your refrigerator?",
                 "options": [
@@ -991,8 +990,6 @@
                     "action": "Homeowner responsibility: Purchase and replace filter."
                 }
             },
-
-            // --- Stove/Cook Top/Hood Vent Section (New) ---
             "stove_start_new": {
                 "question": "What is the issue with your stove, cooktop, or hood vent?",
                 "options": [
@@ -1005,13 +1002,11 @@
                 ]
             },
             "decision_email_warranty_stove_power": {
-                 "decision": {
+                "decision": {
                     "text": "Send an email to **warranty@peakmhc.com**. Provide your contact information, the park you live in, and your lot number.",
                     "action": "Email warranty with contact info, park, and lot number."
                 }
             },
-
-            // --- Microwave Section (New) ---
             "microwave_start_new": {
                 "question": "What is the issue with your microwave?",
                 "options": [
@@ -1038,8 +1033,6 @@
                     "action": "Email warranty."
                 }
             },
-
-            // --- Dishwasher Section (New) ---
             "dishwasher_start_new": {
                 "question": "What is the issue with your dishwasher?",
                 "options": [
@@ -1069,7 +1062,7 @@
             },
             "dishwasher_door_wont_close": {
                 "question": "Why will the door not close?",
-                 "options": [
+                "options": [
                     { "text": "The cabinet is in the way", "next": "decision_email_warranty_dishwasher" },
                     { "text": "It will not latch when closed all the way", "next": "dishwasher_manufacturer_question" }
                 ]
@@ -1081,8 +1074,6 @@
                     { "text": "It comes from under the sink where the drain line connects", "next": "decision_email_warranty_dishwasher" }
                 ]
             },
-
-            // --- Water Heater Section (New) ---
             "water_heater_start_new": {
                 "question": "What is the issue with your water heater?",
                 "options": [
@@ -1119,13 +1110,11 @@
                 }
             },
             "decision_email_warranty_water_heater": {
-                 "decision": {
+                "decision": {
                     "text": "Send an email to **warranty@peakmhc.com**. Include your contact information, lot number, and a brief description of the issue.",
                     "action": "Email warranty with contact info, lot number, and description."
                 }
             },
-
-            // --- Reusable Manufacturer Contact Nodes ---
             "appliance_manufacturer_question": {
                 "question": "Who is the manufacturer of your appliance?",
                 "options": [
@@ -1166,13 +1155,12 @@
                     "action": "Contact Electrolux with serial number."
                 }
             },
-             "decision_contact_rheem": {
+            "decision_contact_rheem": {
                 "decision": {
                     "text": "Contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
                     "action": "Contact Rheem with serial number."
                 }
             },
-            // --- Reusable "Discontinue Use and Contact" Nodes ---
             "decision_discontinue_contact_samsung": {
                 "decision": {
                     "text": "Discontinue use of the appliance and contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
@@ -1203,9 +1191,6 @@
                     "action": "Discontinue use; contact Electrolux with serial number."
                 }
             }
-            // ================================================================= //
-            // == END OF UPDATED APPLIANCE/HVAC SECTION == //
-            // ================================================================= //
         };
 
         let currentPath = []; // To keep track of the path taken
@@ -1260,7 +1245,7 @@
         // Initialize the flow
         function initFlow() {
             currentPath = []; // Reset path
-            renderNode('start');
+            renderNode('warranty_check'); // MODIFIED TO START WITH THE NEW QUESTION
             resetButton.classList.add('hidden'); // Hide reset button at start
         }
 
