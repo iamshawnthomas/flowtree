@@ -70,14 +70,14 @@
             // == START OF FILE - NEW WARRANTY CHECK QUESTION == //
             // ================================================================= //
             "warranty_check": {
-                "question": "Have you lived in your home for less than a year?",
+                "question": "How long have you lived in your hoe?",
                 "options": [
-                    { "text": "Yes", "next": "start" },
-                    { "text": "No", "next": "warranty_expired_warning" }
+                    { "text": "Less than a year", "next": "start" },
+                    { "text": "More than 1 year", "next": "warranty_expired_warning" }
                 ]
             },
             "warranty_expired_warning": {
-                "question": "Your warranty has expired and you as the homeowner are responsible for the maintenance to your home and any cost associated with it.",
+                "question": "Your warranty has expired, you as the homeowner are responsible for the maintenance to your home and any cost associated with it. The only warranty that would still be honored is a Samsung warranty for your kitchen appliances, this warranty is good for 2 years.",
                 "options": [
                     { "text": "I Understand, Continue to Troubleshooter", "next": "start" }
                 ]
@@ -93,7 +93,7 @@
                     { "text": "Water", "next": "water_start_new" },
                     { "text": "Yard Related", "next": "yard_start" },
                     { "text": "Community Related", "next": "community_start" },
-                    { "text": "Appliance/HVAC", "next": "appliance_hvac_start" }
+                    { "text": "Appliance/HVAC", "next": "appliance_hvac_start" },
                 ]
             },
             // Electrical Path
@@ -737,7 +737,7 @@
             "yard_drainage_issue": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the foundation and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the foundation or causes significant erosion, contact your **warranty department** for a drainage assessment.",
-                    "action": "Check downspouts/gutters; observe; if significant issue, contact warranty."
+                    "action": "Check downspouts/gutters; observe; if significant issue, contact property management at 817-445-6335 or stop by the office to inform the staff of the issue."
                 }
             },
            // Community Related Path
@@ -752,7 +752,7 @@
             },
             "community_street_light_issue": {
                 "decision": {
-                    "text": "Report street light outages or damage directly to the Park office and please provide accurate location information.",
+                    "text": "Report street light outages or damage directly to contact property management at 817-445-6335 or stop by the office to inform the staff of the issue, please provide accurate location information.",
                     "action": "Contact property management."
                 }
             },
@@ -768,43 +768,43 @@
             },
             "community_amenity_pool": {
                 "decision": {
-                    "text": "Report issues with community pools or splash pads directly to the property management.",
+                    "text": "Report issues with community pools directly to the property management at 817-445-6335 or stop by the office to inform the staff of the issue..",
                     "action": "Report property management."
                 }
             },
             "community_amenity_playground": {
                 "decision": {
-                    "text": "Report any damage or safety concerns at community playgrounds to the property management company immediately. Provide photos if possible.",
+                    "text": "Report any damage or safety concerns at community playgrounds to the property management at 817-445-6335 or stop by the office to inform the staff of the issue. Provide photos if possible.",
                     "action": "Report to property management."
                 }
             },
             "community_amenity_landscaping": {
                 "decision": {
-                    "text": "For issues with common area landscaping, such as dead plants, irrigation leaks, or damaged fencing, report them to property management.",
+                    "text": "For issues with common area landscaping, such as dead plants, irrigation leaks, or damaged fencing, contact property management at 817-445-6335 or stop by the office to inform the staff of the issue.",
                     "action": "Report to property management."
                 }
             },
             "community_amenity_clubhouse": {
                 "decision": {
-                    "text": "Report maintenance issues, damage, or concerns about the clubhouse or fitness center facilities to property management.",
+                    "text": "Report maintenance issues, damage, or concerns about the clubhouse or fitness center facilities to property management at 817-445-6335 or stop by the office to inform the staff of the issue.",
                     "action": "Report to property management."
                 }
             },
             "community_amenity_trails": {
                 "decision": {
-                    "text": "Report damage, blockages, or safety concerns regarding community walking trails or sidewalks to the property management.",
+                    "text": "Report damage, blockages, or safety concerns regarding community walking trails or sidewalks to the property management at 817-445-6335 or stop by the office to inform the staff of the issue.",
                     "action": "Report to property management."
                 }
             },
             "community_violation": {
                 "decision": {
-                    "text": "For HOA violations or concerns, refer to your HOA Covenants, Conditions, and Restrictions (CC&Rs) and contact property management company directly to discuss the issue.",
+                    "text": "For community violations or concerns, contact property management at 817-445-6335 or stop by the office to inform the staff to discuss the issue.",
                     "action": "Report to property management."
                 }
             },
             "community_common_area_maintenance": {
                 "decision": {
-                    "text": "Report general maintenance needs or concerns in common areas (parks, green spaces, entryways) to property management.",
+                    "text": "Report general maintenance needs or concerns in common areas (parks, green spaces, entryways) to property management at 817-445-6335 or stop by the office to inform the staff of the issue.",
                     "action": "Report to property management."
                 }
             },
@@ -1082,67 +1082,67 @@
             },
             "decision_contact_samsung": {
                 "decision": {
-                    "text": "Contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Contact Samsung with serial number."
                 }
             },
             "decision_contact_ge": {
                 "decision": {
-                    "text": "Contact GE at **800-432-2737**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Contact GE at **800-432-2737**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Contact GE with serial number."
                 }
             },
             "decision_contact_whirlpool": {
                 "decision": {
-                    "text": "Contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Contact Whirlpool with serial number."
                 }
             },
             "decision_contact_frigidaire": {
                 "decision": {
-                    "text": "Contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Contact Frigidaire with serial number."
                 }
             },
             "decision_contact_electrolux": {
                 "decision": {
-                    "text": "Contact Electrolux at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Contact Electrolux at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Contact Electrolux with serial number."
                 }
             },
             "decision_contact_rheem": {
                 "decision": {
-                    "text": "Contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Contact Rheem with serial number."
                 }
             },
             "decision_discontinue_contact_samsung": {
                 "decision": {
-                    "text": "Discontinue use of the appliance and contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Discontinue use of the appliance and contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Discontinue use; contact Samsung with serial number."
                 }
             },
             "decision_discontinue_contact_ge": {
                 "decision": {
-                    "text": "Discontinue use of the appliance and contact GE at **800-432-2737**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Discontinue use of the appliance and contact GE at **800-432-2737**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Discontinue use; contact GE with serial number."
                 }
             },
             "decision_discontinue_contact_whirlpool": {
                 "decision": {
-                    "text": "Discontinue use of the appliance and contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Discontinue use of the appliance and contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Discontinue use; contact Whirlpool with serial number."
                 }
             },
             "decision_discontinue_contact_frigidaire": {
                 "decision": {
-                    "text": "Discontinue use of the appliance and contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Discontinue use of the appliance and contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Discontinue use; contact Frigidaire with serial number."
                 }
             },
             "decision_discontinue_contact_electrolux": {
                 "decision": {
-                    "text": "Discontinue use of the appliance and contact Electrolux at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.",
+                    "text": "Discontinue use of the appliance and contact Electrolux at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink. Please record the name of the person you speak with and any case number they may give to you. If the response you receive is not satisfactory to you, contact Peak Warranty at warranty@peakmhc.com and provide the contact name, case number, your name, your contact number, lot #, what appliance is in question, and serical number.",
                     "action": "Discontinue use; contact Electrolux with serial number."
                 }
             }
