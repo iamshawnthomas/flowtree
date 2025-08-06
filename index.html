@@ -153,24 +153,32 @@
             },
             
             // ================================================================= //
-            // == NEW RENTER FLOW == //
+            // == RENTER FLOW == //
             // ================================================================= //
             "renter_start": {
                 "question": "What kind of issue are you experiencing?",
                 "options": [
                     { "text": "Electrical", "next": "renter_electrical_start" },
-                    { "text": "Structural", "next": "renter_contact_landlord" },
-                    { "text": "Water", "next": "renter_contact_landlord" },
-                    { "text": "Yard Related", "next": "renter_contact_landlord" },
-                    { "text": "Community Related", "next": "renter_contact_landlord" },
-                    { "text": "Appliance/HVAC", "next": "renter_contact_landlord" }
+                    { "text": "Structural", "next": "renter_structural_start" },
+                    // { "text": "Water", "next": "renter_water_start_new" },
+                    // { "text": "Yard Related", "next": "renter_yard_start" },
+                    // { "text": "Community Related", "next": "renter_community_start" },
+                    // { "text": "Appliance/HVAC", "next": "renter_appliance_hvac_start" }
                 ]
             },
+            // This is the single, reusable endpoint for all renter issues.
+            "renter_contact_landlord": {
+                "decision": {
+                    "text": "For this issue, you must contact your landlord or property management company. They are responsible for coordinating the diagnosis and repair.",
+                    "action": "Contact landlord/property manager."
+                }
+            },
+            // Renter Electrical Path
             "renter_electrical_start": {
                 "question": "What is the electrical issue?",
                 "options": [
                     { "text": "Outlet not working", "next": "renter_electrical_outlet_issue" },
-                    { "text": "Light fixture not working", "next": "renter_contact_landlord" },
+                    { "text": "Light fixture not working", "next": "renter_electrical_light_fixture_issue" },
                     { "text": "Ceiling fan not working", "next": "renter_contact_landlord" },
                     { "text": "Breaker keeps tripping", "next": "renter_contact_landlord" }
                 ]
@@ -188,14 +196,55 @@
                     "action": "Check breakers/GFCI, then contact landlord if issue persists."
                 }
             },
-            // This is the single, reusable endpoint for all renter issues.
-            "renter_contact_landlord": {
+            "renter_electrical_light_fixture_issue": {
+                 "question": "Have you replaced the light bulb?",
+                "options": [
+                    { "text": "Yes, I replaced the bulb and it still doesn't work.", "next": "renter_contact_landlord" },
+                    { "text": "No, I haven't replaced the bulb yet.", "next": "renter_electrical_light_fixture_replace_bulb" }
+                ]
+            },
+            "renter_electrical_light_fixture_replace_bulb": {
                 "decision": {
-                    "text": "For this issue, you must contact your landlord or property management company. They are responsible for coordinating the diagnosis and repair.",
-                    "action": "Contact landlord/property manager."
+                    "text": "Please try replacing the light bulb first. If the issue persists, you must contact your landlord.",
+                    "action": "Replace light bulb, then contact landlord if issue persists."
                 }
             },
-            
+            // Renter Structural Path
+            "renter_structural_start": {
+                "question": "What is the structural issue?",
+                "options": [
+                    { "text": "Doors or Windows", "next": "renter_structural_doors_windows" },
+                    { "text": "Flooring", "next": "renter_contact_landlord" },
+                    { "text": "Walls/Drywall", "next": "renter_structural_walls_drywall" },
+                    { "text": "Roof/Ceiling", "next": "renter_contact_landlord" },
+                    { "text": "Foundation", "next": "renter_contact_landlord" }
+                ]
+            },
+            "renter_structural_doors_windows": {
+                "question": "What specific issue are you experiencing with doors or windows?",
+                "options": [
+                    { "text": "Door/window won't open or close properly", "next": "renter_structural_door_window_sticking" },
+                    { "text": "Drafts or air leaks", "next": "renter_contact_landlord" },
+                    { "text": "Cracked or broken glass", "next": "renter_contact_landlord" },
+                    { "text": "Hardware issues (handles, locks, hinges)", "next": "renter_contact_landlord" }
+                ]
+            },
+            "renter_structural_door_window_sticking": {
+                "decision": {
+                    "text": "Check for any debris in the tracks or around the frame that you can safely clear. If the issue persists, you must contact your landlord or property manager for repair.",
+                    "action": "Check for debris, then contact landlord/property manager."
+                }
+            },
+            "renter_structural_walls_drywall": {
+                "question": "What issue are you experiencing with walls or drywall?",
+                "options": [
+                    { "text": "Cracks in drywall or paint", "next": "renter_contact_landlord" },
+                    { "text": "Nail pops or screw pops", "next": "renter_contact_landlord" },
+                    { "text": "Holes or damage", "next": "renter_contact_landlord" },
+                    { "text": "Texture or paint issues", "next": "renter_contact_landlord" }
+                ]
+            },
+
             // ================================================================= //
             // == HOMEOWNER FLOW (Original Flow) == //
             // ================================================================= //
