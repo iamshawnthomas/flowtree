@@ -73,7 +73,7 @@
 </head>
 <body class="bg-gray-100 p-4">
 
-    <!-- =================== DISCLAIMER MODAL =================== -->
+    <!-- =================== DISCLAIMER MODAL (NEW) =================== -->
     <div id="disclaimer-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center p-4 z-50">
         <div class="bg-white rounded-lg shadow-xl p-6 md:p-8 max-w-2xl w-full">
             <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 text-center">IMPORTANT DISCLAIMER: PLEASE READ BEFORE PROCEEDING</h2>
@@ -272,8 +272,131 @@
             "community_amenity_trails": { "decision": { "text": "Report damage, blockages, or safety concerns regarding community walking trails or sidewalks to the property management.", "action": "Report to property management." } },
             "community_violation": { "decision": { "text": "For HOA violations or concerns, refer to your HOA Covenants, Conditions, and Restrictions (CC&Rs) and contact property management company directly to discuss the issue.", "action": "Report to property management." } },
             "community_common_area_maintenance": { "decision": { "text": "Report general maintenance needs or concerns in common areas (parks, green spaces, entryways) to property management.", "action": "Report to property management." } },
-            "hvac_community_placeholder": { "decision": { "text": "HVAC community placeholder." } },
-            // Other appliance sections...
+            
+            // =================== APPLIANCE / HVAC SECTION (MODIFIED) ===================
+            "appliance_hvac_start": { "question": "What kind of appliance or HVAC issue is it?", "options": [ { "text": "HVAC (Heating, Ventilation, Air Conditioning)", "next": "hvac_start" }, { "text": "Refrigerator", "next": "refrigerator_start_new" }, { "text": "Stove/Cook Top/Hood Vent", "next": "stove_start_new" }, { "text": "Microwave", "next": "microwave_start_new" }, { "text": "Dishwasher", "next": "dishwasher_start_new" }, { "text": "Water Heater (appliance related)", "next": "water_heater_start_new" } ] },
+            
+            // HVAC Community Placeholders (NEW)
+            "hvac_community_rancho_placeholder": { "decision": { "text": "Placeholder for Rancho response." } },
+            "hvac_community_villas_placeholder": { "decision": { "text": "Placeholder for Villas response." } },
+            "hvac_community_brazos_placeholder": { "decision": { "text": "Placeholder for Brazos response." } },
+            "hvac_community_solena_placeholder": { "decision": { "text": "Placeholder for Solena response." } },
+
+            // HVAC Path (MODIFIED)
+            "hvac_start": { "question": "What is the HVAC issue?", "options": [ { "text": "Not cooling/heating effectively", "next": "hvac_not_cooling_heating" }, { "text": "No power/Not turning on", "next": "hvac_no_power" }, { "text": "Poor airflow from vents", "next": "hvac_poor_airflow" }, { "text": "Unusual noises or smells", "next": "hvac_noise_smell" } ] },
+            "hvac_not_cooling_heating": { "question": "Have you checked the thermostat settings and replaced/cleaned your air filter recently?", "options": [ { "text": "Yes, thermostat is correct and filter is clean/new.", "next": "hvac_cooling_heating_filter_thermostat_ok" }, { "text": "No, I haven't, or they are incorrect/dirty.", "next": "hvac_thermostat_filter_action" } ] },
+            
+            "hvac_thermostat_filter_action": { 
+                "question": "Adjust thermostat settings (ensure it's on 'Cool' or 'Heat' and 'Auto' for fan). Clean or replace your air filter. A dirty filter severely restricts performance. If the issue persists after these steps, please select your community for the next step.", 
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            "hvac_cooling_heating_filter_thermostat_ok": { "question": "Is the outdoor unit (condenser) running, and is it free of debris?", "options": [ { "text": "Yes, unit is running and clear.", "next": "hvac_outdoor_unit_ok" }, { "text": "No, unit is not running or is obstructed.", "next": "hvac_outdoor_unit_issue" } ] },
+            
+            "hvac_outdoor_unit_ok": { 
+                "question": "If the outdoor unit is running and clear, but there's no effective cooling/heating, it could indicate a refrigerant issue, a faulty compressor, or an indoor coil problem. Please select your community for the next step.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+            
+            "hvac_outdoor_unit_issue": { 
+                "question": "Ensure the outdoor unit is free of leaves, dirt, or other obstructions. If it's not running, check the circuit breaker. If clearing debris or resetting the breaker doesn't help, or if the unit is frozen, please select your community for the next step.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            "hvac_no_power": { "question": "Have you checked the circuit breaker for your HVAC system in the main electrical panel?", "options": [ { "text": "Yes, the breaker is tripped or off.", "next": "hvac_breaker_tripped" }, { "text": "No, the breaker is on.", "next": "hvac_no_breaker_issue" } ] },
+            
+            "hvac_breaker_tripped": { 
+                "question": "Reset the breaker. If it immediately trips again, there's a serious electrical issue. If it stays on but the unit still doesn't power up, there is another issue. In either case, please select your community for the next step.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            "hvac_no_breaker_issue": { 
+                "question": "If the breaker is on, but the HVAC system has no power, the issue could be with the thermostat, control board, or other electrical components within the unit. Please select your community for the next step.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            "hvac_poor_airflow": { "question": "Have you checked and replaced/cleaned your air filter recently?", "options": [ { "text": "Yes, the filter is clean/new.", "next": "hvac_airflow_filter_ok" }, { "text": "No, I haven't, or it's dirty.", "next": "hvac_filter_dirty_action" } ] },
+            
+            "hvac_filter_dirty_action": { 
+                "question": "Clean or replace your air filter immediately. A dirty filter severely restricts airflow and can damage your HVAC system. If the issue persists after replacing the filter, please select your community for the next step.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            "hvac_airflow_filter_ok": { "question": "Are all vents open and unobstructed by furniture or curtains?", "options": [ { "text": "Yes, all vents are open and clear.", "next": "hvac_airflow_vents_clear" }, { "text": "No, some vents were closed/blocked.", "next": "hvac_airflow_vents_adjusted" } ] },
+            
+            "hvac_airflow_vents_adjusted": { 
+                "question": "Ensure all supply and return vents are open and unobstructed. This can significantly impact airflow. If the issue persists, please select your community for the next step.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            "hvac_airflow_vents_clear": { 
+                "question": "If filters are clean and vents are clear, poor airflow could be due to duct leaks, a failing blower motor, or an issue with the evaporator coil. Please select your community for the next step.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            "hvac_noise_smell": { "question": "What kind of noise or smell are you experiencing?", "options": [ { "text": "Loud banging, grinding, or screeching noises", "next": "hvac_noise_mechanical" }, { "text": "Musty, moldy, or burnt smells", "next": "hvac_smell_odor" } ] },
+            
+            "hvac_noise_mechanical": { 
+                "question": "These noises typically indicate a serious mechanical problem (e.g., motor bearing failure, loose fan blade, compressor issue). Shut off the unit immediately to prevent further damage. Please select your community for next steps.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            "hvac_smell_odor": { 
+                "question": "Musty/moldy smells suggest moisture issues or mold in the ductwork/unit. Burnt smells could indicate electrical problems. For any persistent unusual smell, especially burning, shut off the unit. Please select your community for next steps.",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_community_rancho_placeholder" },
+                    { "text": "Villas", "next": "hvac_community_villas_placeholder" },
+                    { "text": "Brazos", "next": "hvac_community_brazos_placeholder" },
+                    { "text": "Solena", "next": "hvac_community_solena_placeholder" }
+                ] 
+            },
+
+            // Other appliance sections
             "refrigerator_start_new": { "question": "What is the issue with your refrigerator?", "options": [ { "text": "It is not running", "next": "appliance_manufacturer_question" }, { "text": "The fridge is cool, but the freezer does not work", "next": "appliance_manufacturer_question" }, { "text": "There is an alarm indicating the filter needs to be changed", "next": "refrigerator_filter_alarm" }, { "text": "There is an alarm indicating it is not cooling properly", "next": "appliance_manufacturer_question" } ] },
             "refrigerator_filter_alarm": { "decision": { "text": "Remove the filter and locate the serial number on the filter. Purchase a new filter and replace it. This is a **homeowner responsibility**, and the homeowner will be responsible for changing the filter and any charges associated with changing the filter.", "action": "Homeowner responsibility: Purchase and replace filter." } },
             "stove_start_new": { "question": "What is the issue with your stove, cooktop, or hood vent?", "options": [ { "text": "A burner is not heating properly", "next": "appliance_manufacturer_question" }, { "text": "The oven does not work", "next": "appliance_manufacturer_question" }, { "text": "A piece of the stove has broken off", "next": "appliance_manufacturer_question" }, { "text": "The door will not close properly", "next": "appliance_manufacturer_question" }, { "text": "The surface is broken or cracked", "next": "appliance_manufacturer_question" }, { "text": "There is no power", "next": "decision_email_warranty_stove_power" } ] },
@@ -354,14 +477,13 @@
                 questionElement.textContent = node.question;
                 flowContentDiv.appendChild(questionElement);
 
-                // Display options as buttons (MODIFIED to add numbers)
+                // Display options as buttons
                 const buttonGrid = document.createElement('div');
                 buttonGrid.className = 'button-grid';
-                node.options.forEach((option, index) => {
+                node.options.forEach(option => {
                     const button = document.createElement('button');
                     button.className = 'flow-button';
-                    // Add the number prefix here
-                    button.textContent = `(${index + 1}) ${option.text}`;
+                    button.textContent = option.text;
                     button.onclick = () => {
                         renderNode(option.next);
                     };
