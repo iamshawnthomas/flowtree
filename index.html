@@ -25,7 +25,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            transition: background-color 0.3s ease;
+            transition: background-color: 0.3s ease;
             width: 100%; /* Make buttons take full width of grid column */
         }
         .flow-button:hover {
@@ -41,7 +41,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 14px;
-            transition: background-color 0.3s ease;
+            transition: background-color: 0.3s ease;
             width: auto; /* Allow button to size to content */
         }
         .back-button:hover {
@@ -272,24 +272,106 @@
             "community_amenity_trails": { "decision": { "text": "Report damage, blockages, or safety concerns regarding community walking trails or sidewalks to the property management.", "action": "Report to property management." } },
             "community_violation": { "decision": { "text": "For HOA violations or concerns, refer to your HOA Covenants, Conditions, and Restrictions (CC&Rs) and contact property management company directly to discuss the issue.", "action": "Report to property management." } },
             "community_common_area_maintenance": { "decision": { "text": "Report general maintenance needs or concerns in common areas (parks, green spaces, entryways) to property management.", "action": "Report to property management." } },
+            
+            // =================== APPLIANCE / HVAC SECTION (MODIFIED) ===================
             "appliance_hvac_start": { "question": "What kind of appliance or HVAC issue is it?", "options": [ { "text": "HVAC (Heating, Ventilation, Air Conditioning)", "next": "hvac_start" }, { "text": "Refrigerator", "next": "refrigerator_start_new" }, { "text": "Stove/Cook Top/Hood Vent", "next": "stove_start_new" }, { "text": "Microwave", "next": "microwave_start_new" }, { "text": "Dishwasher", "next": "dishwasher_start_new" }, { "text": "Water Heater (appliance related)", "next": "water_heater_start_new" } ] },
+            
+            // HVAC Community Final Decisions (NEW)
+            "hvac_decision_champion": {
+                "decision": {
+                    "text": "Contact Champion Heating and Air for service to your HVAC unit. Their contact number is 682-230-5566 and their email is office@mrchillcoolingandheating.com. When contacting them you will need to reference your address with your lot number, your contact information, and the serial number which you can find located on the data sheet under your kitchen sink."
+                }
+            },
+            "hvac_decision_mr_chill": {
+                "decision": {
+                    "text": "Contact Mr. Chill Heating and Air  for service to your HVAC unit. Their contact number is 936-236-9241 and their email is installservice@championheatingair.net. When contacting them you will need to reference your address with your lot number, your contact information, and the serial number which you can find located on the data sheet under your kitchen sink."
+                }
+            },
+            
+            // HVAC Path (MODIFIED)
             "hvac_start": { "question": "What is the HVAC issue?", "options": [ { "text": "Not cooling/heating effectively", "next": "hvac_not_cooling_heating" }, { "text": "No power/Not turning on", "next": "hvac_no_power" }, { "text": "Poor airflow from vents", "next": "hvac_poor_airflow" }, { "text": "Unusual noises or smells", "next": "hvac_noise_smell" } ] },
             "hvac_not_cooling_heating": { "question": "Have you checked the thermostat settings and replaced/cleaned your air filter recently?", "options": [ { "text": "Yes, thermostat is correct and filter is clean/new.", "next": "hvac_cooling_heating_filter_thermostat_ok" }, { "text": "No, I haven't, or they are incorrect/dirty.", "next": "hvac_thermostat_filter_action" } ] },
             "hvac_thermostat_filter_action": { "decision": { "text": "Adjust thermostat settings (ensure it's on 'Cool' or 'Heat' and 'Auto' for fan). Clean or replace your air filter. A dirty filter severely restricts performance. If the issue persists after these steps, contact your **warranty department** or a **qualified HVAC technician**.", "action": "Adjust thermostat/clean filter; if persists, contact warranty/HVAC tech." } },
             "hvac_cooling_heating_filter_thermostat_ok": { "question": "Is the outdoor unit (condenser) running, and is it free of debris?", "options": [ { "text": "Yes, unit is running and clear.", "next": "hvac_outdoor_unit_ok" }, { "text": "No, unit is not running or is obstructed.", "next": "hvac_outdoor_unit_issue" } ] },
-            "hvac_outdoor_unit_ok": { "decision": { "text": "If the outdoor unit is running and clear, but there's no effective cooling/heating, it could indicate a refrigerant issue, a faulty compressor, or an indoor coil problem. Contact your **warranty department** or a **qualified HVAC technician**.", "action": "Contact warranty/HVAC technician." } },
-            "hvac_outdoor_unit_issue": { "decision": { "text": "Ensure the outdoor unit is free of leaves, dirt, or other obstructions. If it's not running, check the circuit breaker. If clearing debris or resetting the breaker doesn't help, or if the unit is frozen, contact your **warranty department** or a **qualified HVAC technician**.", "action": "Clear debris/check breaker; if issues persist or frozen, contact warranty/HVAC tech." } },
+            "hvac_outdoor_unit_ok": { 
+                "question": "If the outdoor unit is running and clear, but there's no effective cooling/heating, it could indicate a refrigerant issue, a faulty compressor, or an indoor coil problem. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
+            "hvac_outdoor_unit_issue": { 
+                "question": "Ensure the outdoor unit is free of leaves, dirt, or other obstructions. If it's not running, check the circuit breaker. If clearing debris or resetting the breaker doesn't help, or if the unit is frozen, What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
             "hvac_no_power": { "question": "Have you checked the circuit breaker for your HVAC system in the main electrical panel?", "options": [ { "text": "Yes, the breaker is tripped or off.", "next": "hvac_breaker_tripped" }, { "text": "No, the breaker is on.", "next": "hvac_no_breaker_issue" } ] },
-            "hvac_breaker_tripped": { "decision": { "text": "Reset the breaker. If it immediately trips again, there's a serious electrical issue. Contact your **warranty department** or a **qualified HVAC technician** immediately. If it stays on but the unit still doesn't power up, proceed to contact for repair.", "action": "Reset breaker; if trips/fails, contact warranty/HVAC tech urgently." } },
-            "hvac_no_breaker_issue": { "decision": { "text": "If the breaker is on, but the HVAC system has no power, the issue could be with the thermostat, control board, or other electrical components within the unit. Contact your **warranty department** or a **qualified HVAC technician**.", "action": "Contact warranty/HVAC technician." } },
+            "hvac_breaker_tripped": {
+                "question": "Reset the breaker. If it immediately trips again, there's a serious electrical issue. If it stays on but the unit still doesn't power up, there is another issue. In either case, What Community do you live in?",
+                 "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
+            "hvac_no_breaker_issue": {
+                "question": "If the breaker is on, but the HVAC system has no power, the issue could be with the thermostat, control board, or other electrical components within the unit. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
             "hvac_poor_airflow": { "question": "Have you checked and replaced/cleaned your air filter recently?", "options": [ { "text": "Yes, the filter is clean/new.", "next": "hvac_airflow_filter_ok" }, { "text": "No, I haven't, or it's dirty.", "next": "hvac_filter_dirty_action" } ] },
-            "hvac_filter_dirty_action": { "decision": { "text": "Clean or replace your air filter immediately. A dirty filter severely restricts airflow and can damage your HVAC system. If the issue persists after replacing the filter, contact your **warranty department** or a **qualified HVAC technician**.", "action": "Clean/replace filter; if persists, contact warranty/HVAC tech." } },
+            "hvac_filter_dirty_action": { 
+                "decision": { 
+                    "text": "Clean or replace your air filter immediately. A dirty filter severely restricts airflow and can damage your HVAC system. If the issue persists after replacing the filter, return to the previous step in this process."
+                } 
+            },
             "hvac_airflow_filter_ok": { "question": "Are all vents open and unobstructed by furniture or curtains?", "options": [ { "text": "Yes, all vents are open and clear.", "next": "hvac_airflow_vents_clear" }, { "text": "No, some vents were closed/blocked.", "next": "hvac_airflow_vents_adjusted" } ] },
-            "hvac_airflow_vents_adjusted": { "decision": { "text": "Ensure all supply and return vents are open and unobstructed. This can significantly impact airflow. If the issue persists, contact your **warranty department** or a **qualified HVAC technician**.", "action": "Adjust vents; if persists, contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink." } },
-            "hvac_airflow_vents_clear": { "decision": { "text": "If filters are clean and vents are clear, poor airflow could be due to duct leaks, a failing blower motor, or an issue with the evaporator coil. Contact your **warranty department** or a **qualified HVAC technician**.", "action": "Contact contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink." } },
+            "hvac_airflow_vents_adjusted": { 
+                "decision": { 
+                    "text": "Ensure all supply and return vents are open and unobstructed. This can significantly impact airflow. If the issue persists, return to the previous step in this process."
+                } 
+            },
+            "hvac_airflow_vents_clear": {
+                "question": "If filters are clean and vents are clear, poor airflow could be due to duct leaks, a failing blower motor, or an issue with the evaporator coil. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
             "hvac_noise_smell": { "question": "What kind of noise or smell are you experiencing?", "options": [ { "text": "Loud banging, grinding, or screeching noises", "next": "hvac_noise_mechanical" }, { "text": "Musty, moldy, or burnt smells", "next": "hvac_smell_odor" } ] },
-            "hvac_noise_mechanical": { "decision": { "text": "These noises typically indicate a serious mechanical problem (e.g., motor bearing failure, loose fan blade, compressor issue). Shut off the unit immediately to prevent further damage and contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.", "action": "Shut off unit; contact contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink." } },
-            "hvac_smell_odor": { "decision": { "text": "Musty/moldy smells suggest moisture issues or mold in the ductwork/unit. Burnt smells could indicate electrical problems. For any persistent unusual smell, especially burning, shut off the unit and contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.", "action": "Investigate smell; contact warranty/HVAC tech." } },
+            "hvac_noise_mechanical": {
+                "question": "These noises typically indicate a serious mechanical problem (e.g., motor bearing failure, loose fan blade, compressor issue). Shut off the unit immediately to prevent further damage. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
+            "hvac_smell_odor": {
+                "question": "Musty/moldy smells suggest moisture issues or mold in the ductwork/unit. Burnt smells could indicate electrical problems. For any persistent unusual smell, especially burning, shut off the unit. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
+
+            // Other appliance sections
             "refrigerator_start_new": { "question": "What is the issue with your refrigerator?", "options": [ { "text": "It is not running", "next": "appliance_manufacturer_question" }, { "text": "The fridge is cool, but the freezer does not work", "next": "appliance_manufacturer_question" }, { "text": "There is an alarm indicating the filter needs to be changed", "next": "refrigerator_filter_alarm" }, { "text": "There is an alarm indicating it is not cooling properly", "next": "appliance_manufacturer_question" } ] },
             "refrigerator_filter_alarm": { "decision": { "text": "Remove the filter and locate the serial number on the filter. Purchase a new filter and replace it. This is a **homeowner responsibility**, and the homeowner will be responsible for changing the filter and any charges associated with changing the filter.", "action": "Homeowner responsibility: Purchase and replace filter." } },
             "stove_start_new": { "question": "What is the issue with your stove, cooktop, or hood vent?", "options": [ { "text": "A burner is not heating properly", "next": "appliance_manufacturer_question" }, { "text": "The oven does not work", "next": "appliance_manufacturer_question" }, { "text": "A piece of the stove has broken off", "next": "appliance_manufacturer_question" }, { "text": "The door will not close properly", "next": "appliance_manufacturer_question" }, { "text": "The surface is broken or cracked", "next": "appliance_manufacturer_question" }, { "text": "There is no power", "next": "decision_email_warranty_stove_power" } ] },
@@ -309,17 +391,17 @@
             "water_heater_leak_from_unit": { "decision": { "text": "Turn the water off to the water heater and contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Turn off water to heater; contact Rheem with serial number." } },
             "decision_email_warranty_water_heater": { "decision": { "text": "Send an email to **warranty@peakmhc.com**. Include your contact information, lot number, and a brief description of the issue.", "action": "Email warranty with contact info, lot number, and description." } },
             "appliance_manufacturer_question": { "question": "Who is the manufacturer of your appliance?", "options": [ { "text": "Samsung", "next": "decision_contact_samsung" }, { "text": "General Electric (GE)", "next": "decision_contact_ge" }, { "text": "Whirlpool", "next": "decision_contact_whirlpool" }, { "text": "Frigidaire", "next": "decision_contact_frigidaire" }, { "text": "Electrolux", "next": "decision_contact_electrolux" } ] },
-            "decision_contact_samsung": { "decision": { "text": "Contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact Samsung with serial number." } },
-            "decision_contact_ge": { "decision": { "text": "Contact GE at **800-432-2737**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact GE with serial number." } },
-            "decision_contact_whirlpool": { "decision": { "text": "Contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact Whirlpool with serial number." } },
-            "decision_contact_frigidaire": { "decision": { "text": "Contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact Frigidaire with serial number." } },
-            "decision_contact_electrolux": { "decision": { "text": "Contact Electrolux at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact Electrolux with serial number." } },
+            "decision_contact_samsung": { "decision": { "text": "Contact Samsung at **800-726-7864**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_ge": { "decision": { "text": "Contact GE at **800-432-2737**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_whirlpool": { "decision": { "text": "Contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_frigidaire": { "decision": { "text": "Contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_electrolux": { "decision": { "text": "Contact Electrolux at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
             "decision_contact_rheem": { "decision": { "text": "Contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact Rheem with serial number." } },
-            "decision_discontinue_contact_samsung": { "decision": { "text": "Discontinue use of the appliance and contact Samsung at **800-726-7864**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Discontinue use; contact Samsung with serial number." } },
-            "decision_discontinue_contact_ge": { "decision": { "text": "Discontinue use of the appliance and contact GE at **800-432-2737**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Discontinue use; contact GE with serial number." } },
-            "decision_discontinue_contact_whirlpool": { "decision": { "text": "Discontinue use of the appliance and contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Discontinue use; contact Whirlpool with serial number." } },
-            "decision_discontinue_contact_frigidaire": { "decision": { "text": "Discontinue use of the appliance and contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Discontinue use; contact Frigidaire with serial number." } },
-            "decision_discontinue_contact_electrolux": { "decision": { "text": "Discontinue use of the appliance and contact Electrolux at **866-386-5286**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Discontinue use; contact Electrolux with serial number." } }
+            "decision_discontinue_contact_samsung": { "decision": { "text": "Discontinue use of the appliance and contact Samsung at **800-726-7864**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_discontinue_contact_ge": { "decision": { "text": "Discontinue use of the appliance and contact GE at **800-432-2737**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_discontinue_contact_whirlpool": { "decision": { "text": "Discontinue use of the appliance and contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_discontinue_contact_frigidaire": { "decision": { "text": "Discontinue use of the appliance and contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_discontinue_contact_electrolux": { "decision": { "text": "Discontinue use of the appliance and contact Electrolux at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } }
         };
 
         // --- Pre-process flowTree to assign unique IDs to all options ---
@@ -342,7 +424,7 @@
 
         // Function to go back to the previous node
         function goBack() {
-            if (currentPath.length > 0) {
+            if (currentPath.length > 1) {
                 currentPath.pop(); // Remove the current node from history
                 const previousNodeId = currentPath[currentPath.length - 1]; // Get the new last node
                 renderNode(previousNodeId, false); // false to not re-add to history
@@ -351,9 +433,14 @@
         
         // Function to render a node from the flowTree
         function renderNode(nodeId, addToHistory = true) {
-            // This logic prevents the same node from being pushed to history twice,
-            // especially when using the back button.
             if (addToHistory) {
+                // To prevent duplicates when using the back button
+                if (currentPath[currentPath.length - 1] !== nodeId) {
+                    currentPath.push(nodeId);
+                }
+            } else {
+                // If not adding to history, it means we are going back, so ensure the path is correct
+                currentPath.pop();
                 currentPath.push(nodeId);
             }
             
