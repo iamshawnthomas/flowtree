@@ -57,6 +57,7 @@
             font-size: 1.1rem;
             color: #555;
             line-height: 1.6;
+            white-space: pre-wrap; /* Preserve whitespace and line breaks */
         }
         .decision-text strong {
             color: #000; /* Make bold text stand out more */
@@ -164,10 +165,10 @@
                     { "text": "Electrical", "next": "electrical_start" },
                     { "text": "Structural", "next": "structural_start" },
                     { "text": "Water", "next": "water_start_new" },
-                    { "text": "Exterior", "next": "exterior_placeholder" },
+                    { "text": "Exterior", "next": "exterior_start" },
                     { "text": "Appliance/HVAC", "next": "appliance_hvac_start" },
-                    { "text": "Yard Related", "next": "yard_start" },
-                    { "text": "Community Related", "next": "community_start" },
+                    { "text": "Yard Related", "next": "yard_community_check" },
+                    { "text": "Community Related", "next": "community_community_check" },
                     { "text": "Preferred Vendors", "next": "vendors_placeholder" },
                     { "text": "Warranty Contact Numbers", "next": "contacts_placeholder" },
                     { "text": "Issue not listed", "next": "not_listed_placeholder" }
@@ -270,13 +271,33 @@
             "structural_floor_squeaks": { "decision": { "text": "Squeaky floors can be caused by subfloor movement, loose nails, or changes in humidity. Minor squeaks are often present during the first couple of months of living in your new manufactured home and are not viewed as a serious issue. If the squeaks are excessive or last more than a few days, contact your warranty department at warranty@peakmhc.com for an assessment.", "action": "Assess severity; contact warranty if significant." } },
             "structural_door_window_sticking": { "decision": { "text": "Doors or windows sticking can be due to humidity changes causing expansion, or minor settling of the home. Adjustments to hinges or frames may be needed. If the sticking is severe, sudden, or accompanied by other signs of structural movement (e.g., large cracks), contact your **warranty department** for assessment.", "action": "Check for environmental factors/adjust; if severe/structural signs, contact warranty." } },
             "structural_foundation_concerns": { "decision": { "text": "Large visible cracks in walls, significant shifting, or unlevel floors are serious concerns. Document with photos and contact your warranty department at warranty@peakmhc.com immediately. Do not delay as additional issues can be caused due to neglect.", "action": "Document with photos; contact warranty department immediately for foundation inspection." } },
+            
+            "yard_community_check": {
+                "question": "Which Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "yard_start" },
+                    { "text": "Villas", "next": "yard_start" },
+                    { "text": "Brazos", "next": "yard_start" },
+                    { "text": "Solena", "next": "yard_start" }
+                ]
+            },
             "yard_start": { "question": "What kind of yard-related issue is it?", "options": [ { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue" }, { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern" }, { "text": "Fence damage/issues", "next": "yard_fence_issue" }, { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type" } ] },
             "yard_drainage_issue": { "decision": { "text": "Ensure downspouts are properly directed away from the foundation and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the foundation or causes significant erosion, contact your **warranty department at warranty@peakmhc.com** for a drainage assessment.", "action": "Check downspouts/gutters; observe; if significant issue, contact warranty." } },
+            
+            "community_community_check": {
+                "question": "Which Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "community_start" },
+                    { "text": "Villas", "next": "community_start" },
+                    { "text": "Brazos", "next": "community_start" },
+                    { "text": "Solena", "next": "community_start" }
+                ]
+            },
             "community_start": { "question": "What kind of community-related issue is it?", "options": [ { "text": "Street light out/damaged", "next": "community_street_light_issue" }, { "text": "Amenity damage/issue (e.g., pool, clubhouse)", "next": "community_amenity_damage" }, { "text": "Community violation/concern", "next": "community_hoa_violation" }, { "text": "Common area maintenance (e.g., park, green space)", "next": "community_common_area_maintenance" } ] },
             "community_street_light_issue": { "decision": { "text": "Report street light outages or damage directly to the Park office and please provide accurate location information.", "action": "Contact property management." } },
             "community_amenity_damage": { "question": "Which amenity is damaged?", "options": [ { "text": "Pool/Splash Pad", "next": "community_amenity_pool" }, { "text": "Playground", "next": "community_amenity_playground" }, { "text": "Common Area Landscaping/Fencing", "next": "community_amenity_landscaping" }, { "text": "Clubhouse/Fitness Center", "next": "community_amenity_clubhouse" }, { "text": "Walking Trails/Sidewalks", "next": "community_amenity_trails" } ] },
             "community_amenity_pool": { "decision": { "text": "Report issues with community pools or splash pads directly to the property management.", "action": "Report property management." } },
-            "community_amenity_playground": { "decision": { "text": "Report any damage or safety concerns at community playgrounds to the property management company immediately. Provide photos if possible.", "action": "Report to property management." } },
+            "community_amenity_playground": { "decision": { "text": "For issues with common area landscaping, such as dead plants, irrigation leaks, or damaged fencing, report them to property management.", "action": "Report to property management." } },
             "community_amenity_landscaping": { "decision": { "text": "For issues with common area landscaping, such as dead plants, irrigation leaks, or damaged fencing, report them to property management.", "action": "Report to property management." } },
             "community_amenity_clubhouse": { "decision": { "text": "Report maintenance issues, damage, or concerns about the clubhouse or fitness center facilities to property management.", "action": "Report to property management." } },
             "community_amenity_trails": { "decision": { "text": "Report damage, blockages, or safety concerns regarding community walking trails or sidewalks to the property management.", "action": "Report to property management." } },
@@ -284,10 +305,64 @@
             "community_common_area_maintenance": { "decision": { "text": "Report general maintenance needs or concerns in common areas (parks, green spaces, entryways) to property management.", "action": "Report to property management." } },
             
             // Placeholder nodes for new categories
-            "exterior_placeholder": { "decision": { "text": "Information regarding exterior issues is currently under development. Please check back later." } },
-            "vendors_placeholder": { "decision": { "text": "A list of preferred vendors is currently under development. Please check back later." } },
-            "contacts_placeholder": { "decision": { "text": "The warranty contact numbers section is currently under development. Please check back later." } },
-            "not_listed_placeholder": { "decision": { "text": "If your issue is not listed, please send a detailed email with photos to **warranty@peakmhc.com** for assistance. Please include your lot number and contact information." } },
+            "exterior_start": { 
+                "question": "What is the issue with the exterior?",
+                "options": [
+                    { "text": "Decking", "next": "exterior_decking" },
+                    { "text": "Walls", "next": "exterior_walls" },
+                    { "text": "Skirting", "next": "exterior_skirting" }
+                ]
+            },
+            "exterior_decking": { "decision": { "text": "Information regarding decking issues is currently under development. Please check back later." } },
+            "exterior_walls": { "decision": { "text": "Information regarding exterior wall issues is currently under development. Please check back later." } },
+            "exterior_skirting": { "decision": { "text": "Information regarding skirting issues is currently under development. Please check back later." } },
+            "vendors_placeholder": { 
+                "decision": { 
+                    "text": `These vendors are only recommendations; you are not required to utilize their services. Peak assumes no responsibility for the work performed or charges for those services by any of the following vendors, they are merely recommendations. 
+
+<strong>PLUMBERS</strong>
+Plumbaholics 214-695-2402
+
+<strong>ELECTRICIANS</strong>
+
+
+<strong>ROOFERS</strong>
+Buffalo Trail Construction 817-995-9525
+
+<strong>HANDYMAN SERVICES</strong>
+345 Handyman Services 682-374-8261`
+                } 
+            },
+            "contacts_placeholder": { 
+                "decision": { 
+                    "text": `<strong>APPLIANCES</strong>
+Samsung 	800-726-7864
+Whirlpool	800-253-1301
+Frigidaire	888-307-2326
+Electrolux	888-307-3236
+Hunter		800-715-0393
+First Alert	800-323-9005
+
+<strong>HVAC</strong>
+Champion	682-230-5566
+Mr. Chill	        936-236-9241
+Nordyne	        800-422--4328
+Stylecrest	800-231-4822
+Carrier		866-234-1018
+Ecobee	        877-932-6233
+
+<strong>WATER HEATER</strong>
+Rheem	        800-432-8373 Without Heat Pump
+Rheem	        800-995-0982 With Heat Pump
+
+<strong>FAUCETS</strong>
+Moen		800-289-6636
+CFG		        888-450-5522
+BBC		        866-427-5001
+Pfister		800-732-8328`
+                } 
+            },
+            "not_listed_placeholder": { "decision": { "text": "If you were not able to find your issue within this tool please send an email to warranty@peakmhc.com. Please include; Your Name, address, a contact number, Lot number, the community in which you live, the issue you are having with as much description as possible and any steps you have already taken to remedy the issue, and photos." } },
 
             // =================== APPLIANCE / HVAC SECTION (MODIFIED) ===================
             "appliance_hvac_start": { "question": "What kind of appliance or HVAC issue is it?", "options": [ { "text": "HVAC (Heating, Ventilation, Air Conditioning)", "next": "hvac_start" }, { "text": "Refrigerator", "next": "refrigerator_start_new" }, { "text": "Stove/Cook Top/Hood Vent", "next": "stove_start_new" }, { "text": "Microwave", "next": "microwave_start_new" }, { "text": "Dishwasher", "next": "dishwasher_start_new" }, { "text": "Water Heater (appliance related)", "next": "water_heater_start_new" } ] },
@@ -400,11 +475,11 @@
             "decision_email_warranty_dishwasher": { "decision": { "text": "Discontinue use of the dishwasher and send an email to **warranty@peakmhc.com**. Include your contact information, lot number, and a brief description of the issue.", "action": "Email warranty with contact info, lot number, and description." } },
             "dishwasher_door_wont_close": { "question": "Why will the door not close?", "options": [ { "text": "The cabinet is in the way", "next": "decision_email_warranty_dishwasher" }, { "text": "It will not latch when closed all the way", "next": "dishwasher_manufacturer_question" } ] },
             "dishwasher_leak_question": { "question": "Where is the leak coming from?", "options": [ { "text": "It comes from under the dishwasher", "next": "dishwasher_manufacturer_question" }, { "text": "It comes from under the sink where the drain line connects", "next": "decision_email_warranty_dishwasher" } ] },
-            "water_heater_start_new": { "question": "What is the issue with your water heater?", "options": [ { "text": "There is no hot water", "next": "water_heater_no_hot_water_q" }, { "text": "The water is too hot", "next": "water_heater_too_hot" }, { "text": "There is a leak", "next": "water_heater_leak_q" }, { "text": "The water heater is making a weird noise", "next": "decision_contact_rheem" } ] },
-            "water_heater_no_hot_water_q": { "question": "Does the water heater have power?", "options": [ { "text": "Yes", "next": "decision_contact_rheem" }, { "text": "No", "next": "decision_email_warranty_water_heater" } ] },
-            "water_heater_too_hot": { "decision": { "text": "A safe temperature to operate the water heater at is 131 degrees. If you are not able to set the temperature at this temperature you will need to contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Check temp; if unable to set, contact Rheem with serial number." } },
+            "water_heater_start_new": { "question": "What is the issue with your water heater?", "options": [ { "text": "There is no hot water", "next": "water_heater_no_hot_water_q" }, { "text": "The water is too hot", "next": "water_heater_too_hot" }, { "text": "There is a leak", "next": "water_heater_leak_q" }, { "text": "The water heater is making a weird noise", "next": "decision_contact_rheem_updated" } ] },
+            "water_heater_no_hot_water_q": { "question": "Does the water heater have power?", "options": [ { "text": "Yes", "next": "decision_contact_rheem_updated" }, { "text": "No", "next": "decision_email_warranty_water_heater" } ] },
+            "water_heater_too_hot": { "decision": { "text": "A safe temperature to operate the water heater at is 131 degrees. If you are not able to set the temperature at this temperature you will need to contact Rheem at 800-432-8373 if your system does not have a heat pump or 800-995-0982 if your system has a heat pump. You will need the serial number of the appliance located on the data sheet under your kitchen sink. A heat pump is an additional section on top of the water heater tank with a blower and vents on the side of the blower housing.", "action": "Check temp; if unable to set, contact Rheem with serial number." } },
             "water_heater_leak_q": { "question": "Where is the leak coming from?", "options": [ { "text": "It is coming from one of the water lines", "next": "decision_email_warranty_water_heater" }, { "text": "It is coming from the water heater itself", "next": "water_heater_leak_from_unit" } ] },
-            "water_heater_leak_from_unit": { "decision": { "text": "Turn the water off to the water heater and contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Turn off water to heater; contact Rheem with serial number." } },
+            "water_heater_leak_from_unit": { "decision": { "text": "Turn the water off to the water heater and contact Rheem at 800-432-8373 if your system does not have a heat pump or 800-995-0982 if your system has a heat pump. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Turn off water to heater; contact Rheem with serial number." } },
             "decision_email_warranty_water_heater": { "decision": { "text": "Send an email to **warranty@peakmhc.com**. Include your contact information, lot number, and a brief description of the issue.", "action": "Email warranty with contact info, lot number, and description." } },
             "appliance_manufacturer_question": { "question": "Who is the manufacturer of your appliance?", "options": [ { "text": "Samsung", "next": "decision_contact_samsung" }, { "text": "General Electric (GE)", "next": "decision_contact_ge" }, { "text": "Whirlpool", "next": "decision_contact_whirlpool" }, { "text": "Frigidaire", "next": "decision_contact_frigidaire" }, { "text": "Electrolux", "next": "decision_contact_electrolux" } ] },
             "decision_contact_samsung": { "decision": { "text": "Contact Samsung at **800-726-7864**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
@@ -412,7 +487,7 @@
             "decision_contact_whirlpool": { "decision": { "text": "Contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
             "decision_contact_frigidaire": { "decision": { "text": "Contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
             "decision_contact_electrolux": { "decision": { "text": "Contact Electrolux at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
-            "decision_contact_rheem": { "decision": { "text": "Contact Rheem at **800-432-8373** or **800-995-0982**. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact Rheem with serial number." } },
+            "decision_contact_rheem_updated": { "decision": { "text": "Contact Rheem at 800-432-8373 if your system does not have a heat pump or 800-995-0982 if your system has a heat pump. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact Rheem with serial number." } },
             "decision_discontinue_contact_samsung": { "decision": { "text": "Discontinue use of the appliance and contact Samsung at **800-726-7864**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
             "decision_discontinue_contact_ge": { "decision": { "text": "Discontinue use of the appliance and contact GE at **800-432-2737**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
             "decision_discontinue_contact_whirlpool": { "decision": { "text": "Discontinue use of the appliance and contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
@@ -504,7 +579,10 @@
                 // Display decision
                 const decisionElement = document.createElement('p');
                 decisionElement.className = 'decision-text mb-6';
-                decisionElement.innerHTML = node.decision.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                // Use innerText for pre-formatted text to preserve spaces and line breaks from template literal
+                decisionElement.innerText = node.decision.text; 
+                // Then replace ** for bolding using innerHTML
+                decisionElement.innerHTML = decisionElement.innerHTML.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                 flowContentDiv.appendChild(decisionElement);
                 
                 // Show reset button on decision nodes
