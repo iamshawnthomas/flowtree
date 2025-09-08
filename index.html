@@ -31,7 +31,6 @@
         .flow-button:hover {
             background-color: #45a049;
         }
-        /* Style for the new Back button */
         .back-button {
             background-color: #6b7280; /* Gray */
             color: white;
@@ -174,9 +173,7 @@
                     { "text": "Issue not listed", "next": "not_listed_placeholder" }
                 ]
             },
-            // ================================================================= //
-            // == YARD RELATED ISSUES == //
-            // ================================================================= //
+            // Community related issues
             "yard_community_check": {
                 "question": "Which Community do you live in?",
                 "options": [
@@ -186,43 +183,15 @@
                     { "text": "Solena", "next": "yard_start_solena" }
                 ]
             },
-            "yard_start_rancho": { 
-                "question": "What kind of yard-related issue is it?", 
+            "yard_start_rancho": {
+                "question": "What kind of yard-related issue is it?",
                 "options": [
                     { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_rancho" },
                     { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_rancho" },
                     { "text": "Fence damage/issues", "next": "yard_fence_issue_rancho" },
-                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_rancho" }
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_rancho" }
                 ]
             },
-            "yard_start_villas": { 
-                "question": "What kind of yard-related issue is it?", 
-                "options": [
-                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_villas" },
-                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_villas" },
-                    { "text": "Fence damage/issues", "next": "yard_fence_issue_villas" },
-                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_villas" }
-                ]
-            },
-            "yard_start_brazos": { 
-                "question": "What kind of yard-related issue is it?", 
-                "options": [
-                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_brazos" },
-                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_brazos" },
-                    { "text": "Fence damage/issues", "next": "yard_fence_issue_brazos" },
-                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_brazos" }
-                ]
-            },
-            "yard_start_solena": { 
-                "question": "What kind of yard-related issue is it?", 
-                "options": [
-                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_solena" },
-                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_solena" },
-                    { "text": "Fence damage/issues", "next": "yard_fence_issue_solena" },
-                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_solena" }
-                ]
-            },
-            // Responses for Box 111 (Rancho Serenidad)
             "yard_drainage_issue_rancho": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
@@ -230,7 +199,7 @@
             },
             "yard_landscaping_concern_rancho": {
                 "decision": {
-                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
+                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             "yard_fence_issue_rancho": {
@@ -238,12 +207,20 @@
                     "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            "yard_sprinkler_issue_type_rancho": {
+            "yard_sprinkler_issue_rancho": {
                 "decision": {
                     "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            // Responses for Box 112 (Villas De Mariposa)
+            "yard_start_villas": {
+                "question": "What kind of yard-related issue is it?",
+                "options": [
+                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_villas" },
+                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_villas" },
+                    { "text": "Fence damage/issues", "next": "yard_fence_issue_villas" },
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_villas" }
+                ]
+            },
             "yard_drainage_issue_villas": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
@@ -251,7 +228,7 @@
             },
             "yard_landscaping_concern_villas": {
                 "decision": {
-                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
+                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             "yard_fence_issue_villas": {
@@ -259,12 +236,20 @@
                     "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            "yard_sprinkler_issue_type_villas": {
+            "yard_sprinkler_issue_villas": {
                 "decision": {
                     "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            // Responses for Box 113 (Brazos Point)
+            "yard_start_brazos": {
+                "question": "What kind of yard-related issue is it?",
+                "options": [
+                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_brazos" },
+                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_brazos" },
+                    { "text": "Fence damage/issues", "next": "yard_fence_issue_brazos" },
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_brazos" }
+                ]
+            },
             "yard_drainage_issue_brazos": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
@@ -272,7 +257,7 @@
             },
             "yard_landscaping_concern_brazos": {
                 "decision": {
-                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
+                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             "yard_fence_issue_brazos": {
@@ -280,12 +265,20 @@
                     "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            "yard_sprinkler_issue_type_brazos": {
+            "yard_sprinkler_issue_brazos": {
                 "decision": {
                     "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            // Responses for Box 114 (Solena)
+            "yard_start_solena": {
+                "question": "What kind of yard-related issue is it?",
+                "options": [
+                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_solena" },
+                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_solena" },
+                    { "text": "Fence damage/issues", "next": "yard_fence_issue_solena" },
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_solena" }
+                ]
+            },
             "yard_drainage_issue_solena": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
@@ -293,7 +286,7 @@
             },
             "yard_landscaping_concern_solena": {
                 "decision": {
-                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
+                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             "yard_fence_issue_solena": {
@@ -301,52 +294,153 @@
                     "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            "yard_sprinkler_issue_type_solena": {
+            "yard_sprinkler_issue_solena": {
                 "decision": {
                     "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            // Additional requested changes
-            "box_7": {
+            // Electrical Path
+            "electrical_start": { "question": "What is the electrical issue?", "options": [ { "text": "My home has no electricity.", "next": "electrical_no_electricity_issue" }, { "text": "Outlet not working", "next": "electrical_outlet_issue" }, { "text": "Light fixture not working", "next": "electrical_light_fixture_issue" }, { "text": "Ceiling fan not working", "next": "electrical_ceiling_fan_issue" }, { "text": "Breaker keeps tripping", "next": "electrical_breaker_tripping" } ] },
+            "electrical_no_electricity_issue": { "decision": { "text": "If your home has no electricity, check with your power provider to report the outage and find out if there are any known issues in your area." } },
+            "electrical_outlet_issue": { "question": "Have you checked the breaker in the main breaker panel for the tripped breaker? A tripped breaker will feel spongy when you press on it. Flip it to off and then back on. If it is a GFCI outlet, have you tried to reset the outlet itself?", "options": [ { "text": "Yes", "next": "electrical_outlet_checked" }, { "text": "No", "next": "electrical_outlet_not_checked" } ] },
+            "electrical_outlet_checked": { "question": "Have you checked the outlet itself for any signs of damage?", "options": [ { "text": "Yes", "next": "electrical_outlet_damaged" }, { "text": "No", "next": "electrical_outlet_not_damaged" } ] },
+            "electrical_outlet_damaged": { "decision": { "text": "If the outlet is damaged, do not use it and contact a licensed electrician for repair." } },
+            "electrical_outlet_not_damaged": { "decision": { "text": "If the outlet is not damaged, there may be another issue. Please contact a licensed electrician for further diagnosis." } },
+            // Structural Path
+            "structural_start": { "question": "What kind of structural issue are you experiencing?", "options": [ { "text": "Cracks in walls or ceiling", "next": "structural_wall_ceiling_crack_type" }, { "text": "Squeaky floors or subfloor issues", "next": "structural_floor_squeaks" }, { "text": "Doors or windows sticking/not closing properly", "next": "structural_door_window_sticking" }, { "text": "Foundation concerns (e.g., visible cracks, shifting)", "next": "structural_foundation_concerns" } ] },
+            "structural_wall_ceiling_crack_type": { "question": "What does the crack look like?", "options": [ { "text": "Hairline cracks, small, not expanding", "next": "structural_wall_ceiling_crack_minor" }, { "text": "Large, jagged, or expanding cracks; cracks near doors/windows; cracks in brick/foundation", "next": "structural_wall_ceiling_crack_major" } ] },
+            "structural_wall_ceiling_crack_minor": { "decision": { "text": "Minor hairline cracks are common in new homes due to settling and humidity changes and are considered cosmetic and are typically not a covered issue after the initial move-in period. Monitor for expansion. If they expand significantly, or appear with other signs of structural movement, contact your warranty department at warranty@peakmhc.com if you have owned your home for less than 30 days. If you have owned your home for more than 30 days select the manufacturer of your home below. You can find this information on the data sheet located under your kitchen sink." } },
+            "structural_wall_ceiling_crack_major": { "decision": { "text": "Large, expanding, or jagged cracks, especially near openings or in the foundation/brick, can indicate structural issues. Take photos and contact your warranty department at warranty@peakmhc.com immediately for assessment." } },
+            "structural_floor_squeaks": { "decision": { "text": "Squeaky floors can be caused by subfloor movement, loose nails, or changes in humidity. Minor squeaks are often present during the first couple of months of living in your newly manufactured home and are not viewed as a serious issue. If the squeaks are excessive or last more than a few weeks, contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink." } },
+            "structural_door_window_sticking": { "decision": { "text": "Doors or windows sticking can be due to humidity changes causing expansion, or minor settling of the home. Adjustments to hinges or frames may be needed. If the sticking is severe, sudden, or accompanied by other signs of structural movement (e.g., large cracks), contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink." } },
+            "structural_foundation_concerns": { "decision": { "text": "Large visible cracks in walls, significant shifting, or unlevel floors are serious concerns. Document with photos and contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink." } },
+            // The rest of the original flowTree object...
+            // =================== APPLIANCE / HVAC SECTION (MODIFIED) ===================
+            "appliance_hvac_start": { "question": "What kind of appliance or HVAC issue is it?", "options": [ { "text": "HVAC (Heating, Ventilation, Air Conditioning)", "next": "hvac_start" }, { "text": "Refrigerator", "next": "refrigerator_start_new" }, { "text": "Stove/Cook Top/Hood Vent", "next": "stove_start_new" }, { "text": "Microwave", "next": "microwave_start_new" }, { "text": "Dishwasher", "next": "dishwasher_start_new" }, { "text": "Water Heater (appliance related)", "next": "water_heater_start_new" } ] },
+            // HVAC Community Final Decisions (NEW)
+            "hvac_decision_champion": {
                 "decision": {
-                    "text": "My home has no electricity."
+                    "text": "Contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink."
                 }
             },
-            "box_17": {
-                "question": "Have you checked the breaker in the main breaker panel for a tripped breaker? A tripped breaker will feel spongy when you press on it. Flip it to off and then back on. If it is a GFCI outlet, have you tried to reset the outlet itself?"
-            },
-            "box_109": {
+            "hvac_decision_mr_chill": {
                 "decision": {
-                    "text": "Minor hairline cracks are common in new homes due to settling and humidity changes and are considered cosmetic and are typically not a covered issue after the initial move-in period. Monitor for expansion. If they expand significantly, or appear with other signs of structural movement, contact your warranty department at warranty@peakmhc.com if you have owned your home for less than 30 days. If you have owned your home for more than 30 days select the manufacturer of your home below. You can find this information on the data sheet located under your kitchen sink."
+                    "text": "Contact Mr. Chill Heating and Air for service to your HVAC unit. Their contact number is 936-236-9241 and their email is office@mrchillcoolingandheating.com. When contacting them you will need to reference your address with your lot number, your contact information, and the serial number which you can find located on the data sheet under your kitchen sink."
                 }
             },
-            // Responses for Box 106, 107, 108, and 109
-            "box_106": {
-                "decision": {
-                    "text": "Squeaky floors can be caused by subfloor movement, loose nails, or changes in humidity. Minor squeaks are often present during the first couple of months of living in your newly manufactured home and are not viewed as a serious issue. If the squeaks are excessive or last more than a few weeks, contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink."
-                }
+            // HVAC Path (MODIFIED)
+            "hvac_start": { "question": "What is the HVAC issue?", "options": [ { "text": "Not cooling/heating effectively", "next": "hvac_not_cooling_heating" }, { "text": "No power/Not turning on", "next": "hvac_no_power" }, { "text": "Poor airflow from vents", "next": "hvac_poor_airflow" }, { "text": "Unusual noises or smells", "next": "hvac_noise_smell" } ] },
+            "hvac_not_cooling_heating": { "question": "Have you checked the thermostat settings and replaced/cleaned your air filter recently?", "options": [ { "text": "Yes, thermostat is correct and filter is clean/new.", "next": "hvac_cooling_heating_filter_thermostat_ok" }, { "text": "No, I haven't, or they are incorrect/dirty.", "next": "hvac_thermostat_filter_action" } ] },
+            "hvac_thermostat_filter_action": { "decision": { "text": "Adjust thermostat settings (ensure it's on 'Cool' or 'Heat' and 'Auto' for fan). Clean or replace your air filter. A dirty filter severely restricts performance. If the issue persists after these steps, contact your **warranty department** or a **qualified HVAC technician**.", "action": "Adjust thermostat/clean filter; if persists, contact warranty/HVAC tech." } },
+            "hvac_cooling_heating_filter_thermostat_ok": { "question": "Is the outdoor unit (condenser) running, and is it free of debris?", "options": [ { "text": "Yes, unit is running and clear.", "next": "hvac_outdoor_unit_ok" }, { "text": "No, unit is not running or is obstructed.", "next": "hvac_outdoor_unit_issue" } ] },
+            "hvac_outdoor_unit_ok": { 
+                "question": "If the outdoor unit is running and clear, but there's no effective cooling/heating, it could indicate a refrigerant issue, a faulty compressor, or an indoor coil problem. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
             },
-            "box_107": {
-                "decision": {
-                    "text": "Doors or windows sticking can be due to humidity changes causing expansion, or minor settling of the home. Adjustments to hinges or frames may be needed. If the sticking is severe, sudden, or accompanied by other signs of structural movement (e.g., large cracks), contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink."
-                }
+            "hvac_outdoor_unit_issue": { 
+                "question": "Ensure the outdoor unit is free of leaves, dirt, or other obstructions. If it's not running, check the circuit breaker. If clearing debris or resetting the breaker doesn't help, or if the unit is frozen, What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
             },
-            "box_108": {
-                "decision": {
-                    "text": "Large visible cracks in walls, significant shifting, or unlevel floors are serious concerns. Document with photos and contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink."
-                }
+            "hvac_no_power": { "question": "Have you checked the circuit breaker for your HVAC system in the main electrical panel?", "options": [ { "text": "Yes, the breaker is tripped or off.", "next": "hvac_breaker_tripped" }, { "text": "No, the breaker is on.", "next": "hvac_no_breaker_issue" } ] },
+            "hvac_breaker_tripped": {
+                "question": "Reset the breaker. If it immediately trips again, there's a serious electrical issue. If it stays on but the unit still doesn't power up, there is another issue. In either case, What Community do you live in?",
+                 "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
             },
-            "box_109_responses": [
-                "Clayton Waco 1",
-                "Clayton Athens",
-                "Clayton Southern Energy",
-                "Clayton Bonham",
-                "Clayton Sulpher Springs",
-                "New Vision",
-                "Oak Creek",
-                "Fleetwood/CAVCO",
-                "Champion Homes"
-            ],
+            "hvac_no_breaker_issue": {
+                "question": "If the breaker is on, but the HVAC system has no power, the issue could be with the thermostat, control board, or other electrical components within the unit. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
+            "hvac_poor_airflow": { "question": "Have you checked and replaced/cleaned your air filter recently?", "options": [ { "text": "Yes, the filter is clean/new.", "next": "hvac_airflow_filter_ok" }, { "text": "No, I haven't, or it's dirty.", "next": "hvac_filter_dirty_action" } ] },
+            "hvac_filter_dirty_action": { 
+                "decision": { 
+                    "text": "Clean or replace your air filter immediately. A dirty filter severely restricts airflow and can damage your HVAC system. If the issue persists after replacing the filter, return to the previous step in this process."
+                } 
+            },
+            "hvac_airflow_filter_ok": { "question": "Are all vents open and unobstructed by furniture or curtains?", "options": [ { "text": "Yes, all vents are open and clear.", "next": "hvac_airflow_vents_clear" }, { "text": "No, some vents were closed/blocked.", "next": "hvac_airflow_vents_adjusted" } ] },
+            "hvac_airflow_vents_adjusted": { 
+                "decision": { 
+                    "text": "Ensure all supply and return vents are open and unobstructed. This can significantly impact airflow. If the issue persists, return to the previous step in this process."
+                } 
+            },
+            "hvac_airflow_vents_clear": {
+                "question": "If filters are clean and vents are clear, poor airflow could be due to duct leaks, a failing blower motor, or an issue with the evaporator coil. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
+            "hvac_noise_smell": { "question": "What kind of noise or smell are you experiencing?", "options": [ { "text": "Loud banging, grinding, or screeching noises", "next": "hvac_noise_mechanical" }, { "text": "Musty, moldy, or burnt smells", "next": "hvac_smell_odor" } ] },
+            "hvac_noise_mechanical": {
+                "question": "These noises typically indicate a serious mechanical problem (e.g., motor bearing failure, loose fan blade, compressor issue). Shut off the unit immediately to prevent further damage. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
+            "hvac_smell_odor": {
+                "question": "Musty/moldy smells suggest moisture issues or mold in the ductwork/unit. Burnt smells could indicate electrical problems. For any persistent unusual smell, especially burning, shut off the unit. What Community do you live in?",
+                "options": [
+                    { "text": "Rancho", "next": "hvac_decision_champion" },
+                    { "text": "Villas", "next": "hvac_decision_champion" },
+                    { "text": "Brazos", "next": "hvac_decision_mr_chill" },
+                    { "text": "Solena", "next": "hvac_decision_champion" }
+                ]
+            },
+            // Other appliance sections
+            "refrigerator_start_new": { "question": "What is the issue with your refrigerator?", "options": [ { "text": "It is not running", "next": "appliance_manufacturer_question" }, { "text": "The fridge is cool, but the freezer does not work", "next": "appliance_manufacturer_question" }, { "text": "There is an alarm indicating the filter needs to be changed", "next": "refrigerator_filter_alarm" }, { "text": "There is an alarm indicating it is not cooling properly", "next": "appliance_manufacturer_question" } ] },
+            "refrigerator_filter_alarm": { "decision": { "text": "Remove the filter and locate the serial number on the filter. Purchase a new filter and replace it. This is a **homeowner responsibility**, and the homeowner will be responsible for changing the filter and any charges associated with changing the filter.", "action": "Homeowner responsibility: Purchase and replace filter." } },
+            "stove_start_new": { "question": "What is the issue with your stove, cooktop, or hood vent?", "options": [ { "text": "A burner is not heating properly", "next": "appliance_manufacturer_question" }, { "text": "The oven does not work", "next": "appliance_manufacturer_question" }, { "text": "A piece of the stove has broken off", "next": "appliance_manufacturer_question" }, { "text": "The door will not close properly", "next": "appliance_manufacturer_question" }, { "text": "The surface is broken or cracked", "next": "appliance_manufacturer_question" }, { "text": "There is no power", "next": "decision_email_warranty_stove_power" } ] },
+            "decision_email_warranty_stove_power": { "decision": { "text": "Send an email to **warranty@peakmhc.com**. Provide your contact information, the park you live in, and your lot number.", "action": "Email warranty with contact info, park, and lot number." } },
+            "microwave_start_new": { "question": "What is the issue with your microwave?", "options": [ { "text": "The microwave is not heating", "next": "microwave_manufacturer_question" }, { "text": "The turn table does not turn", "next": "microwave_manufacturer_question" }, { "text": "The light does not come on", "next": "microwave_manufacturer_question" }, { "text": "There is no power", "next": "decision_email_warranty_microwave_power" }, { "text": "The door will not stay closed", "next": "microwave_manufacturer_question" } ] },
+            "microwave_manufacturer_question": { "question": "Who is the manufacturer of your microwave?", "options": [ { "text": "Samsung", "next": "decision_discontinue_contact_samsung" }, { "text": "General Electric (GE)", "next": "decision_discontinue_contact_ge" }, { "text": "Whirlpool", "next": "decision_discontinue_contact_whirlpool" }, { "text": "Frigidaire", "next": "decision_discontinue_contact_frigidaire" }, { "text": "Electrolux", "next": "decision_discontinue_contact_electrolux" } ] },
+            "decision_email_warranty_microwave_power": { "decision": { "text": "Send an email to **warranty@peakmhc.com**.", "action": "Email warranty." } },
+            "dishwasher_start_new": { "question": "What is the issue with your dishwasher?", "options": [ { "text": "There is no power", "next": "decision_email_warranty_dishwasher" }, { "text": "It will not dry the dishes", "next": "dishwasher_manufacturer_question" }, { "text": "It will not complete a cycle", "next": "dishwasher_manufacturer_question" }, { "text": "It is loose from the cabinet", "next": "decision_email_warranty_dishwasher" }, { "text": "The door will not close", "next": "dishwasher_door_wont_close" }, { "text": "There is a leak", "next": "dishwasher_leak_question" } ] },
+            "dishwasher_manufacturer_question": { "question": "Who is the manufacturer of your dishwasher?", "options": [ { "text": "Samsung", "next": "decision_discontinue_contact_samsung" }, { "text": "General Electric (GE)", "next": "decision_discontinue_contact_ge" }, { "text": "Whirlpool", "next": "decision_discontinue_contact_whirlpool" }, { "text": "Frigidaire", "next": "decision_discontinue_contact_frigidaire" }, { "text": "Electrolux", "next": "decision_discontinue_contact_electrolux" } ] },
+            "decision_email_warranty_dishwasher": { "decision": { "text": "Discontinue use of the dishwasher and send an email to **warranty@peakmhc.com**. Include your contact information, lot number, and a brief description of the issue.", "action": "Email warranty with contact info, lot number, and description." } },
+            "dishwasher_door_wont_close": { "question": "Why will the door not close?", "options": [ { "text": "The cabinet is in the way", "next": "decision_email_warranty_dishwasher" }, { "text": "It will not latch when closed all the way", "next": "dishwasher_manufacturer_question" } ] },
+            "dishwasher_leak_question": { "question": "Where is the leak coming from?", "options": [ { "text": "It comes from under the dishwasher", "next": "dishwasher_manufacturer_question" }, { "text": "It comes from under the sink where the drain line connects", "next": "decision_email_warranty_dishwasher" } ] },
+            "water_heater_start_new": { "question": "What is the issue with your water heater?", "options": [ { "text": "There is no hot water", "next": "water_heater_no_hot_water_q" }, { "text": "The water is too hot", "next": "water_heater_too_hot" }, { "text": "There is a leak", "next": "water_heater_leak_q" }, { "text": "The water heater is making a weird noise", "next": "decision_contact_rheem_updated" } ] },
+            "water_heater_no_hot_water_q": { "question": "Does the water heater have power?", "options": [ { "text": "Yes", "next": "decision_contact_rheem_updated" }, { "text": "No", "next": "decision_email_warranty_water_heater" } ] },
+            "water_heater_too_hot": { "decision": { "text": "A safe temperature to operate the water heater at is 131 degrees. If you are not able to set the temperature at this temperature you will need to contact Rheem at 800-432-8373 if your system does not have a heat pump or 800-995-0982 if your system has a heat pump. You will need the serial number of the appliance located on the data sheet under your kitchen sink. A heat pump is an additional section on top of the water heater tank with a blower and vents on the side of the blower housing.", "action": "Check temp; if unable to set, contact Rheem with serial number." } },
+            "water_heater_leak_q": { "question": "Where is the leak coming from?", "options": [ { "text": "It is coming from one of the water lines", "next": "decision_email_warranty_water_heater" }, { "text": "It is coming from the water heater itself", "next": "water_heater_leak_from_unit" } ] },
+            "water_heater_leak_from_unit": { "decision": { "text": "Turn the water off to the water heater and contact Rheem at 800-432-8373 if your system does not have a heat pump or 800-995-0982 if your system has a heat pump. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Turn off water to heater; contact Rheem with serial number." } },
+            "decision_email_warranty_water_heater": { "decision": { "text": "Send an email to **warranty@peakmhc.com**. Include your contact information, lot number, and a brief description of the issue.", "action": "Email warranty with contact info, lot number, and description." } },
+            "appliance_manufacturer_question": { "question": "Who is the manufacturer of your appliance?", "options": [ { "text": "Samsung", "next": "decision_contact_samsung" }, { "text": "General Electric (GE)", "next": "decision_contact_ge" }, { "text": "Whirlpool", "next": "decision_contact_whirlpool" }, { "text": "Frigidaire", "next": "decision_contact_frigidaire" }, { "text": "Electrolux", "next": "decision_contact_electrolux" } ] },
+            "decision_contact_samsung": { "decision": { "text": "Contact Samsung at **800-726-7864**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_ge": { "decision": { "text": "Contact GE at **800-432-2737**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_whirlpool": { "decision": { "text": "Contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_frigidaire": { "decision": { "text": "Contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_electrolux": { "decision": { "text": "Contact Electrolux at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_contact_rheem_updated": { "decision": { "text": "Contact Rheem at 800-432-8373 if your system does not have a heat pump or 800-995-0982 if your system has a heat pump. You will need the serial number of the appliance located on the data sheet under your kitchen sink.", "action": "Contact Rheem with serial number." } },
+            "decision_discontinue_contact_samsung": { "decision": { "text": "Discontinue use of the appliance and contact Samsung at **800-726-7864**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_discontinue_contact_ge": { "decision": { "text": "Discontinue use of the appliance and contact GE at **800-432-2737**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_discontinue_contact_whirlpool": { "decision": { "text": "Discontinue use of the appliance and contact Whirlpool at **866-698-2538**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_discontinue_contact_frigidaire": { "decision": { "text": "Discontinue use of the appliance and contact Frigidaire at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } },
+            "decision_discontinue_contact_electrolux": { "decision": { "text": "Discontinue use of the appliance and contact Electrolux at **866-386-5286**. You will need the serial number of the appliance. This information can be found on the data sheet located under your kitchen sink. You will also need to provide the service department with your address and Lot number as well as your contact information. Document who you spoke with and make sure to get a case number. You, as the homeowner, are the necessary first contact with the warranty department for the repair of your appliance. If the Peak Enterprises Warranty department needs to get involved, they will need all of this information to assist you in getting the needed repairs." } }
         };
 
         // --- Pre-process flowTree to assign unique IDs to all options ---
