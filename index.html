@@ -168,13 +168,15 @@
                     { "text": "Exterior", "next": "exterior_start" },
                     { "text": "Appliance/HVAC", "next": "appliance_hvac_start" },
                     { "text": "Yard Related", "next": "yard_community_check" },
-                    { "text": "Community Related", next: "community_community_check" },
+                    { "text": "Community Related", "next": "community_community_check" },
                     { "text": "Preferred Vendors", "next": "vendors_placeholder" },
                     { "text": "Warranty Contact Numbers", "next": "contacts_placeholder" },
                     { "text": "Issue not listed", "next": "not_listed_placeholder" }
                 ]
             },
-            // The rest of the original flowTree object...
+            // ================================================================= //
+            // == YARD RELATED ISSUES == //
+            // ================================================================= //
             "yard_community_check": {
                 "question": "Which Community do you live in?",
                 "options": [
@@ -220,7 +222,7 @@
                     { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_solena" }
                 ]
             },
-            // Responses for Box 111
+            // Responses for Box 111 (Rancho Serenidad)
             "yard_drainage_issue_rancho": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
@@ -228,7 +230,7 @@
             },
             "yard_landscaping_concern_rancho": {
                 "decision": {
-                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
+                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             "yard_fence_issue_rancho": {
@@ -241,7 +243,7 @@
                     "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            // Responses for Box 112
+            // Responses for Box 112 (Villas De Mariposa)
             "yard_drainage_issue_villas": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
@@ -249,7 +251,7 @@
             },
             "yard_landscaping_concern_villas": {
                 "decision": {
-                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
+                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             "yard_fence_issue_villas": {
@@ -262,7 +264,7 @@
                     "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            // Responses for Box 113
+            // Responses for Box 113 (Brazos Point)
             "yard_drainage_issue_brazos": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
@@ -270,7 +272,7 @@
             },
             "yard_landscaping_concern_brazos": {
                 "decision": {
-                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
+                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             "yard_fence_issue_brazos": {
@@ -283,7 +285,7 @@
                     "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
-            // Responses for Box 114
+            // Responses for Box 114 (Solena)
             "yard_drainage_issue_solena": {
                 "decision": {
                     "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
@@ -291,7 +293,7 @@
             },
             "yard_landscaping_concern_solena": {
                 "decision": {
-                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
+                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             "yard_fence_issue_solena": {
@@ -318,6 +320,7 @@
                     "text": "Minor hairline cracks are common in new homes due to settling and humidity changes and are considered cosmetic and are typically not a covered issue after the initial move-in period. Monitor for expansion. If they expand significantly, or appear with other signs of structural movement, contact your warranty department at warranty@peakmhc.com if you have owned your home for less than 30 days. If you have owned your home for more than 30 days select the manufacturer of your home below. You can find this information on the data sheet located under your kitchen sink."
                 }
             },
+            // Responses for Box 106, 107, 108, and 109
             "box_106": {
                 "decision": {
                     "text": "Squeaky floors can be caused by subfloor movement, loose nails, or changes in humidity. Minor squeaks are often present during the first couple of months of living in your newly manufactured home and are not viewed as a serious issue. If the squeaks are excessive or last more than a few weeks, contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink."
@@ -333,7 +336,6 @@
                     "text": "Large visible cracks in walls, significant shifting, or unlevel floors are serious concerns. Document with photos and contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink."
                 }
             },
-            // Add the possible responses for boxes 109, 106, 107, and 108
             "box_109_responses": [
                 "Clayton Waco 1",
                 "Clayton Athens",
@@ -345,39 +347,6 @@
                 "Fleetwood/CAVCO",
                 "Champion Homes"
             ],
-            "box_106_responses": [
-                "Clayton Waco 1",
-                "Clayton Athens",
-                "Clayton Southern Energy",
-                "Clayton Bonham",
-                "Clayton Sulpher Springs",
-                "New Vision",
-                "Oak Creek",
-                "Fleetwood/CAVCO",
-                "Champion Homes"
-            ],
-            "box_107_responses": [
-                "Clayton Waco 1",
-                "Clayton Athens",
-                "Clayton Southern Energy",
-                "Clayton Bonham",
-                "Clayton Sulpher Springs",
-                "New Vision",
-                "Oak Creek",
-                "Fleetwood/CAVCO",
-                "Champion Homes"
-            ],
-            "box_108_responses": [
-                "Clayton Waco 1",
-                "Clayton Athens",
-                "Clayton Southern Energy",
-                "Clayton Bonham",
-                "Clayton Sulpher Springs",
-                "New Vision",
-                "Oak Creek",
-                "Fleetwood/CAVCO",
-                "Champion Homes"
-            ]
         };
 
         // --- Pre-process flowTree to assign unique IDs to all options ---
