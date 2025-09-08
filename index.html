@@ -126,45 +126,53 @@
                 "question": "Are you a...",
                 "options": [
                     { "text": "Homeowner", "next": "warranty_check" },
-                    { "text": "Renter", "next": "renter_placeholder" }
+                    { "text": "Renter", "next": "renter_community_check" }
                 ]
             },
-            "renter_placeholder": {
+            "renter_community_check": {
+                "question": "What community do you live in?",
+                "options": [
+                    { "text": "Rancho Serenidad", "next": "renter_rancho_contact" },
+                    { "text": "Villas De Mariposa", "next": "renter_villas_contact" },
+                    { "text": "Brazos Point", "next": "renter_brazos_contact" },
+                    { "text": "Solena", "next": "renter_solena_contact" }
+                ]
+            },
+            "renter_rancho_contact": {
                 "decision": {
-                    "text": "The troubleshooting flow for renters is currently under development. Please check back later."
+                    "text": "Contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
+                }
+            },
+            "renter_villas_contact": {
+                "decision": {
+                    "text": "Contact your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
+                }
+            },
+            "renter_brazos_contact": {
+                "decision": {
+                    "text": "Contact your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
+                }
+            },
+            "renter_solena_contact": {
+                "decision": {
+                    "text": "Contact your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
                 }
             },
             // ================================================================= //
             // == EXISTING FLOW STARTS HERE == //
             // ================================================================= //
             "warranty_check": {
-                "question": "What community do you live in?",
+                "question": "Have you lived in your home for less than a year?",
                 "options": [
-                    { "text": "Rancho Serenidad", "next": "rancho_contact_info" },
-                    { "text": "Villas De Mariposa", "next": "villas_contact_info" },
-                    { "text": "Brazos Point", "next": "brazos_contact_info" },
-                    { "text": "Solena", "next": "solena_contact_info" }
+                    { "text": "Yes", "next": "service_fee_warning" },
+                    { "text": "No", "next": "warranty_expired_warning" }
                 ]
             },
-            "rancho_contact_info": {
-                "decision": {
-                    "text": "Contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email."
-                }
-            },
-            "villas_contact_info": {
-                "decision": {
-                    "text": "Contact your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email."
-                }
-            },
-            "brazos_contact_info": {
-                "decision": {
-                    "text": "Contact your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email."
-                }
-            },
-            "solena_contact_info": {
-                "decision": {
-                    "text": "Contact your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email."
-                }
+            "warranty_expired_warning": {
+                "question": "Your warranty has expired and you as the homeowner are responsible for the maintenance to your home and any cost associated with it.",
+                "options": [
+                    { "text": "I Understand, Continue to Troubleshooter", "next": "start" }
+                ]
             },
             "service_fee_warning": {
                 "question": "Be advised, some warranties require a service fee that is not covered by the seller of the home. This service fee is due and payable by the homeowner to the specific service team or technician. Most, but not all, warranties have a $100-$200 service fee that is determined by the warranty company. You should ask your warranty company if a service fee is required for their service that you, the homeowner, will be responsible for. Weekend, holiday, or after hours calls may be slightly higher in cost.",
