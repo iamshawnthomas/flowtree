@@ -118,7 +118,6 @@
         </div>
         <button id="resetButton" class="flow-button w-full bg-blue-500 hover:bg-blue-600 hidden">Start Over</button>
     </div>
-
     <script>
         // Define the flow tree structure
         const flowTree = {
@@ -174,28 +173,150 @@
                     { "text": "Issue not listed", "next": "not_listed_placeholder" }
                 ]
             },
-            // Electrical Path
-            "electrical_start": { "question": "What is the electrical issue?", "options": [ { "text": "Outlet not working", "next": "electrical_outlet_issue" }, { "text": "Light fixture not working", "next": "electrical_light_fixture_issue" }, { "text": "Ceiling fan not working", "next": "electrical_ceiling_fan_issue" }, { "text": "Breaker keeps tripping", "next": "electrical_breaker_tripping" } ] },
-            "electrical_outlet_issue": { "question": "Have you checked the breaker in the main breaker panel for the tripped breaker? Have you tried to reset the GFCI outlet?", "options": [ { "text": "Yes, the breaker has flipped or the GFCI tripped.", "next": "electrical_outlet_breaker_tripped" }, { "text": "No, the breaker is on and the GFCI is not tripped.", "next": "electrical_outlet_no_breaker_issue" } ] },
-            "electrical_outlet_breaker_tripped": { "decision": { "text": "Reset the breaker or GFCI. If it immediately trips again, there's likely an electrical short or overload. Contact your warranty department at warranty@peakmhc.com or a licensed electrician immediately.", "action": "Reset breaker/GFCI; if trips/fails, contact warranty/electrician." } },
-            "electrical_outlet_no_breaker_issue": { "decision": { "text": "If the breaker is on and the GFCI is not tripped, the outlet itself may be faulty or improperly wired. Contact your warranty department at warranty@peakmhc.com or a licensed electrician for diagnosis and repair.", "action": "Contact warranty/electrician." } },
-            "electrical_light_fixture_issue": { "question": "Have you replaced the light bulb?", "options": [ { "text": "Yes, I replaced the bulb and it still doesn't work.", "next": "electrical_light_fixture_bulb_replaced" }, { "text": "No, I haven't replaced the bulb yet.", "next": "electrical_light_fixture_replace_bulb" } ] },
-            "electrical_light_fixture_replace_bulb": { "decision": { "text": "Replace the light bulb. If the issue persists, return to the previous step.", "action": "Replace light bulb." } },
-            "electrical_light_fixture_bulb_replaced": { "question": "Have you checked the breaker in the main breaker panel?", "options": [ { "text": "The breaker has flipped", "next": "electrical_light_fixture_breaker_tripped" }, { "text": "The breaker has not flipped", "next": "electrical_light_fixture_breaker_not_flipped" } ] },
-            "electrical_light_fixture_breaker_tripped": { "decision": { "text": "Reset the breaker. If it immediately trips again, there's likely an electrical short. Contact your warranty department at warranty@peakmhc.com or a licensed electrician immediately.", "action": "Reset breaker; if trips/fails, contact warranty/electrician." } },
-            "electrical_light_fixture_breaker_not_flipped": { "decision": { "text": "If the breaker is on, the issue is likely within the light fixture itself, such as a faulty socket or wiring. Contact your warranty department at warranty@peakmhc.com  or a licensed electrician for diagnosis and repair.", "action": "Contact warranty/electrician." } },
-            "electrical_breaker_tripping": { "question": "Is it a specific appliance or device that causes the breaker to trip, or does it seem random?", "options": [ { "text": "A specific appliance/device causes it to trip.", "next": "electrical_breaker_appliance_cause" }, { "text": "It seems to trip randomly or without a clear cause.", "next": "electrical_breaker_random_trip" } ] },
-            "electrical_breaker_appliance_cause": { "decision": { "text": "Unplug the appliance that causes the trip. If the breaker holds, the appliance is likely faulty. If multiple appliances on the same circuit cause it, you may be overloading the circuit. If the breaker still trips without the appliance, or if it's a new issue, contact your **warranty department at warranty@peakmhc.com** or a **licensed electrician**.", "action": "Unplug faulty appliance/reduce load; contact warranty/electrician if issue persists." } },
-            "electrical_breaker_random_trip": { "decision": { "text": "Random breaker trips can indicate a serious underlying electrical issue, such as a short in the wiring or a faulty breaker. This requires immediate attention. Contact your warranty department at warranty@peakmhc.com or a licensed electrician immediately.", "action": "Contact warranty/electrician urgently." } },
-            "electrical_ceiling_fan_issue": { "question": "What is the issue with your ceiling fan?", "options": [ { "text": "Fan hums but doesn't spin or spins slowly.", "next": "electrical_fan_hums" }, { "text": "Fan doesn't turn on at all (no light, no fan movement).", "next": "electrical_fan_no_power" }, { "text": "Pull chain/string doesn't do anything.", "next": "electrical_fan_pull_string_no_response" }, { "text": "Fan wobbles excessively or makes grinding/clicking noises.", "next": "electrical_fan_wobble_noise" } ] },
-            "electrical_fan_hums": { "decision": { "text": "This could indicate a faulty capacitor or a motor issue. Ensure the fan blades are unobstructed and balanced. If the issue persists, contact your warranty department at warranty@peakmhc.com or a licensed electrician.", "action": "Check for obstructions/balance; contact warranty/electrician." } },
-            "electrical_fan_no_power": { "question": "Have you checked the breaker in the main breaker panel?", "options": [ { "text": "The breaker has flipped", "next": "electrical_fan_breaker_flipped" }, { "text": "The breaker has not flipped", "next": "electrical_fan_breaker_not_flipped" } ] },
-            "electrical_fan_pull_string_no_response": { "question": "Have you checked the breaker in the main breaker panel?", "options": [ { "text": "The breaker has flipped", "next": "electrical_fan_breaker_flipped" }, { "text": "The breaker has not flipped", "next": "electrical_fan_breaker_not_flipped" } ] },
-            "electrical_fan_wobble_noise": { "decision": { "text": "Excessive wobble usually means loose mounting or unbalanced blades. Ensure all screws are tight and use a balancing kit. Grinding/clicking suggests motor or bearing issues. If balancing doesn't help or noises persist, contact your **warranty department** or a **licensed electrician**.", "action": "Check mounting/balance blades; contact warranty/electrician if persistent." } },
-            "electrical_fan_breaker_flipped": { "decision": { "text": "Reset the breaker. If it immediately trips again, there's likely an electrical short. Contact your **warranty department at warranty@peakmhc.com** or a **licensed electrician** immediately. If it stays on but the fan still doesn't work, proceed to contact for repair.", "action": "Reset breaker; if trips/fails, contact warranty/electrician." } },
-            "electrical_fan_breaker_not_flipped": { "decision": { "text": "If the breaker is on, the issue is likely within the fan unit itself, such as a faulty motor, switch, or wiring. Contact your **warranty department at warranty@peakmhc.com** or a **licensed electrician** for diagnosis and repair.", "action": "Contact warranty/electrician." } },
-            "water_start_new": { "question": "Is the water issue inside or outside the home?", "options": [ { "text": "The issue is inside", "next": "water_issue_inside" }, { "text": "The issue is outside", "next": "water_issue_outside" } ] },
-            "water_issue_inside": { "question": "What is the issue inside the home?", "options": [ { "text": "The issue is with a toilet", "next": "water_toilet_start_new" }, { "text": "The issue is with a tub/shower", "next": "water_tub_shower_start" }, { "text": "The issue is with a sink", "next": "water_sink_start" }, { "text": "The issue is in the laundry area", "next": "water_laundry_start" }, { "text": "There is water coming from the AC/water heater closet", "next": "water_ac_heater_closet_start" }, { "text": "The dishwasher is leaking", "next": "water_dishwasher_leaking" }, { "text": "There is a leak in my ceiling after it rains", "next": "water_ceiling_leak_after_rain" } ] },
+            // Additional paths...
+            "yard_community_check": {
+                "question": "Which Community do you live in?",
+                "options": [
+                    { "text": "Rancho Serenidad", "next": "yard_start_rancho" },
+                    { "text": "Villas De Mariposa", "next": "yard_start_villas" },
+                    { "text": "Brazos Point", "next": "yard_start_brazos" },
+                    { "text": "Solena", "next": "yard_start_solena" }
+                ]
+            },
+            "yard_start_rancho": { 
+                "question": "What kind of yard-related issue is it?", 
+                "options": [
+                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_rancho" },
+                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_rancho" },
+                    { "text": "Fence damage/issues", "next": "yard_fence_issue_rancho" },
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_rancho" }
+                ]
+            },
+            "yard_drainage_issue_rancho": { 
+                "decision": { 
+                    "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@ranchoserenidad.com."
+                } 
+            },
+            "yard_landscaping_concern_rancho": { 
+                "decision": { 
+                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@ranchoserenidad.com."
+                } 
+            },
+            "yard_fence_issue_rancho": { 
+                "decision": { 
+                    "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@ranchoserenidad.com."
+                } 
+            },
+            "yard_sprinkler_issue_type_rancho": { 
+                "decision": { 
+                    "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@ranchoserenidad.com."
+                } 
+            },
+            "yard_start_villas": { 
+                "question": "What kind of yard-related issue is it?", 
+                "options": [
+                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_villas" },
+                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_villas" },
+                    { "text": "Fence damage/issues", "next": "yard_fence_issue_villas" },
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_villas" }
+                ]
+            },
+            "yard_drainage_issue_villas": { 
+                "decision": { 
+                    "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@villasdemariposas.com."
+                } 
+            },
+            "yard_landscaping_concern_villas": { 
+                "decision": { 
+                    "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@villasdemariposas.com."
+                } 
+            },
+            "yard_fence_issue_villas": { 
+                "decision": { 
+                    "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@villasdemariposas.com."
+                } 
+            },
+            "yard_sprinkler_issue_type_villas": { 
+                "decision": { 
+                    "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@villasdemariposas.com or (817) 783-0590 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@villasdemariposas.com."
+                } 
+            },
+            "yard_start_brazos": { 
+                "question": "What kind of yard-related issue is it?", 
+                "options": [
+                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_brazos" },
+                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_brazos" },
+                    { "text": "Fence damage/issues", "next": "yard_fence_issue_brazos" },
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_brazos" }
+                ]
+            },
+            "yard_drainage_issue_brazos": { 
+                "decision": { 
+                    "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@brazospoint.com."
+                } 
+            },
+            "yard_landscaping_concern_brazos": { 
+                "decision": { 
+                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@brazospoint.com."
+                } 
+            },
+            "yard_fence_issue_brazos": { 
+                "decision": { 
+                    "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@brazospoint.com."
+                } 
+            },
+                        "yard_sprinkler_issue_type_brazos": { 
+                "decision": { 
+                    "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@brazospoint.com or (281) 473-0080 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@brazospoint.com."
+                } 
+            },
+            "yard_start_solena": { 
+                "question": "What kind of yard-related issue is it?", 
+                "options": [
+                    { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue_solena" },
+                    { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern_solena" },
+                    { "text": "Fence damage/issues", "next": "yard_fence_issue_solena" },
+                    { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type_solena" }
+                ]
+            },
+            "yard_drainage_issue_solena": { 
+                "decision": { 
+                    "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@solena.com."
+                } 
+            },
+            "yard_landscaping_concern_solena": { 
+                "decision": { 
+                    "text": "Any issues with the landscaping or Sod should be directed to the property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@solena.com."
+                } 
+            },
+            "yard_fence_issue_solena": { 
+                "decision": { 
+                    "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@solena.com."
+                } 
+            },
+            "yard_sprinkler_issue_type_solena": { 
+                "decision": { 
+                    "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@solena.com or (972) 970-0010 for assistance. Make sure to include photos and your information if you are sending an email.",
+                    "action": "Contact property management at manager@solena.com."
+                } 
+            },
+            "water_issue_inside": { "question": "What is the issue inside the home?", "options": [ { "text": "The issue is with a toilet", "next": "water_toilet_start_new" }, { "text": "The issue is with a tub/shower", "next": "water_tub_shower_start" }, { "text": "The issue is with a sink", "next": "water_sink_start" }, { "text": "The issue is in the laundry area", "next": "water_laundry_start" }, { "text": "There is water coming from the AC/water heater closet", "next": "water_ac_heater_closet_start" }, { "text": "The dishwasher is leaking", "next": "water_dishwasher_leaking" }, { "text": "There is a leak in my ceiling after it rains", "next": "water_ceiling_leak_after_rain" }, { "text": "My home has no electricity.", "next": "no_electricity_issue" } ] },
+            "no_electricity_issue": { "decision": { "text": "If your home has no electricity, please check your circuit breaker and ensure that all switches are in the correct position. If the issue persists, contact your warranty department or a licensed electrician for further assistance.", "action": "Check circuit breaker; if persists, contact warranty/electrician." } },
             "water_toilet_start_new": { "question": "What is the issue with your toilet?", "options": [ { "text": "The water in my toilet continues to run.", "next": "water_toilet_running_new" }, { "text": "The toilet will not flush, or it is overflowing", "next": "water_toilet_clog_overflow" } ] },
             "water_toilet_running_new": { "decision": { "text": "This is a **homeowner’s responsibility**. You may need to adjust the fill level, repair the flush mechanism, or replace a seal. You can perform this yourself or contact a service technician. This repair and the expense of it, is the responsibility of the homeowner. Not repairing this will cause an increase to your water bill.", "action": "Homeowner responsibility; adjust/repair/replace components or contact technician." } },
             "water_toilet_clog_overflow": { "question": "Did you flush something by accident?", "options": [ { "text": "Yes", "next": "water_toilet_clog_flushed_item" }, { "text": "No", "next": "water_toilet_clog_no_item" } ] },
@@ -232,12 +353,12 @@
             "water_laundry_hose_leak_valve_during_hours": { "decision": { "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.", "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos." } },
             "water_laundry_under_wall_leak": { "question": "Is it after 4PM or is it a weekend?", "options": [ { "text": "Yes", "next": "water_laundry_under_wall_leak_after_hours" }, { "text": "No", "next": "water_laundry_under_wall_leak_during_hours" } ] },
             "water_laundry_under_wall_leak_after_hours": { "decision": { "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.", "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com." } },
-                        "water_laundry_under_wall_leak_during_hours": { "decision": { "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.", "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos." } },
+            "water_laundry_under_wall_leak_during_hours": { "decision": { "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.", "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos." } },
             "water_ac_heater_closet_start": { "question": "What is the issue in the AC/water heater closet?", "options": [ { "text": "There is water spraying from the water heater", "next": "water_ac_heater_closet_heater_spray" }, { "text": "There is water coming from the air handler in the closet", "next": "water_ac_heater_closet_air_handler_start" } ] },
             "water_ac_heater_closet_heater_spray": { "question": "Is it after 4PM or is it a weekend?", "options": [ { "text": "Yes", "next": "water_ac_heater_closet_heater_spray_after_hours" }, { "text": "No", "next": "water_ac_heater_closet_heater_spray_during_hours" } ] },
             "water_ac_heater_closet_heater_spray_after_hours": { "decision": { "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.", "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com." } },
             "water_ac_heater_closet_heater_spray_during_hours": { "decision": { "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.", "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos." } },
-            "water_ac_heater_closet_air_handler_start": { "question": "Remove the front of the air handler to expose the coils. If coils are covered with ice, turn off the system and contact your HVAC warranty company. What park do you live in?", "options": [ { "text": "Rancho Serenidad", "next": "water_ac_heater_closet_air_handler_rancho" }, { "text": "Villas De Mariposa", "next": "water_ac_heater_closet_air_handler_villas" }, { "text": "Brazos Point", "next": "water_ac_heater_closet_air_handler_brazos" }, { "text": "Solena", "next": "water_ac_heater_closet_air_handler_solena" } ] },
+            "water_ac_heater_closet_air_handler_start": { "question": "Remove the front of the air handler to expose the coils. If coils are covered with ice, turn off the system and contact your HVAC warranty company. What park do you live in?", "options": [ { "text": "Rancho Serenidad MHC", "next": "water_ac_heater_closet_air_handler_rancho" }, { "text": "Villas De Mariposa MHC", "next": "water_ac_heater_closet_air_handler_villas" }, { "text": "Brazos Point MHC", "next": "water_ac_heater_closet_air_handler_brazos" }, { "text": "Solena MHC", "next": "water_ac_heater_closet_air_handler_solena" } ] },
             "water_ac_heater_closet_air_handler_rancho": { "decision": { "text": "Contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.", "action": "Contact Champion Heating and Air with unit serial number." } },
             "water_ac_heater_closet_air_handler_villas": { "decision": { "text": "Contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.", "action": "Contact Champion Heating and Air with unit serial number." } },
             "water_ac_heater_closet_air_handler_solena": { "decision": { "text": "Contact Champion Heating and Air at **installservice@championheatingair.net** or **682-230-5566**. You will need your serial number of your unit. The information is located on your data sheet under your kitchen sink.", "action": "Contact Champion Heating and Air with unit serial number." } },
@@ -261,30 +382,66 @@
             "water_outside_leak_under_home_not_frozen_after_hours": { "decision": { "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.", "action": "Turn off water to home/water heater breaker; contact technician. If warranty, document and submit to warranty@peakmhc.com." } },
             "water_outside_leak_under_home_not_frozen_during_hours": { "decision": { "text": "Turn the water off to the home immediately, flip the breaker in the main breaker panel that is labeled “Water Heater”, and send an email to **warranty@peakmhc.com**. Please include as many details as possible along with photos, your lot number, and your contact information.", "action": "Turn off water to home/water heater breaker; email warranty@peakmhc.com with details and photos." } },
             "water_outside_sewer_smell_start": { "question": "What type of sewer smell are you experiencing?", "options": [ { "text": "There is sewer water coming from the underbelly of the home", "next": "water_outside_sewer_underbelly" }, { "text": "There is sewer water coming from the ground under or near my home", "next": "water_outside_sewer_ground" } ] },
-            "water_outside_sewer_underbelly": { "decision": { "text": "Contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.", "action": "Contact certified technician. If warranty, document and submit to warranty@peakmhc.com." } },
-            "water_outside_sewer_ground": { "decision": { "text": "Send an email to **warranty@peakmhc.com** with as many details about the issue as possible, please include photos. Please include your lot number and contact information in the email.", "action": "Email warranty@peakmhc.com with details, photos, lot number, and contact info." } },
-            "structural_start": { "question": "What kind of structural issue are you experiencing?", "options": [ { "text": "Cracks in walls or ceiling", "next": "structural_wall_ceiling_crack_type" }, { "text": "Squeaky floors or subfloor issues", "next": "structural_floor_squeaks" }, { "text": "Doors or windows sticking/not closing properly", "next": "structural_door_window_sticking" }, { "text": "Foundation concerns (e.g., visible cracks, shifting)", "next": "structural_foundation_concerns" } ] },
-            "structural_wall_ceiling_crack_type": { "question": "What does the crack look like?", "options": [ { "text": "Hairline cracks, small, not expanding", "next": "structural_wall_ceiling_crack_minor" }, { "text": "Large, jagged, or expanding cracks; cracks near doors/windows; cracks in brick/foundation", "next": "structural_wall_ceiling_crack_major" } ] },
-            "structural_wall_ceiling_crack_minor": { "decision": { "text": "Minor hairline cracks are common in new homes due to settling and humidity changes and are considered cosmetic and are typically not a covered issue after the initial move-in period. Monitor for expansion. If they expand significantly, or appear with other signs of structural movement, contact your warranty department at warranty@peakmhc.com if you have owned your home for less than 30 days. If you have owned your home for more than 30 days, select the manufacturer of your home below. You can find this information on the data sheet located under your kitchen sink.", "action": "Monitor minor cracks; if expand, contact warranty." } },
-            "structural_wall_ceiling_crack_major": { "decision": { "text": "Large, expanding, or jagged cracks, especially near openings or in the foundation/brick, can indicate structural issues. Take photos and contact your warranty department at warranty@peakmhc.com immediately for assessment.", "action": "Take photos; contact warranty department immediately." } },
-            "structural_floor_squeaks": { "decision": { "text": "Squeaky floors can be caused by subfloor movement, loose nails, or changes in humidity. Minor squeaks are often present during the first couple of months of living in your newly manufactured home and are not viewed as a serious issue. If the squeaks are excessive or last more than a few weeks, contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink.", "action": "Assess severity; contact warranty if significant." } },
-            "structural_door_window_sticking": { "decision": { "text": "Doors or windows sticking can be due to humidity changes causing expansion, or minor settling of the home. Adjustments to hinges or frames may be needed. If the sticking is severe, sudden, or accompanied by other signs of structural movement (e.g., large cracks), contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink.", "action": "Check for environmental factors/adjust; if severe/structural signs, contact warranty." } },
-            "structural_foundation_concerns": { "decision": { "text": "Large visible cracks in walls, significant shifting, or unlevel floors are serious concerns. Document with photos and contact your warranty department per your home manufacturer for an assessment. You can find this information on the data sheet located under your kitchen sink.", "action": "Document with photos; contact warranty department immediately for foundation inspection." } },
-            
-            "yard_community_check": {
-                "question": "Which Community do you live in?",
-                "options": [
-                    { "text": "Rancho", "next": "yard_start" },
-                    { "text": "Villas", "next": "yard_start" },
-                    { "text": "Brazos", "next": "yard_start" },
-                    { "text": "Solena", "next": "yard_start" }
-                ]
+            "water_outside_sewer_underbelly": { 
+                "decision": { 
+                    "text": "Contact a **certified technician**. If the technician feels the issue is a warranty issue, they will need to document well with before, during, and after photos. Submit the photos to **warranty@peakmhc.com** with as many details about the issue as possible. Please include your lot number and contact information in the email with any invoice you may have paid. It will then be reviewed to determine responsibility.", 
+                    "action": "Contact certified technician. If warranty, document and submit to warranty@peakmhc.com." 
+                } 
             },
-            "yard_start": { "question": "What kind of yard-related issue is it?", "options": [ { "text": "Drainage/Water pooling issues", "next": "yard_drainage_issue" }, { "text": "Landscaping/Sod concerns", "next": "yard_landscaping_concern" }, { "text": "Fence damage/issues", "next": "yard_fence_issue" }, { "text": "Sprinkler system problem", "next": "yard_sprinkler_issue_type" } ] },
-            "yard_drainage_issue": { "decision": { "text": "Ensure downspouts are properly directed away from the home and that gutters are clear. Observe during rainfall to identify precise areas of pooling. Minor surface pooling may be normal after heavy rain. If water consistently pools near the home or causes significant erosion, contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email.", "action": "Contact property management at manager@ranchoserenidad.com." } },
-            "yard_landscaping_concern": { "decision": { "text": "Any issues with the landscaping or sod should be directed to the property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email.", "action": "Contact property management at manager@ranchoserenidad.com." } },
-            "yard_fence_issue": { "decision": { "text": "If there are issues with the fencing, please indicate the location in the community when contacting your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email.", "action": "Contact property management at manager@ranchoserenidad.com." } },
-            "yard_sprinkler_issue_type": { "decision": { "text": "Any issues with the sprinkler system such as a busted sprinkler head or standing water around a sprinkle head please contact your property management team at manager@ranchoserenidad.com or 817-455-6335 for assistance. Make sure to include photos and your information if you are sending an email.", "action": "Contact property management at manager@ranchoserenidad.com." } },
+            "water_outside_sewer_ground": { 
+                "decision": { 
+                    "text": "Send an email to **warranty@peakmhc.com** with as many details about the issue as possible, please include photos. Please include your lot number and contact information in the email.", 
+                    "action": "Email warranty@peakmhc.com with details, photos, lot number, and contact info." 
+                } 
+            },
+            "structural_start": { 
+                "question": "What kind of structural issue are you experiencing?", 
+                "options": [ 
+                    { "text": "Cracks in walls or ceiling", "next": "structural_wall_ceiling_crack_type" }, 
+                    { "text": "Squeaky floors or subfloor issues", "next": "structural_floor_squeaks" }, 
+                    { "text": "Doors or windows sticking/not closing properly", "next": "structural_door_window_sticking" }, 
+                    { "text": "Foundation concerns (e.g., visible cracks, shifting)", "next": "structural_foundation_concerns" } 
+                ] 
+            },
+            "structural_wall_ceiling_crack_type": { 
+                "question": "What does the crack look like?", 
+                "options": [ 
+                    { "text": "Hairline cracks, small, not expanding", "next": "structural_wall_ceiling_crack_minor" }, 
+                    { "text": "Large, jagged, or expanding cracks; cracks near doors/windows; cracks in brick/foundation", "next": "structural_wall_ceiling_crack_major" } 
+                ] 
+            },
+            "structural_wall_ceiling_crack_minor": { 
+                "decision": { 
+                    "text": "Minor hairline cracks are common in new homes due to settling and humidity changes and are considered cosmetic. Monitor for expansion. If they expand significantly, or appear with other signs of structural movement, contact your **warranty department**.", 
+                    "action": "Monitor minor cracks; if expand, contact warranty." 
+                } 
+            },
+            "structural_wall_ceiling_crack_major": { 
+                "decision": { 
+                    "text": "Large, expanding, or jagged cracks, especially near openings or in the foundation/brick, can indicate structural issues. Take photos and contact your **warranty department at warranty@peakmhc.com** immediately for assessment.", 
+                    "action": "Take photos; contact warranty department immediately." 
+                } 
+            },
+            "structural_floor_squeaks": { 
+                "decision": { 
+                    "text": "Squeaky floors can be caused by subfloor movement, loose nails, or changes in humidity. Minor squeaks are often present during the first couple of months of living in your new manufactured home and are not viewed as a serious issue. If the squeaks are excessive or last more than a few days, contact your warranty department at warranty@peakmhc.com for an assessment.", 
+                    "action": "Assess severity; contact warranty if significant." 
+                } 
+            },
+            "structural_door_window_sticking": { 
+                "decision": { 
+                    "text": "Doors or windows sticking can be due to humidity changes causing expansion, or minor settling of the home. Adjustments to hinges or frames may be needed. If the sticking is severe, sudden, or accompanied by other signs of structural movement (e.g., large cracks), contact your **warranty department** for assessment.", 
+                    "action": "Check for environmental factors/adjust; if severe/structural signs, contact warranty." 
+                } 
+            },
+            "structural_foundation_concerns": { 
+                "decision": { 
+                    "text": "Large visible cracks in walls, significant shifting, or unlevel floors are serious concerns. Document with photos and contact your warranty department at warranty@peakmhc.com immediately. Do not delay as additional issues can be caused due to neglect.", 
+                    "action": "Document with photos; contact warranty department immediately for foundation inspection." 
+                } 
+            },
+
+            // Additional placeholder nodes as needed...
         };
 
         // --- Pre-process flowTree to assign unique IDs to all options ---
